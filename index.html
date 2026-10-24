@@ -123,7 +123,7 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .tut-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.2);transition:.3s;}
 .tut-dot.active{background:var(--acc);box-shadow:0 0 10px var(--acc);transform:scale(1.3);}
 .tut-dot.done{background:var(--green);}
-#customizeScreen,#shopScreen,#halloweenScreen{justify-content:flex-end;padding:0;background:transparent;backdrop-filter:none;}
+#customizeScreen,#shopScreen,#halloweenScreen,#upgradeScreen{justify-content:flex-end;padding:0;background:transparent;backdrop-filter:none;}
 .custom-header{position:absolute;top:0;left:0;right:0;padding:25px;background:linear-gradient(180deg,rgba(3,8,16,0.95),transparent);display:flex;justify-content:center;align-items:center;z-index:60;}
 .custom-header h2{margin:0;color:#fff;font-size:24px;}
 .shop-balance{position:absolute;right:25px;top:25px;background:var(--panel);padding:8px 16px;border-radius:99px;font-size:14px;font-weight:900;color:var(--gold);border:1px solid var(--border);display:flex;align-items:center;gap:6px;box-shadow:0 4px 10px rgba(0,0,0,0.5);backdrop-filter:blur(10px);}
@@ -144,9 +144,22 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .item-card .price.pump{color:var(--pumpkin);}
 .item-card .eq-tag{position:absolute;inset:0;background:rgba(57,255,20,0.85);color:#000;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;border-radius:12px;opacity:0;transition:.2s;}
 .item-card.eq .eq-tag{opacity:1;}
-#halloweenScreen .custom-header{background:linear-gradient(180deg,rgba(50,0,50,0.95),transparent);}
-#halloweenScreen .custom-footer{background:linear-gradient(0deg,rgba(30,0,20,0.98),rgba(50,0,30,0.85),transparent);}
-#halloweenScreen .tab.active{background:rgba(255,102,0,0.2);color:#ff6600;border-color:#ff6600;}
+
+/* UPGRADE UI */
+.upgrade-list { display:flex; flex-direction:column; gap:10px; width:100%; max-width:440px; max-height:50vh; overflow-y:auto; padding:4px; }
+.upgrade-card { display:flex; align-items:center; gap:14px; padding:14px; border-radius:16px; background:var(--panel); border:2px solid var(--border); cursor:pointer; transition:all .2s; text-align:left; }
+.upgrade-card:active { transform:scale(0.97); }
+.upgrade-card.maxed { opacity:.7; border-color:var(--gold); cursor:default; }
+.upgrade-icon { width:50px; height:50px; border-radius:12px; background:rgba(0,243,255,0.1); color:var(--acc); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
+.upgrade-card.maxed .upgrade-icon { color:var(--gold); background:rgba(255,204,0,0.1); }
+.upgrade-info { flex:1; }
+.upgrade-info h3 { font-size:16px; color:#fff; margin-bottom:2px; }
+.upgrade-info p { font-size:12px; color:var(--sub); margin:0; }
+.upgrade-stat { font-size:13px; color:var(--green); font-weight:800; margin-top:4px; }
+.upgrade-btn { padding:8px 14px; border-radius:10px; background:rgba(255,204,0,0.15); border:1px solid var(--gold); color:var(--gold); font-weight:900; font-family:'Nunito'; font-size:13px; display:flex; align-items:center; gap:6px; white-space:nowrap; }
+.upgrade-btn:active { background:rgba(255,204,0,0.3); }
+.upgrade-btn.disabled { opacity:0.5; background:transparent; border-color:var(--sub); color:var(--sub); pointer-events:none; }
+
 .settings-box{background:var(--panel);padding:20px;border-radius:20px;width:100%;max-width:420px;border:1px solid var(--border);text-align:left;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow);max-height:70vh;overflow-y:auto;}
 .setting-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:700;color:var(--txt);gap:12px;flex-wrap:wrap;}
 .setting-row select,.setting-row input{padding:10px 12px;border-radius:8px;background:rgba(0,0,0,0.3);border:1px solid var(--border);color:var(--txt);font-family:'Nunito';outline:none;font-weight:700;}
@@ -229,12 +242,15 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
   <div class="menu-bottom">
     <button class="btn pri" onclick="window.openWorlds()"><i class="ph ph-play"></i> PLAY NOW</button>
     <div class="grid-2">
+      <button class="btn" onclick="window.openUpgrades()"><i class="ph ph-arrow-up-circle"></i> UPGRADES</button>
       <button class="btn" onclick="window.openCustomize()"><i class="ph ph-paint-brush"></i> INVENTORY</button>
       <button class="btn" onclick="window.openShop()"><i class="ph ph-storefront"></i> SHOP</button>
       <button class="btn" onclick="window.openSettings()"><i class="ph ph-gear"></i> SETTINGS</button>
-      <button class="btn" onclick="window.openUpdates()"><i class="ph ph-scroll"></i> UPDATES</button>
     </div>
-    <button class="btn halloween" onclick="window.openHalloween()" style="margin-top:14px;"><i class="ph ph-pumpkin"></i> HALLOWEEN SHOP</button>
+    <div class="grid-2" style="margin-top:0;">
+      <button class="btn" onclick="window.openUpdates()"><i class="ph ph-scroll"></i> UPDATES</button>
+      <button class="btn halloween" onclick="window.openHalloween()"><i class="ph ph-pumpkin"></i> HALLOWEEN</button>
+    </div>
   </div>
 </div>
 
@@ -248,6 +264,18 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
   <button class="back-btn" onclick="window.openWorlds()"><i class="ph ph-arrow-left"></i></button>
   <h2 id="stage-screen-title">TROPICAL REEF</h2>
   <div class="stages-grid" id="stages-grid"></div>
+</div>
+
+<!-- NOVA TELA DE UPGRADES -->
+<div class="overlay hidden" id="upgradeScreen">
+  <button class="back-btn" onclick="window.goMenu()"><i class="ph ph-arrow-left"></i></button>
+  <div class="custom-header">
+    <h2>UPGRADES</h2>
+    <div class="shop-balance"><i class="ph ph-coin"></i> <span id="upgradeCoinBalance">0</span></div>
+  </div>
+  <div class="custom-footer" style="max-height:55vh;">
+    <div class="upgrade-list" id="upgrade-list"></div>
+  </div>
 </div>
 
 <div class="overlay hidden" id="customizeScreen">
@@ -445,6 +473,7 @@ const DEFAULT_SAVE = {
   stats: { coinsTotal: 0, deaths: 0, plays: 0, bestCombo: 0 },
   tutorialDone: false,
   redeemedCodes: [],
+  upgrades: { speed: 1, air: 1, jump: 1, magnet: 1 }, // NOVO: Upgrades
   _savedAt: 0
 };
 
@@ -462,6 +491,7 @@ function mergeWithDefaults(parsed) {
   if (!Array.isArray(merged.ownedHats)) merged.ownedHats = ['hat_0'];
   if (!Array.isArray(merged.ownedHalloween)) merged.ownedHalloween = [];
   if (!Array.isArray(merged.redeemedCodes)) merged.redeemedCodes = [];
+  if (!merged.upgrades) merged.upgrades = { speed: 1, air: 1, jump: 1, magnet: 1 };
   if (!merged.stars || typeof merged.stars !== 'object' || Array.isArray(merged.stars)) merged.stars = {};
   if (!merged.keybinds || typeof merged.keybinds !== 'object') merged.keybinds = { jump: ['Space'], dive: ['ShiftLeft'] };
   if (!merged.settings || typeof merged.settings !== 'object') merged.settings = { sfxVolume: 0.7, musicVolume: 0.5, theme: 'cyan' };
@@ -539,9 +569,6 @@ window.importSave = () => {
   } catch(e) { showToast('❌ Código inválido!'); }
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   CODES SYSTEM (AQUI ESTÃO OS CÓDIGOS)
-   ═══════════════════════════════════════════════════════════════ */
 const CODES = {
   'WELCOME': { coins: 100, pumpkins: 5, xp: 50 },
   'PUFFER': { coins: 250, pumpkins: 10, xp: 100 },
@@ -668,6 +695,7 @@ window.updateHUD = () => {
   const xpFill = document.getElementById('xpFill'); if (xpFill) xpFill.style.width = pct + '%';
   const scb = document.getElementById('shopCoinBalance'); if (scb) scb.textContent = save.coins;
   const spb = document.getElementById('shopPumpkinCount'); if (spb) spb.textContent = save.pumpkins;
+  const upb = document.getElementById('upgradeCoinBalance'); if (upb) upb.textContent = save.coins;
   const sc = document.getElementById('statCoins'); if (sc) sc.textContent = save.stats.coinsTotal;
   const scom = document.getElementById('statCombo'); if (scom) scom.textContent = save.stats.bestCombo;
   const sd = document.getElementById('statDeaths'); if (sd) sd.textContent = save.stats.deaths;
@@ -682,6 +710,94 @@ function addXP(amount) {
   }
   persistSave(); updateHUD();
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   UPGRADES SYSTEM
+   ═══════════════════════════════════════════════════════════════ */
+const UPGRADES = {
+  speed:  { name: 'Swim Speed', icon: 'ph-sneaker-move', baseCost: 100, costMult: 1.5, maxLevel: 10 },
+  air:    { name: 'Air Capacity', icon: 'ph-wind', baseCost: 150, costMult: 1.6, maxLevel: 10 },
+  jump:   { name: 'Jump Power', icon: 'ph-arrow-fat-up', baseCost: 120, costMult: 1.5, maxLevel: 10 },
+  magnet: { name: 'Coin Magnet', icon: 'ph-magnet', baseCost: 80, costMult: 1.4, maxLevel: 10 }
+};
+
+function getUpgradeCost(key) {
+  const upg = UPGRADES[key];
+  const currentLvl = save.upgrades[key];
+  if (currentLvl >= upg.maxLevel) return null;
+  return Math.floor(upg.baseCost * Math.pow(upg.costMult, currentLvl - 1));
+}
+
+function getUpgradeStat(key) {
+  const lvl = save.upgrades[key];
+  if (key === 'speed') return Math.round((lvl - 1) * 10) + '%';
+  if (key === 'air') return Math.round(22 + (lvl - 1) * 3) + 's';
+  if (key === 'jump') return Math.round(14 + (lvl - 1) * 1.2) + ' pow';
+  if (key === 'magnet') return Math.round(3.5 + (lvl - 1) * 0.5) + 'm';
+}
+
+window.openUpgrades = () => {
+  SFX.click();
+  showScreen('upgradeScreen');
+  gameState.mode = 'upgrades';
+  showcaseScene.visible = true;
+  showcaseLight.intensity = 2.5;
+  showcaseAccent.intensity = 1.5;
+  giantPumpkin.visible = false;
+  scene.fog.near = 20; scene.fog.far = 60;
+  scene.fog.color.setHex(0x04101e);
+  skyMat.uniforms.top.value.setHex(0x1a4a6a);
+  skyMat.uniforms.bottom.value.setHex(0x04101e);
+  sunLight.intensity = 0.9; caveLight.intensity = 0;
+  water.visible = false;
+  document.getElementById('upgradeCoinBalance').textContent = save.coins;
+  renderUpgrades();
+};
+
+window.renderUpgrades = () => {
+  const list = document.getElementById('upgrade-list');
+  list.innerHTML = '';
+  for (const key in UPGRADES) {
+    const upg = UPGRADES[key];
+    const lvl = save.upgrades[key];
+    const cost = getUpgradeCost(key);
+    const isMax = lvl >= upg.maxLevel;
+    const stat = getUpgradeStat(key);
+    
+    const card = document.createElement('div');
+    card.className = 'upgrade-card' + (isMax ? ' maxed' : '');
+    card.innerHTML = `
+      <div class="upgrade-icon"><i class="ph ${upg.icon}"></i></div>
+      <div class="upgrade-info">
+        <h3>${upg.name} <span style="font-size:12px;color:var(--sub);">Lv.${lvl}</span></h3>
+        <p>Current: <strong style="color:#fff;">${stat}</strong></p>
+        ${!isMax ? `<div class="upgrade-stat">Next Lv: ${getUpgradeStat(key, true)}</div>` : ''}
+      </div>
+      ${!isMax ? `<button class="upgrade-btn ${save.coins < cost ? 'disabled' : ''}"><i class="ph ph-coin"></i> ${cost}</button>` : `<span style="color:var(--gold);font-weight:900;font-size:12px;">MAX</span>`}
+    `;
+    if (!isMax) {
+      card.querySelector('.upgrade-btn').onclick = () => window.buyUpgrade(key);
+    }
+    list.appendChild(card);
+  }
+};
+
+window.buyUpgrade = (key) => {
+  const cost = getUpgradeCost(key);
+  if (!cost) return;
+  if (save.coins >= cost) {
+    save.coins -= cost;
+    save.upgrades[key]++;
+    persistSave();
+    updateHUD();
+    SFX.levelUp(); // Som de level up para upar melhoria
+    renderUpgrades();
+    showToast(`⬆️ ${UPGRADES[key].name} upgraded to Lv.${save.upgrades[key]}!`);
+  } else {
+    SFX.lose();
+    showToast('Not enough coins!');
+  }
+};
 
 /* ═══════════════════════════════════════════════════════════════
    EXPANDED COSMETICS DATA (>90 items!)
@@ -887,7 +1003,7 @@ for (let i = 0; i < 30; i++) {
   const spike = new THREE.Mesh(spikeGeo, spikeMat);
   spike.quaternion.setFromUnitVectors(UP, dir);
   spike.position.copy(dir);
-  spike.scale.setScalar(1.0); // Base scale
+  spike.scale.setScalar(1.0);
   spike.castShadow = true;
   puffer.add(spike);
   spikes.push({ mesh: spike, dir: dir.clone() });
@@ -954,25 +1070,25 @@ createHat('hat_wizard', new THREE.ConeGeometry(0.5, 1.1, 12), [0, 1.55, 0], { co
 createHat('hat_ghost_hat', new THREE.SphereGeometry(0.5, 12, 10, 0, Math.PI*2, 0, Math.PI/2), [0, 1.1, 0], { color: 0xffffff, transparent: true, opacity: 0.7 });
 createHat('hat_pumpkin_king', new THREE.SphereGeometry(0.55, 16, 12), [0, 1.2, 0], { color: 0xff6600 });
 
-// Pirate Hat (FIXED: Added missing mesh)
+// Pirate Hat
 createHat('hat_pirate', new THREE.ConeGeometry(0.6, 0.4, 3), [0, 1.1, 0], { color: 0x111111 });
 const skull = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshBasicMaterial({ color: 0xffffff }));
 skull.position.set(0, 1.15, 0.35); hats['hat_pirate'].add(skull);
 
-// Hood/Hacker (FIXED: Added missing mesh)
+// Hood/Hacker
 createHat('hat_hacker', new THREE.SphereGeometry(0.6, 16, 12, 0, Math.PI*2, 0, Math.PI/1.5), [0, 1.0, -0.05], { color: 0x222222 });
 
-// Flower (FIXED: Added missing mesh & colors)
+// Flower
 createHat('hat_flower', new THREE.TorusGeometry(0.2, 0.1, 8, 12), [0.35, 1.0, 0.25], { color: 0xff69b4 });
 const flowerCenter = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffcc00 }));
 flowerCenter.position.set(0.35, 1.0, 0.25); hats['hat_flower'].add(flowerCenter);
 
-// Cowboy Hat (FIXED: Brim position)
+// Cowboy Hat
 createHat('hat_cowboy', new THREE.CylinderGeometry(0.35, 0.4, 0.5, 12), [0, 1.15, 0], { color: 0x8b5a2b }); 
 const cowboyBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.06, 16), new THREE.MeshStandardMaterial({ color: 0x8b5a2b }));
 cowboyBrim.position.set(0, -0.2, 0); hats['hat_cowboy'].add(cowboyBrim);
 
-// Propeller Hat (FIXED: Blades & stem grouped properly)
+// Propeller Hat
 const propGrp = new THREE.Group();
 const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.2, 8), new THREE.MeshStandardMaterial({ color: 0xaaaaaa }));
 stem.position.y = 0.1; propGrp.add(stem);
@@ -982,7 +1098,7 @@ const blade2 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.04, 0.6), new THREE.
 blade2.position.y = 0.2; propGrp.add(blade2);
 propGrp.position.set(0, 1.0, 0); hats['hat_propeller'] = propGrp; propGrp.visible = false; bodyGrp.add(propGrp);
 
-// Party Hat (FIXED: Pom-pom position)
+// Party Hat
 createHat('hat_party', new THREE.ConeGeometry(0.35, 0.8, 12), [0, 1.3, 0], { color: 0xff00ff });
 const partyPom = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffff00 }));
 partyPom.position.set(0, 0.4, 0); hats['hat_party'].add(partyPom);
@@ -990,7 +1106,7 @@ partyPom.position.set(0, 0.4, 0); hats['hat_party'].add(partyPom);
 // Chef Hat
 createHat('hat_chef', new THREE.CylinderGeometry(0.4, 0.35, 0.6, 12), [0, 1.2, 0], { color: 0xffffff });
 
-// Viking Hat (FIXED: Slightly higher position)
+// Viking Hat
 const vikingGrp = new THREE.Group();
 vikingGrp.add(new THREE.Mesh(new THREE.SphereGeometry(0.5, 12, 8, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 })));
 const hornL = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffffee }));
@@ -1008,7 +1124,7 @@ const eyeR = new THREE.Mesh(new THREE.SphereGeometry(0.1, 6, 6), new THREE.MeshB
 eyeR.position.set(0.15, 0.1, 0.38); skullHat.add(eyeR);
 skullHat.position.set(0, 1.1, 0); hats['hat_skull'] = skullHat; skullHat.visible = false; bodyGrp.add(skullHat);
 
-// Cauldron (FIXED: Handle removed, liquid position fixed)
+// Cauldron
 const cauldron = new THREE.Group();
 cauldron.add(new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.3, 0.4, 12), new THREE.MeshStandardMaterial({ color: 0x111111 })));
 const cSoup = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.05, 12), new THREE.MeshStandardMaterial({ color: 0x00ff00, emissive: 0x00aa00 }));
@@ -1529,22 +1645,30 @@ function updatePlay(dt, now) {
   if (keys.has('ArrowRight') || keys.has('KeyD')) ix += 1;
   if (keys.has('ArrowUp') || keys.has('KeyW')) iz -= 1;
   if (keys.has('ArrowDown') || keys.has('KeyS')) iz += 1;
+  
+  // APLICANDO UPGRADE DE VELOCIDADE E PULO
+  const speedMult = 1 + ((save.upgrades.speed - 1) * 0.1);
+  const jumpPower = 14 + ((save.upgrades.jump - 1) * 1.2);
+  const maxAir = 22 + ((save.upgrades.air - 1) * 3);
+  const magnetRange = 3.5 + ((save.upgrades.magnet - 1) * 0.5);
+
   const jumpHeld = input.jump || save.keybinds.jump.some(k => keys.has(k));
   const diveHeld = input.dive || save.keybinds.dive.some(k => keys.has(k));
   const inWaterNow = player.pos.y < 0;
   if (inWaterNow !== player.inWater) { if (inWaterNow) SFX.splash(); player.inWater = inWaterNow; }
+  
   if (player.inWater) {
-    player.vel.x += ix * 24 * dt; player.vel.z += iz * 24 * dt;
+    player.vel.x += ix * 24 * speedMult * dt; player.vel.z += iz * 24 * speedMult * dt;
     player.vel.y += (0 - player.pos.y) * 0.6 * dt;
-    if (jumpHeld) player.vel.y += 26 * dt;
-    if (diveHeld) player.vel.y -= 26 * dt;
+    if (jumpHeld) player.vel.y += 26 * speedMult * dt;
+    if (diveHeld) player.vel.y -= 26 * speedMult * dt;
     player.vel.multiplyScalar(Math.pow(0.9, dt * 60));
   } else {
-    player.vel.x += ix * 34 * dt; player.vel.z += iz * 34 * dt;
+    player.vel.x += ix * 34 * speedMult * dt; player.vel.z += iz * 34 * speedMult * dt;
     player.vel.y -= 26 * dt;
     player.flapCd -= dt;
     if (jumpHeld && player.flapCd <= 0) { 
-      player.vel.y = 14; 
+      player.vel.y = jumpPower; 
       player.flapCd = 0.28; 
       SFX.jump(); 
       spawnParticles(player.pos.x, player.pos.y - 0.5, player.pos.z, 0xffffff, 6);
@@ -1553,11 +1677,13 @@ function updatePlay(dt, now) {
     player.vel.multiplyScalar(Math.pow(0.98, dt * 60));
     if (player.vel.y < -22) player.vel.y = -22;
   }
+  
   const targetInfl = player.inWater ? 0 : 1;
   player.inflation += (targetInfl - player.inflation) * 5 * dt;
   if (!player.inWater) player.airTime += dt;
   else player.airTime = Math.max(0, player.airTime - dt * 3.5);
-  if (player.airTime > 22) { die(); return; }
+  
+  if (player.airTime > maxAir) { die(); return; }
   player.pos.addScaledVector(player.vel, dt);
   const radius = 1.05 + player.inflation * 0.55;
   for (const p of currentLevel.platforms) {
@@ -1603,7 +1729,8 @@ function updatePlay(dt, now) {
     const c = collectibles[i];
     const dist = player.pos.distanceTo(c.position);
     
-    if (dist < 3.5 && c.userData.type !== 'goal') {
+    // MAGNET UPGRADE
+    if (dist < magnetRange && c.userData.type !== 'goal') {
         const dir = new THREE.Vector3().subVectors(player.pos, c.position).normalize();
         c.position.addScaledVector(dir, 15 * dt);
     }
@@ -1655,11 +1782,11 @@ function updatePlay(dt, now) {
   }
   camera.position.lerp(new THREE.Vector3(player.pos.x, Math.max(player.pos.y + 9, 6), player.pos.z + 13), 1 - Math.pow(0.0001, dt));
   camera.lookAt(player.pos.x, player.pos.y + 1, player.pos.z);
-  const airFrac = 1 - Math.min(1, player.airTime / 22);
+  const airFrac = 1 - Math.min(1, player.airTime / maxAir);
   document.getElementById('airFill').style.width = (airFrac * 100) + '%';
-  document.getElementById('airTxt').textContent = Math.max(0, 22 - player.airTime).toFixed(1) + 's';
-  document.getElementById('darkness').style.opacity = Math.pow(Math.min(1, player.airTime/22), 1.3) * 0.95;
-  document.getElementById('danger').style.opacity = player.airTime > 16 ? (Math.sin(now * 0.012) * 0.5 + 0.5) * 0.8 : 0;
+  document.getElementById('airTxt').textContent = Math.max(0, maxAir - player.airTime).toFixed(1) + 's';
+  document.getElementById('darkness').style.opacity = Math.pow(Math.min(1, player.airTime/maxAir), 1.3) * 0.95;
+  document.getElementById('danger').style.opacity = player.airTime > (maxAir * 0.7) ? (Math.sin(now * 0.012) * 0.5 + 0.5) * 0.8 : 0;
 }
 
 const particles = [];
@@ -2028,11 +2155,14 @@ window.resetSave = () => {
   }
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   UPDATE LOG (CÓDIGOS REMOVIDOS)
-   ═══════════════════════════════════════════════════════════════ */
 const UPDATES = [
-  { version:'5.5.0', name:'Cosmetic Fixes', best: true, changes: [
+  { version:'5.6.0', name:'Upgrades System', best: true, changes: [
+    '⬆️ Added a brand new Upgrades system!',
+    '🏊 Speed, Air Capacity, Jump Power, and Coin Magnet can now be upgraded.',
+    '🏪 New UI for upgrades matching the shop aesthetic.',
+    '🎨 Cleaned up the main menu button layout.'
+  ]},
+  { version:'5.5.0', name:'Cosmetic Fixes', best: false, changes: [
     '🛠️ Fixed glitched parts on some hats (Party, Cowboy, Propeller, Cauldron)',
     '👒 Added missing 3D models for Pirate, Hood, and Flower hats',
     '🎨 Fixed hat color mismatches',
@@ -2151,7 +2281,7 @@ function loop(now) {
     camera.position.set(0, 2.2, 7.5);
     camera.lookAt(0, 0.8, 0);
     water.visible = false;
-  } else if (gameState.mode === 'showcase') {
+  } else if (gameState.mode === 'showcase' || gameState.mode === 'upgrades') {
     showcaseScene.visible = true;
     puffer.position.set(0, 0.5, 0);
     puffer.rotation.y += dt * 0.5;
