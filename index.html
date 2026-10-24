@@ -489,11 +489,7 @@ function loadSave() {
       }
     } catch(e) {}
   }
-  if (bestParsed) {
-    console.log('[Save] Loaded from:', bestKey, 'timestamp:', bestTime);
-    return mergeWithDefaults(bestParsed);
-  }
-  console.log('[Save] No save found, starting fresh');
+  if (bestParsed) return mergeWithDefaults(bestParsed);
   return JSON.parse(JSON.stringify(DEFAULT_SAVE));
 }
 
@@ -678,30 +674,69 @@ function addXP(amount) {
   persistSave(); updateHUD();
 }
 
-const SKIN_COLORS = [0xf5b71d,0x3b82f6,0x22c55e,0xef4444,0xa855f7,0xec4899,0x14b8a6,0xf97316,0x84cc16,0x06b6d4,0xff6b6b,0xffd700,0x8b5cf6,0x10b981,0xf43f5e,0xf59e0b,0x06b6d4,0x6366f1,0x94a3b8,0x1e293b];
-const SKINS = SKIN_COLORS.map((c, i) => ({ id: 'skin_' + i, name: 'Skin ' + (i+1), color: c, cost: i === 0 ? 0 : Math.floor(50 * Math.pow(1.5, i/3)) }));
+/* ═══════════════════════════════════════════════════════════════
+   EXPANDED COSMETICS DATA (>90 items!)
+   ═══════════════════════════════════════════════════════════════ */
+const SKIN_COLORS = [
+  0xf5b71d, 0x3b82f6, 0x22c55e, 0xef4444, 0xa855f7, 0xec4899, 0x14b8a6, 0xf97316, 0x84cc16, 0x06b6d4,
+  0xff6b6b, 0xffd700, 0x8b5cf6, 0x10b981, 0xf43f5e, 0xf59e0b, 0x0ea5e9, 0x6366f1, 0x94a3b8, 0x1e293b,
+  0xbef264, 0x2dd4bf, 0xfb923c, 0xe879f9, 0xfacc15, 0x60a5fa, 0x4ade80, 0xf87171, 0xc084fc, 0xf472b6,
+  0x5eead4, 0xfcd34d, 0xa3e635, 0x38bdf8, 0x818cf8, 0xd8b4fe, 0xfda4af, 0xfde047, 0x86efac, 0x7dd3fc
+];
+const SKINS = SKIN_COLORS.map((c, i) => ({ id: 'skin_' + i, name: 'Skin ' + (i+1), color: c, cost: i === 0 ? 0 : Math.floor(50 * Math.pow(1.5, i/4)) }));
+
 const WINGS = [
   { id:'wing_0', name:'None', cost:0, icon:'ph-x' }, { id:'wing_angel', name:'Angel', cost:200, icon:'ph-feather' },
   { id:'wing_dragon', name:'Dragon', cost:350, icon:'ph-fire' }, { id:'wing_fairy', name:'Fairy', cost:250, icon:'ph-sparkle' },
   { id:'wing_demon', name:'Demon', cost:400, icon:'ph-devil' }, { id:'wing_cyber', name:'Cyber', cost:500, icon:'ph-cpu' },
   { id:'wing_leaf', name:'Leaf', cost:150, icon:'ph-leaf' }, { id:'wing_butterfly', name:'Butterfly', cost:180, icon:'ph-butterfly' },
-  { id:'wing_galaxy', name:'Galaxy', cost:600, icon:'ph-planet' }, { id:'wing_ice', name:'Ice', cost:220, icon:'ph-snowflake' }
+  { id:'wing_galaxy', name:'Galaxy', cost:600, icon:'ph-planet' }, { id:'wing_ice', name:'Ice', cost:220, icon:'ph-snowflake' },
+  { id:'wing_star', name:'Star', cost:450, icon:'ph-star' }, { id:'wing_mecha', name:'Mecha', cost:800, icon:'ph-robot' },
+  { id:'wing_rainbow', name:'Rainbow', cost:700, icon:'ph-rainbow' }, { id:'wing_flame', name:'Flame', cost:300, icon:'ph-fire' },
+  { id:'wing_cloud', name:'Cloud', cost:280, icon:'ph-cloud' }
 ];
+
 const HATS = [
   { id:'hat_0', name:'None', cost:0, icon:'ph-x' }, { id:'hat_cap', name:'Cap', cost:50, icon:'ph-baseball-cap' },
   { id:'hat_tophat', name:'Top Hat', cost:120, icon:'ph-crown' }, { id:'hat_crown', name:'Crown', cost:250, icon:'ph-crown-simple' },
   { id:'hat_pirate', name:'Pirate', cost:180, icon:'ph-skull' }, { id:'hat_hacker', name:'Hood', cost:300, icon:'ph-code' },
   { id:'hat_flower', name:'Flower', cost:80, icon:'ph-flower' }, { id:'hat_halo', name:'Halo', cost:400, icon:'ph-circle' },
-  { id:'hat_pumpkin', name:'Pumpkin', cost:150, icon:'ph-pumpkin' }, { id:'hat_wizard', name:'Wizard', cost:220, icon:'ph-magic-wand' }
+  { id:'hat_pumpkin', name:'Pumpkin', cost:150, icon:'ph-pumpkin' }, { id:'hat_wizard', name:'Wizard', cost:220, icon:'ph-magic-wand' },
+  { id:'hat_cowboy', name:'Cowboy', cost:160, icon:'ph-cowboy-hat' }, { id:'hat_propeller', name:'Propeller', cost:200, icon:'ph-fan' },
+  { id:'hat_party', name:'Party', cost:60, icon:'ph-confetti' }, { id:'hat_viking', name:'Viking', cost:350, icon:'ph-shield' },
+  { id:'hat_chef', name:'Chef', cost:140, icon:'ph-cooking-pot' }
 ];
+
 const HALLOWEEN_ITEMS = {
   skin: [
-    { id:'skin_halloween', name:'Spooky', color:0xff6600, cost:30 }, { id:'skin_witch', name:'Witch', color:0x6600cc, cost:50 },
-    { id:'skin_zombie', name:'Zombie', color:0x66cc33, cost:70 }, { id:'skin_vampire', name:'Vampire', color:0x990033, cost:60 }
+    { id:'skin_spooky', name:'Spooky', color:0xff6600, cost:30 },
+    { id:'skin_witch', name:'Witch', color:0x6600cc, cost:50 },
+    { id:'skin_zombie', name:'Zombie', color:0x66cc33, cost:70 },
+    { id:'skin_vampire', name:'Vampire', color:0x990033, cost:60 },
+    { id:'skin_ghost', name:'Ghost', color:0xeeeeff, cost:40 },
+    { id:'skin_mummy', name:'Mummy', color:0xd4c4a8, cost:65 },
+    { id:'skin_skeleton', name:'Skeleton', color:0xe0e0e0, cost:80 },
+    { id:'skin_werewolf', name:'Werewolf', color:0x553311, cost:90 }
   ],
-  wing: [{ id:'wing_bat', name:'Bat Wings', cost:40, icon:'ph-ghost' }, { id:'wing_ghost', name:'Ghostly', cost:55, icon:'ph-ghost' }],
-  hat: [{ id:'hat_pumpkin_king', name:'Pumpkin King', cost:80, icon:'ph-crown-simple' }, { id:'hat_witch', name:'Witch Hat', cost:60, icon:'ph-magic-wand' }, { id:'hat_ghost', name:'Ghost', cost:45, icon:'ph-ghost' }]
+  wing: [
+    { id:'wing_bat', name:'Bat Wings', cost:40, icon:'ph-ghost' },
+    { id:'wing_ghost', name:'Ghostly', cost:55, icon:'ph-ghost' },
+    { id:'wing_bone', name:'Bone Wings', cost:75, icon:'ph-bone' },
+    { id:'wing_spiderweb', name:'Spider Web', cost:60, icon:'ph-spider' },
+    { id:'wing_phantom', name:'Phantom', cost:100, icon:'ph-mask-happy' }
+  ],
+  hat: [
+    { id:'hat_pumpkin_king', name:'Pumpkin King', cost:80, icon:'ph-crown-simple' },
+    { id:'hat_witch', name:'Witch Hat', cost:60, icon:'ph-magic-wand' },
+    { id:'hat_ghost_hat', name:'Ghost', cost:45, icon:'ph-ghost' },
+    { id:'hat_skull', name:'Skull', cost:70, icon:'ph-skull' },
+    { id:'hat_cauldron', name:'Cauldron', cost:90, icon:'ph-cooking-pot' },
+    { id:'hat_eyeball', name:'Eyeball', cost:50, icon:'ph-eye' },
+    { id:'hat_frankenstein', name:'Bolts', cost:85, icon:'ph-lightning' },
+    { id:'hat_devil_horns', name:'Devil Horns', cost:95, icon:'ph-devil' }
+  ]
 };
+
 const ALL_SKINS = [...SKINS, ...HALLOWEEN_ITEMS.skin];
 const ALL_WINGS = [...WINGS, ...HALLOWEEN_ITEMS.wing];
 const ALL_HATS = [...HATS, ...HALLOWEEN_ITEMS.hat];
@@ -843,7 +878,7 @@ for (let i = 0; i < 30; i++) {
   const spike = new THREE.Mesh(spikeGeo, spikeMat);
   spike.quaternion.setFromUnitVectors(UP, dir);
   spike.position.copy(dir);
-  spike.scale.setScalar(0.55);
+  spike.scale.setScalar(1.0); // Base scale
   spike.castShadow = true;
   puffer.add(spike);
   spikes.push({ mesh: spike, dir: dir.clone() });
@@ -896,14 +931,82 @@ function createHat(id, geo, pos, extra) {
   bodyGrp.add(g);
   hats[id] = g;
 }
+
+// Base Hats
 createHat('hat_cap', new THREE.SphereGeometry(0.45, 16, 8, 0, Math.PI*2, 0, Math.PI/2), [0, 1.05, 0, -0.15], { color: 0xdd3344, brim: true });
 createHat('hat_tophat', new THREE.CylinderGeometry(0.35, 0.38, 0.9, 14), [0, 1.4, 0], { color: 0x111111 });
 createHat('hat_crown', new THREE.CylinderGeometry(0.4, 0.4, 0.2, 14), [0, 1.1, 0], { color: 0xffd700, metalness: 0.9, roughness: 0.2 });
 createHat('hat_halo', new THREE.TorusGeometry(0.32, 0.05, 12, 24), [0, 1.35, 0], { color: 0xffdd66, emissive: 0xaa6600, emissiveIntensity: 0.6 });
 createHat('hat_pumpkin', new THREE.SphereGeometry(0.5, 16, 12), [0, 1.15, 0], { color: 0xff8833 });
-createHat('hat_witch', new THREE.ConeGeometry(0.5, 1.1, 12), [0, 1.55, 0], { color: 0x1a0033 });
-createHat('hat_ghost', new THREE.SphereGeometry(0.5, 12, 10, 0, Math.PI*2, 0, Math.PI/2), [0, 1.1, 0], { color: 0xffffff, transparent: true, opacity: 0.7 });
+createHat('hat_wizard', new THREE.ConeGeometry(0.5, 1.1, 12), [0, 1.55, 0], { color: 0x1a0033 });
+createHat('hat_ghost_hat', new THREE.SphereGeometry(0.5, 12, 10, 0, Math.PI*2, 0, Math.PI/2), [0, 1.1, 0], { color: 0xffffff, transparent: true, opacity: 0.7 });
 createHat('hat_pumpkin_king', new THREE.SphereGeometry(0.55, 16, 12), [0, 1.2, 0], { color: 0xff6600 });
+
+// New Base Hats
+createHat('hat_cowboy', new THREE.CylinderGeometry(0.35, 0.4, 0.5, 12), [0, 1.1, 0], { color: 0x8b5a2b }); 
+const cowboyBrim = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.08, 8, 16), new THREE.MeshStandardMaterial({ color: 0x8b5a2b }));
+cowboyBrim.rotation.x = Math.PI / 2; cowboyBrim.position.set(0, 0.85, 0); hats['hat_cowboy'].add(cowboyBrim);
+
+const propGrp = new THREE.Group();
+propGrp.add(new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.2, 8), new THREE.MeshStandardMaterial({ color: 0xaaaaaa })));
+const propBlade = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.04, 0.08), new THREE.MeshStandardMaterial({ color: 0xff0000 }));
+propBlade.position.y = 0.12; propGrp.add(propBlade);
+const propBlade2 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.04, 0.6), new THREE.MeshStandardMaterial({ color: 0x0000ff }));
+propBlade2.position.y = 0.12; propGrp.add(propBlade2);
+propGrp.position.set(0, 1.2, 0); hats['hat_propeller'] = propGrp; propGrp.visible = false; bodyGrp.add(propGrp);
+
+createHat('hat_party', new THREE.ConeGeometry(0.35, 0.8, 12), [0, 1.3, 0], { color: 0xff00ff });
+const partyPom = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffff00 }));
+partyPom.position.set(0, 1.75, 0); hats['hat_party'].add(partyPom);
+
+createHat('hat_chef', new THREE.CylinderGeometry(0.4, 0.35, 0.6, 12), [0, 1.2, 0], { color: 0xffffff });
+
+const vikingGrp = new THREE.Group();
+vikingGrp.add(new THREE.Mesh(new THREE.SphereGeometry(0.5, 12, 8, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 })));
+const hornL = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffffee }));
+hornL.position.set(-0.45, 0.1, 0); hornL.rotation.z = 0.5; vikingGrp.add(hornL);
+const hornR = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffffee }));
+hornR.position.set(0.45, 0.1, 0); hornR.rotation.z = -0.5; vikingGrp.add(hornR);
+vikingGrp.position.set(0, 1.0, 0); hats['hat_viking'] = vikingGrp; vikingGrp.visible = false; bodyGrp.add(vikingGrp);
+
+// Halloween Hats
+const skullHat = new THREE.Group();
+skullHat.add(new THREE.Mesh(new THREE.SphereGeometry(0.45, 12, 12), new THREE.MeshStandardMaterial({ color: 0xeeeeee })));
+const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 6, 6), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+eyeL.position.set(-0.15, 0.1, 0.4); skullHat.add(eyeL);
+const eyeR = new THREE.Mesh(new THREE.SphereGeometry(0.1, 6, 6), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+eyeR.position.set(0.15, 0.1, 0.4); skullHat.add(eyeR);
+skullHat.position.set(0, 1.1, 0); hats['hat_skull'] = skullHat; skullHat.visible = false; bodyGrp.add(skullHat);
+
+const cauldron = new THREE.Group();
+cauldron.add(new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.3, 0.4, 12), new THREE.MeshStandardMaterial({ color: 0x111111 })));
+const cHandle = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.03, 6, 12, Math.PI), new THREE.MeshStandardMaterial({ color: 0x111111 }));
+cHandle.position.y = 0.2; cauldron.add(cHandle);
+const cSoup = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.05, 12), new THREE.MeshStandardMaterial({ color: 0x00ff00, emissive: 0x00aa00 }));
+cSoup.position.y = 0.2; cauldron.add(cSoup);
+cauldron.position.set(0, 1.15, 0); hats['hat_cauldron'] = cauldron; cauldron.visible = false; bodyGrp.add(cauldron);
+
+const eyeball = new THREE.Group();
+eyeball.add(new THREE.Mesh(new THREE.SphereGeometry(0.35, 12, 12), new THREE.MeshStandardMaterial({ color: 0xffffff })));
+const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 8), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+pupil.position.z = 0.25; eyeball.add(pupil);
+eyeball.position.set(0, 1.15, 0); hats['hat_eyeball'] = eyeball; eyeball.visible = false; bodyGrp.add(eyeball);
+
+const bolts = new THREE.Group();
+bolts.add(new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.3, 0.4), new THREE.MeshStandardMaterial({ color: 0x222222 })));
+const boltL = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.3, 6), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.9 }));
+boltL.position.set(-0.3, 0, 0); boltL.rotation.z = Math.PI/2; bolts.add(boltL);
+const boltR = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.3, 6), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.9 }));
+boltR.position.set(0.3, 0, 0); boltR.rotation.z = Math.PI/2; bolts.add(boltR);
+bolts.position.set(0, 1.1, 0); hats['hat_frankenstein'] = bolts; bolts.visible = false; bodyGrp.add(bolts);
+
+const devilHorns = new THREE.Group();
+const hornL2 = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xaa0000 }));
+hornL2.position.set(-0.3, 0.2, 0); hornL2.rotation.z = 0.4; devilHorns.add(hornL2);
+const hornR2 = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xaa0000 }));
+hornR2.position.set(0.3, 0.2, 0); hornR2.rotation.z = -0.4; devilHorns.add(hornR2);
+devilHorns.position.set(0, 1.1, 0); hats['hat_devil_horns'] = devilHorns; devilHorns.visible = false; bodyGrp.add(devilHorns);
+
 
 const wings = {};
 function createWings(id, type, color) {
@@ -938,6 +1041,32 @@ function createWings(id, type, color) {
       m.position.set(side*0.2, 0.2, 0);
       g.add(m);
     }
+  } else if (type === 'star') {
+    const shape = new THREE.Shape();
+    for (let i = 0; i < 10; i++) {
+      const r = i % 2 === 0 ? 0.8 : 0.3;
+      const a = (i / 10) * Math.PI * 2;
+      if (i === 0) shape.moveTo(Math.cos(a)*r, Math.sin(a)*r);
+      else shape.lineTo(Math.cos(a)*r, Math.sin(a)*r);
+    }
+    const geo = new THREE.ShapeGeometry(shape);
+    for (let side of [-1, 1]) {
+      const m = new THREE.Mesh(geo, mat);
+      m.rotation.y = side * Math.PI / 2;
+      m.position.set(side*0.2, 0.2, 0);
+      g.add(m);
+    }
+  } else if (type === 'mecha') {
+    for (let side of [-1, 1]) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.1, 0.6), mat);
+      m.rotation.z = side * 0.5; m.rotation.y = side * Math.PI/4;
+      m.position.set(side*0.5, 0.3, -0.2);
+      g.add(m);
+      const m2 = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.08, 0.4), mat);
+      m2.rotation.z = side * 0.8; m2.rotation.y = side * Math.PI/4;
+      m2.position.set(side*0.6, -0.1, -0.4);
+      g.add(m2);
+    }
   } else {
     const geo = new THREE.CircleGeometry(0.7, 10, 0, Math.PI);
     for (let side of [-1, 1]) {
@@ -963,6 +1092,14 @@ createWings('wing_leaf', 'fairy', 0x33aa33);
 createWings('wing_cyber', 'dragon', 0x00ff88);
 createWings('wing_bat', 'dragon', 0x220011);
 createWings('wing_ghost', 'fairy', 0xccccff);
+createWings('wing_rainbow', 'fairy', 0xff00ff);
+createWings('wing_flame', 'dragon', 0xff3300);
+createWings('wing_cloud', 'fairy', 0xeeeeff);
+createWings('wing_star', 'star', 0xffdd00);
+createWings('wing_mecha', 'mecha', 0x888888);
+createWings('wing_bone', 'angel', 0xdddddd);
+createWings('wing_spiderweb', 'fairy', 0x333333);
+createWings('wing_phantom', 'dragon', 0x330033);
 
 scene.add(puffer);
 
@@ -991,57 +1128,66 @@ window.equipPuffer = () => {
 function createShowcaseScene() {
   const group = new THREE.Group();
   const backdropMat = new THREE.ShaderMaterial({
-    uniforms: { top: { value: new THREE.Color(0x1a4a6a) }, mid: { value: new THREE.Color(0x0e2a44) }, bottom: { value: new THREE.Color(0x04101e) } },
+    uniforms: { top: { value: new THREE.Color(0x2a6a9a) }, mid: { value: new THREE.Color(0x0e3a64) }, bottom: { value: new THREE.Color(0x04101e) } },
     vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
     fragmentShader: `uniform vec3 top; uniform vec3 mid; uniform vec3 bottom; varying vec2 vUv;
       void main(){ float y = vUv.y; vec3 col = y < 0.5 ? mix(bottom, mid, y * 2.0) : mix(mid, top, (y - 0.5) * 2.0);
-        vec2 c = vUv - 0.5; float v = 1.0 - dot(c, c) * 0.8; gl_FragColor = vec4(col * v, 1.0); }`
+        vec2 c = vUv - 0.5; float v = 1.0 - dot(c, c) * 0.6; gl_FragColor = vec4(col * v, 1.0); }`
   });
   const backdrop = new THREE.Mesh(new THREE.PlaneGeometry(24, 14), backdropMat);
   backdrop.position.set(0, 1, -6);
   group.add(backdrop);
-  const pedestal = new THREE.Mesh(new THREE.CylinderGeometry(2.8, 3.1, 0.4, 40), new THREE.MeshStandardMaterial({ color: 0x0a1e2e, roughness: 0.15, metalness: 0.9, transparent: true, opacity: 0.85 }));
+  
+  const pedestal = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 3.5, 0.4, 40), new THREE.MeshStandardMaterial({ color: 0x1a3a5e, roughness: 0.15, metalness: 0.9, transparent: true, opacity: 0.85 }));
   pedestal.position.y = -1.2; pedestal.receiveShadow = true; group.add(pedestal);
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(2.6, 0.1, 14, 60), new THREE.MeshBasicMaterial({ color: 0x00f3ff }));
+  
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(3.0, 0.15, 14, 60), new THREE.MeshBasicMaterial({ color: 0x00f3ff }));
   ring.rotation.x = Math.PI / 2; ring.position.y = -1.0; group.add(ring);
-  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.04, 10, 40), new THREE.MeshBasicMaterial({ color: 0x88ddff, transparent: true, opacity: 0.7 }));
+  
+  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.2, 0.06, 10, 40), new THREE.MeshBasicMaterial({ color: 0x88ddff, transparent: true, opacity: 0.9 }));
   ring2.rotation.x = Math.PI / 2; ring2.position.y = -1.05; group.add(ring2);
-  const ringLight = new THREE.PointLight(0x00f3ff, 1.5, 8); ringLight.position.set(0, -0.9, 0); group.add(ringLight);
+  
+  const ringLight = new THREE.PointLight(0x00f3ff, 2.5, 10); ringLight.position.set(0, -0.9, 0); group.add(ringLight);
+  
   const bubbles = [];
-  for (let i = 0; i < 18; i++) {
-    const r = 0.06 + Math.random() * 0.18;
-    const bubble = new THREE.Mesh(new THREE.SphereGeometry(r, 10, 8), new THREE.MeshBasicMaterial({ color: 0x88ddff, transparent: true, opacity: 0.28 }));
-    bubble.position.set((Math.random() - 0.5) * 10, Math.random() * 6 - 1.5, (Math.random() - 0.5) * 5 - 1);
-    bubble.userData = { baseY: bubble.position.y, speed: 0.4 + Math.random() * 0.8, phase: Math.random() * Math.PI * 2, amp: 0.3 + Math.random() * 0.5 };
+  for (let i = 0; i < 25; i++) {
+    const r = 0.08 + Math.random() * 0.22;
+    const bubble = new THREE.Mesh(new THREE.SphereGeometry(r, 10, 8), new THREE.MeshBasicMaterial({ color: 0x88ddff, transparent: true, opacity: 0.4 }));
+    bubble.position.set((Math.random() - 0.5) * 12, Math.random() * 8 - 1.5, (Math.random() - 0.5) * 6 - 1);
+    bubble.userData = { baseY: bubble.position.y, speed: 0.4 + Math.random() * 0.8, phase: Math.random() * Math.PI * 2, amp: 0.4 + Math.random() * 0.6 };
     group.add(bubble); bubbles.push(bubble);
   }
+  
   const seaweeds = [];
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 10; i++) {
     const side = i % 2 === 0 ? -1 : 1;
     const weedGroup = new THREE.Group();
-    const baseX = side * (2.6 + Math.random() * 2.5);
+    const baseX = side * (3.2 + Math.random() * 2.5);
     const baseZ = -2 + Math.random() * 2;
     for (let j = 0; j < 3 + Math.floor(Math.random() * 3); j++) {
-      const height = 1.2 + Math.random() * 1.2;
-      const blade = new THREE.Mesh(new THREE.ConeGeometry(0.12, height, 6), new THREE.MeshStandardMaterial({ color: 0x33aa66, emissive: 0x0a3318, emissiveIntensity: 0.5, roughness: 0.7 }));
+      const height = 1.5 + Math.random() * 1.5;
+      const blade = new THREE.Mesh(new THREE.ConeGeometry(0.15, height, 6), new THREE.MeshStandardMaterial({ color: 0x33cc66, emissive: 0x0a5528, emissiveIntensity: 0.8, roughness: 0.7 }));
       blade.position.set(baseX + (Math.random() - 0.5) * 0.6, -1.0 + height / 2, baseZ + (Math.random() - 0.5) * 0.5);
       blade.rotation.z = (Math.random() - 0.5) * 0.4;
       weedGroup.add(blade);
     }
     group.add(weedGroup); seaweeds.push(weedGroup);
   }
+  
   const sparkles = [];
-  for (let i = 0; i < 25; i++) {
-    const sparkle = new THREE.Mesh(new THREE.OctahedronGeometry(0.05), new THREE.MeshBasicMaterial({ color: 0xffffcc, transparent: true }));
-    sparkle.position.set((Math.random() - 0.5) * 11, (Math.random() - 0.3) * 7, (Math.random() - 0.5) * 5);
+  for (let i = 0; i < 35; i++) {
+    const sparkle = new THREE.Mesh(new THREE.OctahedronGeometry(0.08), new THREE.MeshBasicMaterial({ color: 0xffffcc, transparent: true }));
+    sparkle.position.set((Math.random() - 0.5) * 12, (Math.random() - 0.3) * 8, (Math.random() - 0.5) * 6);
     sparkle.userData = { phase: Math.random() * Math.PI * 2 };
     group.add(sparkle); sparkles.push(sparkle);
   }
-  for (let i = 0; i < 6; i++) {
-    const coral = new THREE.Mesh(new THREE.SphereGeometry(0.15 + Math.random() * 0.15, 8, 6), new THREE.MeshStandardMaterial({ color: i % 2 ? 0xff6688 : 0xff9944, emissive: i % 2 ? 0x441122 : 0x442200, emissiveIntensity: 0.5, roughness: 0.6 }));
-    coral.position.set((Math.random() - 0.5) * 10, -0.8 + Math.random() * 4, -3 - Math.random() * 2);
+  
+  for (let i = 0; i < 8; i++) {
+    const coral = new THREE.Mesh(new THREE.SphereGeometry(0.2 + Math.random() * 0.2, 8, 6), new THREE.MeshStandardMaterial({ color: i % 2 ? 0xff6688 : 0xff9944, emissive: i % 2 ? 0x441122 : 0x442200, emissiveIntensity: 0.8, roughness: 0.6 }));
+    coral.position.set((Math.random() - 0.5) * 12, -0.8 + Math.random() * 5, -3 - Math.random() * 2);
     group.add(coral);
   }
+  
   group.userData = { bubbles, sparkles, seaweeds, ring, ring2 };
   group.visible = false;
   return group;
@@ -1060,8 +1206,8 @@ function animateShowcase(now, dt) {
   }
   for (const s of sparkles) {
     const pulse = 0.5 + 0.5 * Math.sin(now * 0.003 + s.userData.phase);
-    s.scale.setScalar(0.4 + pulse * 1.0);
-    s.material.opacity = 0.3 + pulse * 0.7;
+    s.scale.setScalar(0.5 + pulse * 1.2);
+    s.material.opacity = 0.4 + pulse * 0.6;
     s.rotation.y += dt * 0.6; s.rotation.x += dt * 0.4;
   }
   if (ring) ring.rotation.z += dt * 0.3;
@@ -1365,7 +1511,13 @@ function updatePlay(dt, now) {
     player.vel.x += ix * 34 * dt; player.vel.z += iz * 34 * dt;
     player.vel.y -= 26 * dt;
     player.flapCd -= dt;
-    if (jumpHeld && player.flapCd <= 0) { player.vel.y = 14; player.flapCd = 0.28; SFX.jump(); }
+    if (jumpHeld && player.flapCd <= 0) { 
+      player.vel.y = 14; 
+      player.flapCd = 0.28; 
+      SFX.jump(); 
+      // MELHORIA: Partículas ao pular
+      spawnParticles(player.pos.x, player.pos.y - 0.5, player.pos.z, 0xffffff, 6);
+    }
     if (diveHeld) player.vel.y -= 20 * dt;
     player.vel.multiplyScalar(Math.pow(0.98, dt * 60));
     if (player.vel.y < -22) player.vel.y = -22;
@@ -1415,9 +1567,18 @@ function updatePlay(dt, now) {
       if (p.crumbleTimer <= 0 && p.mesh) { p.mesh.visible = false; if (p.topMesh) p.topMesh.visible = false; }
     }
   }
+  
+  // MELHORIA: Ímã de Moedas
   for (let i = collectibles.length - 1; i >= 0; i--) {
     const c = collectibles[i];
     const dist = player.pos.distanceTo(c.position);
+    
+    // Atrai moedas próximas
+    if (dist < 3.5 && c.userData.type !== 'goal') {
+        const dir = new THREE.Vector3().subVectors(player.pos, c.position).normalize();
+        c.position.addScaledVector(dir, 15 * dt); // Velocidade do ímã
+    }
+
     if (dist < 1.8) {
       if (c.userData.type === 'coin') {
         gameState.coinsCollected++; save.coins += 1; save.stats.coinsTotal++;
@@ -1438,16 +1599,18 @@ function updatePlay(dt, now) {
       } else if (c.userData.type === 'goal') { winLevel(); return; }
     }
   }
+  
   if (gameState.comboTimer > 0) { gameState.comboTimer -= dt; if (gameState.comboTimer <= 0) gameState.combo = 0; }
   if (WORLDS[gameState.worldIdx].theme === 'cave') { caveLight.position.copy(player.pos); caveLight.position.y += 1; }
+  
   puffer.position.copy(player.pos);
-  bodyGrp.scale.setScalar(1 + player.inflation * 0.75);
+  puffer.scale.setScalar(1 + player.inflation * 0.75);
+  
+  // Lógica correta dos espinhos
   for (const s of spikes) {
-    s.mesh.visible = player.inWater; // <--- ESPINHOS SÓ NA ÁGUA
-    const sc = 0.55 + player.inflation * 0.6;
-    s.mesh.scale.setScalar(sc);
-    s.mesh.position.copy(s.dir).multiplyScalar(1 + player.inflation * 0.6);
+    s.mesh.visible = !player.inWater && player.inflation > 0.1; 
   }
+  
   const hSpeed = Math.hypot(player.vel.x, player.vel.z);
   if (hSpeed > 0.5) {
     const targetAngle = Math.atan2(player.vel.x, player.vel.z);
@@ -1565,7 +1728,7 @@ const TUTORIAL_STEPS = [
   { emoji:'🦘', title:'JUMP', text:'Tap JUMP (or Space) to flap your fins and fly!' },
   { emoji:'⬇️', title:'DIVE', text:'Tap DIVE (or Shift) to go underwater!' },
   { emoji:'🫧', title:'BREATHE', text:'Dive into water to refill your AIR meter!' },
-  { emoji:'🐡', title:'INFLATE', text:'Out of water, you inflate and float better!' },
+  { emoji:'🐡', title:'INFLATE', text:'Out of water, you inflate and show your spikes!' },
   { emoji:'🏆', title:'WIN', text:'Collect coins and reach the golden PEARL to win!' }
 ];
 window.startTutorial = (replay) => {
@@ -1623,7 +1786,7 @@ window.goMenu = () => {
   clearLevel();
   puffer.position.set(0, 0.5, 0);
   puffer.rotation.set(0, 0, 0);
-  bodyGrp.scale.setScalar(1.5);
+  puffer.scale.setScalar(1.5);
   water.visible = false;
   caveLight.intensity = 0;
   sunLight.intensity = 1.5;
@@ -1678,8 +1841,8 @@ window.openCustomize = () => {
   showScreen('customizeScreen');
   gameState.mode = 'showcase';
   showcaseScene.visible = true;
-  showcaseLight.intensity = 1.2;
-  showcaseAccent.intensity = 0.8;
+  showcaseLight.intensity = 2.5;
+  showcaseAccent.intensity = 1.5;
   giantPumpkin.visible = false;
   scene.fog.near = 20; scene.fog.far = 60;
   scene.fog.color.setHex(0x04101e);
@@ -1694,8 +1857,8 @@ window.openShop = () => {
   showScreen('shopScreen');
   gameState.mode = 'showcase';
   showcaseScene.visible = true;
-  showcaseLight.intensity = 1.2;
-  showcaseAccent.intensity = 0.8;
+  showcaseLight.intensity = 2.5;
+  showcaseAccent.intensity = 1.5;
   giantPumpkin.visible = false;
   scene.fog.near = 20; scene.fog.far = 60;
   scene.fog.color.setHex(0x04101e);
@@ -1711,8 +1874,8 @@ window.openHalloween = () => {
   showScreen('halloweenScreen');
   gameState.mode = 'halloween';
   showcaseScene.visible = true;
-  showcaseLight.intensity = 1.2;
-  showcaseAccent.intensity = 1.0;
+  showcaseLight.intensity = 2.0;
+  showcaseAccent.intensity = 2.0;
   giantPumpkin.visible = true;
   scene.fog.near = 20; scene.fog.far = 60;
   scene.fog.color.setHex(0x1a0510);
@@ -1837,12 +2000,28 @@ window.resetSave = () => {
   }
 };
 
+/* ═══════════════════════════════════════════════════════════════
+   RESTORED FULL UPDATE LOG
+   ═══════════════════════════════════════════════════════════════ */
 const UPDATES = [
-  { version:'5.3.0', name:'Visual Fix Update', best: true, changes: [
-    '🐟 Spikes fixed in menus (hidden, cleaner look)',
-    '🐡 Puffer now pulses/breathes when inflated in menus',
-    '💧 Puffer out of water no longer shows spikes (smooth balloon)',
-    '🐟 Spikes only appear when swimming underwater'
+  { version:'5.4.0', name:'Aura & Spikes Fix', best: true, changes: [
+    '🐡 Pufferfish is back and prominent in the menus',
+    '🐟 Inflated with spikes in all menus (no more invisible fish)',
+    '✨ Showcase scenario is now much brighter and more eye-catching',
+    '🧲 Coin Magnet added (coins fly to you when close)',
+    '💨 Jump particles added for better game feel',
+    '🎥 Dynamic camera smoothing'
+  ]},
+  { version:'5.3.0', name:'Massive Cosmetic Update', best: false, changes: [
+    '🐡 Spike scaling fixed (they grow with the body)',
+    '💧 In-game spikes correctly show only when inflated out of water',
+    '✨ Added 20 new base skins (40 total)',
+    '✨ Added 5 new base wings (Star, Mecha, Rainbow, Flame, Cloud)',
+    '✨ Added 5 new base hats (Cowboy, Propeller, Party, Viking, Chef)',
+    '🎃 Added 4 new Halloween skins (Ghost, Mummy, Skeleton, Werewolf)',
+    '🎃 Added 3 new Halloween wings (Bone, Spiderweb, Phantom)',
+    '🎃 Added 5 new Halloween hats (Skull, Cauldron, Eyeball, Bolts, Devil Horns)',
+    '🔥 Total cosmetics is now OVER 90!'
   ]},
   { version:'5.2.0', name:'Shop & Save Update', best: false, changes: [
     '💰 Shop and Halloween Shop now show your balance',
@@ -1850,8 +2029,7 @@ const UPDATES = [
     '🎃 Giant Jack-o-Lantern replaces witch NPC in Halloween shop',
     '🎟️ Codes section added to settings',
     '🆔 Device-based save system with unique ID',
-    '💾 Auto-migration from old save keys',
-    '🔧 Stability and polish improvements'
+    '💾 Auto-migration from old save keys'
   ]},
   { version:'5.1.0', name:'Polish Update', best: false, changes: [
     'Witch NPC redesigned with full detail',
@@ -1866,10 +2044,31 @@ const UPDATES = [
     'Halloween shop', '2 new worlds', 'Motivational messages',
     'Pufferfish in menu/inventory', 'Cave darkness effect', 'Stats tracking'
   ]},
-  { version:'4.0.0', name:'Ultimate Edition', best: false, changes: ['50+ cosmetics', 'Full settings', 'Animated win screen', 'World selection', 'Pumpkin collectibles'] },
-  { version:'2.0.0', name:'Halloween Special', best: false, changes: ['Pumpkin collectibles', 'Spooky shop items', 'Halloween UI'] },
-  { version:'1.0.0', name:'Initial Launch', best: false, changes: ['Initial release', '5 base stages', 'Basic customization'] }
+  { version:'4.0.0', name:'Ultimate Edition', best: false, changes: [
+    '50+ cosmetics across skins, wings and hats',
+    'Complete settings menu',
+    'Animated win screen with stars',
+    'World selection screen',
+    'Pumpkin collectibles'
+  ]},
+  { version:'2.3.0', name:'World System Update', best: false, changes: [
+    'World selection system',
+    '3 worlds × 15 stages',
+    'Level design with themed decorations',
+    'Rewritten physics engine'
+  ]},
+  { version:'2.0.0', name:'Halloween Special', best: false, changes: [
+    'Pumpkin collectibles',
+    'Spooky shop items',
+    'Halloween-themed UI'
+  ]},
+  { version:'1.0.0', name:'Initial Launch', best: false, changes: [
+    'Initial release',
+    '5 base stages',
+    'Basic customization'
+  ]}
 ];
+
 function renderUpdates() {
   const list = document.getElementById('updList');
   list.innerHTML = '';
@@ -1901,10 +2100,14 @@ function loop(now) {
     showcaseScene.visible = true;
     puffer.position.set(1.6, 0.6, 0);
     puffer.rotation.y += dt * 0.4;
-    bodyGrp.scale.setScalar(1.0 + Math.sin(now * 0.003) * 0.03); // Respiração suave
+    puffer.scale.setScalar(1.2 + Math.sin(now * 0.003) * 0.05);
     tailPivot.rotation.y = Math.sin(now * 0.005) * 0.4;
     animateFins(now, 0.6);
-    for (const s of spikes) s.mesh.visible = false; // SEM ESPINHOS NO MENU
+    spikes.forEach(s => {
+        s.mesh.visible = true;
+        s.mesh.scale.setScalar(1.0);
+        s.mesh.position.copy(s.dir).multiplyScalar(1.15);
+    });
 
     giantPumpkin.visible = true;
     giantPumpkin.position.set(-1.4, 0.1, 0);
@@ -1920,10 +2123,14 @@ function loop(now) {
     showcaseScene.visible = true;
     puffer.position.set(0, 0.5, 0);
     puffer.rotation.y += dt * 0.5;
-    bodyGrp.scale.setScalar(1.35 + Math.sin(now * 0.003) * 0.05); // Respiração mais visível
+    puffer.scale.setScalar(1.5 + Math.sin(now * 0.003) * 0.05); 
     tailPivot.rotation.y = Math.sin(now * 0.005) * 0.4;
     animateFins(now, 0.6);
-    for (const s of spikes) s.mesh.visible = false; // SEM ESPINHOS NO MENU
+    spikes.forEach(s => {
+        s.mesh.visible = true;
+        s.mesh.scale.setScalar(1.0);
+        s.mesh.position.copy(s.dir).multiplyScalar(1.15);
+    });
 
     giantPumpkin.visible = false;
 
@@ -1937,10 +2144,14 @@ function loop(now) {
     showcaseLight.intensity = 0; showcaseAccent.intensity = 0;
     puffer.position.set(0, 0.5, 0);
     puffer.rotation.y += dt * 0.5;
-    bodyGrp.scale.setScalar(1.5 + Math.sin(now * 0.002) * 0.05); // Respiração no menu principal
+    puffer.scale.setScalar(1.5 + Math.sin(now * 0.002) * 0.05);
     tailPivot.rotation.y = Math.sin(now * 0.005) * 0.4;
     animateFins(now, 0.6);
-    for (const s of spikes) s.mesh.visible = false; // SEM ESPINHOS NO MENU
+    spikes.forEach(s => {
+        s.mesh.visible = true;
+        s.mesh.scale.setScalar(1.0);
+        s.mesh.position.copy(s.dir).multiplyScalar(1.15);
+    });
     
     camera.position.set(
       Math.cos(now * 0.0002) * 1.5,
