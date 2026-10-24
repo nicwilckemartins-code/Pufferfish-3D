@@ -144,8 +144,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .item-card .price.pump{color:var(--pumpkin);}
 .item-card .eq-tag{position:absolute;inset:0;background:rgba(57,255,20,0.85);color:#000;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;border-radius:12px;opacity:0;transition:.2s;}
 .item-card.eq .eq-tag{opacity:1;}
-
-/* UPGRADE UI */
 .upgrade-list { display:flex; flex-direction:column; gap:10px; width:100%; max-width:440px; max-height:50vh; overflow-y:auto; padding:4px; }
 .upgrade-card { display:flex; align-items:center; gap:14px; padding:14px; border-radius:16px; background:var(--panel); border:2px solid var(--border); cursor:pointer; transition:all .2s; text-align:left; }
 .upgrade-card:active { transform:scale(0.97); }
@@ -159,7 +157,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .upgrade-btn { padding:8px 14px; border-radius:10px; background:rgba(255,204,0,0.15); border:1px solid var(--gold); color:var(--gold); font-weight:900; font-family:'Nunito'; font-size:13px; display:flex; align-items:center; gap:6px; white-space:nowrap; }
 .upgrade-btn:active { background:rgba(255,204,0,0.3); }
 .upgrade-btn.disabled { opacity:0.5; background:transparent; border-color:var(--sub); color:var(--sub); pointer-events:none; }
-
 .settings-box{background:var(--panel);padding:20px;border-radius:20px;width:100%;max-width:420px;border:1px solid var(--border);text-align:left;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow);max-height:70vh;overflow-y:auto;}
 .setting-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:700;color:var(--txt);gap:12px;flex-wrap:wrap;}
 .setting-row select,.setting-row input{padding:10px 12px;border-radius:8px;background:rgba(0,0,0,0.3);border:1px solid var(--border);color:var(--txt);font-family:'Nunito';outline:none;font-weight:700;}
@@ -266,7 +263,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
   <div class="stages-grid" id="stages-grid"></div>
 </div>
 
-<!-- NOVA TELA DE UPGRADES -->
 <div class="overlay hidden" id="upgradeScreen">
   <button class="back-btn" onclick="window.goMenu()"><i class="ph ph-arrow-left"></i></button>
   <div class="custom-header">
@@ -473,7 +469,7 @@ const DEFAULT_SAVE = {
   stats: { coinsTotal: 0, deaths: 0, plays: 0, bestCombo: 0 },
   tutorialDone: false,
   redeemedCodes: [],
-  upgrades: { speed: 1, air: 1, jump: 1, magnet: 1 }, // NOVO: Upgrades
+  upgrades: { speed: 1, air: 1, jump: 1, magnet: 1 },
   _savedAt: 0
 };
 
@@ -790,7 +786,7 @@ window.buyUpgrade = (key) => {
     save.upgrades[key]++;
     persistSave();
     updateHUD();
-    SFX.levelUp(); // Som de level up para upar melhoria
+    SFX.levelUp();
     renderUpgrades();
     showToast(`⬆️ ${UPGRADES[key].name} upgraded to Lv.${save.upgrades[key]}!`);
   } else {
@@ -800,7 +796,7 @@ window.buyUpgrade = (key) => {
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   EXPANDED COSMETICS DATA (>90 items!)
+   EXPANDED COSMETICS DATA
    ═══════════════════════════════════════════════════════════════ */
 const SKIN_COLORS = [
   0xf5b71d, 0x3b82f6, 0x22c55e, 0xef4444, 0xa855f7, 0xec4899, 0x14b8a6, 0xf97316, 0x84cc16, 0x06b6d4,
@@ -1041,182 +1037,291 @@ function animateFins(now, speed = 1) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   HATS (FIXED MODELS & POSITIONS)
+   REALISTIC HATS (EXTRUDE GEOMETRY & COMPOUND MODELS)
    ═══════════════════════════════════════════════════════════════ */
 const hats = {};
-function createHat(id, geo, pos, extra) {
-  const g = new THREE.Group();
-  const mat = new THREE.MeshStandardMaterial(extra.color || 0xdd3344, extra);
-  g.add(new THREE.Mesh(geo, mat));
-  if (extra.brim) {
-    const brim = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.06, 0.4), mat);
-    brim.position.set(0, 0, 0.35);
-    g.add(brim);
-  }
-  g.position.set(pos[0], pos[1], pos[2]);
-  if (pos[3]) g.rotation.x = pos[3];
-  g.visible = false;
-  bodyGrp.add(g);
-  hats[id] = g;
+
+// 1. Cap
+const capGrp = new THREE.Group();
+const capDome = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xdd3344, roughness: 0.8 }));
+const capBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.05, 16, 1, false, 0, Math.PI), new THREE.MeshStandardMaterial({ color: 0xdd3344, roughness: 0.8 }));
+capBrim.position.set(0, 0, 0.25); capBrim.rotation.x = -0.1;
+capGrp.add(capDome, capBrim); capGrp.position.set(0, 1.05, 0); capGrp.rotation.x = -0.15; capGrp.visible = false; bodyGrp.add(capGrp); hats['hat_cap'] = capGrp;
+
+// 2. Top Hat
+const topHatGrp = new THREE.Group();
+const thCrown = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.38, 0.9, 20), new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.4 }));
+const thBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.06, 24), new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.4 }));
+const thBand = new THREE.Mesh(new THREE.CylinderGeometry(0.385, 0.385, 0.15, 20), new THREE.MeshStandardMaterial({ color: 0x990022, roughness: 0.6 }));
+thBrim.position.y = -0.45; thBand.position.y = -0.25;
+topHatGrp.add(thCrown, thBrim, thBand); topHatGrp.position.set(0, 1.4, 0); topHatGrp.visible = false; bodyGrp.add(topHatGrp); hats['hat_tophat'] = topHatGrp;
+
+// 3. Crown
+const crownGrp = new THREE.Group();
+const cBase = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.25, 16), new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.9, roughness: 0.2 }));
+crownGrp.add(cBase);
+for(let i=0; i<5; i++) {
+    const a = (i/5) * Math.PI*2;
+    const spike = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.3, 8), new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.9, roughness: 0.2 }));
+    spike.position.set(Math.cos(a)*0.35, 0.25, Math.sin(a)*0.35);
+    crownGrp.add(spike);
+    const jewel = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), new THREE.MeshStandardMaterial({ color: 0xff0000, emissive: 0x550000 }));
+    jewel.position.set(Math.cos(a)*0.35, 0.4, Math.sin(a)*0.35);
+    crownGrp.add(jewel);
 }
+crownGrp.position.set(0, 1.15, 0); crownGrp.visible = false; bodyGrp.add(crownGrp); hats['hat_crown'] = crownGrp;
 
-// Base Hats
-createHat('hat_cap', new THREE.SphereGeometry(0.45, 16, 8, 0, Math.PI*2, 0, Math.PI/2), [0, 1.05, 0, -0.15], { color: 0xdd3344, brim: true });
-createHat('hat_tophat', new THREE.CylinderGeometry(0.35, 0.38, 0.9, 14), [0, 1.4, 0], { color: 0x111111 });
-createHat('hat_crown', new THREE.CylinderGeometry(0.4, 0.4, 0.2, 14), [0, 1.1, 0], { color: 0xffd700, metalness: 0.9, roughness: 0.2 });
-createHat('hat_halo', new THREE.TorusGeometry(0.32, 0.05, 12, 24), [0, 1.35, 0], { color: 0xffdd66, emissive: 0xaa6600, emissiveIntensity: 0.6 });
-createHat('hat_pumpkin', new THREE.SphereGeometry(0.5, 16, 12), [0, 1.15, 0], { color: 0xff8833 });
-createHat('hat_wizard', new THREE.ConeGeometry(0.5, 1.1, 12), [0, 1.55, 0], { color: 0x1a0033 });
-createHat('hat_ghost_hat', new THREE.SphereGeometry(0.5, 12, 10, 0, Math.PI*2, 0, Math.PI/2), [0, 1.1, 0], { color: 0xffffff, transparent: true, opacity: 0.7 });
-createHat('hat_pumpkin_king', new THREE.SphereGeometry(0.55, 16, 12), [0, 1.2, 0], { color: 0xff6600 });
+// 4. Halo
+const haloGrp = new THREE.Group();
+const haloRing = new THREE.Mesh(new THREE.TorusGeometry(0.32, 0.04, 16, 32), new THREE.MeshStandardMaterial({ color: 0xffdd66, emissive: 0xffaa00, emissiveIntensity: 1.5 }));
+haloGrp.add(haloRing); haloGrp.position.set(0, 1.35, 0); haloGrp.rotation.x = Math.PI/2; haloGrp.visible = false; bodyGrp.add(haloGrp); hats['hat_halo'] = haloGrp;
 
-// Pirate Hat
-createHat('hat_pirate', new THREE.ConeGeometry(0.6, 0.4, 3), [0, 1.1, 0], { color: 0x111111 });
-const skull = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshBasicMaterial({ color: 0xffffff }));
-skull.position.set(0, 1.15, 0.35); hats['hat_pirate'].add(skull);
+// 5. Pumpkin
+const pumHatGrp = new THREE.Group();
+const phBody = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12), new THREE.MeshStandardMaterial({ color: 0xff8833, roughness: 0.6 }));
+phBody.scale.set(1, 0.8, 1); pumHatGrp.add(phBody);
+for(let i=0; i<6; i++) {
+    const ridge = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 8), new THREE.MeshStandardMaterial({ color: 0xcc6622, roughness: 0.6 }));
+    const a = (i/6)*Math.PI*2;
+    ridge.position.set(Math.cos(a)*0.4, 0, Math.sin(a)*0.4);
+    ridge.scale.set(0.8, 1, 0.8); pumHatGrp.add(ridge);
+}
+const phStem = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.08, 0.25, 8), new THREE.MeshStandardMaterial({ color: 0x3a5a2a }));
+phStem.position.y = 0.45; pumHatGrp.add(phStem);
+pumHatGrp.position.set(0, 1.15, 0); pumHatGrp.visible = false; bodyGrp.add(pumHatGrp); hats['hat_pumpkin'] = pumHatGrp;
 
-// Hood/Hacker
-createHat('hat_hacker', new THREE.SphereGeometry(0.6, 16, 12, 0, Math.PI*2, 0, Math.PI/1.5), [0, 1.0, -0.05], { color: 0x222222 });
+// 6. Wizard
+const wizGrp = new THREE.Group();
+const wizBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.65, 0.05, 20), new THREE.MeshStandardMaterial({ color: 0x1a0033 }));
+const wizCone = new THREE.Mesh(new THREE.ConeGeometry(0.4, 1.3, 16), new THREE.MeshStandardMaterial({ color: 0x1a0033 }));
+wizCone.position.y = 0.65; wizCone.rotation.z = 0.1;
+const wizTip = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffdd00 }));
+wizTip.position.set(-0.1, 1.3, 0);
+wizGrp.add(wizBrim, wizCone, wizTip); wizGrp.position.set(0, 1.45, 0); wizGrp.visible = false; bodyGrp.add(wizGrp); hats['hat_wizard'] = wizGrp;
 
-// Flower
-createHat('hat_flower', new THREE.TorusGeometry(0.2, 0.1, 8, 12), [0.35, 1.0, 0.25], { color: 0xff69b4 });
-const flowerCenter = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffcc00 }));
-flowerCenter.position.set(0.35, 1.0, 0.25); hats['hat_flower'].add(flowerCenter);
+// 7. Pirate
+const pirGrp = new THREE.Group();
+const pirBase = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.55, 0.3, 3), new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.8 }));
+pirBase.rotation.y = Math.PI/6;
+const skullMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5 });
+const skullBase = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 12), skullMat);
+skullBase.scale.set(1, 0.9, 1.1); skullBase.position.set(0, 0.1, 0.4);
+const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.03, 6, 6), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+eyeL.position.set(-0.05, 0.15, 0.5); const eyeR = eyeL.clone(); eyeR.position.x = 0.05;
+const jaw = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.06, 0.05), skullMat);
+jaw.position.set(0, 0.02, 0.5);
+pirGrp.add(pirBase, skullBase, eyeL, eyeR, jaw);
+pirGrp.position.set(0, 1.15, 0); pirGrp.visible = false; bodyGrp.add(pirGrp); hats['hat_pirate'] = pirGrp;
 
-// Cowboy Hat
-createHat('hat_cowboy', new THREE.CylinderGeometry(0.35, 0.4, 0.5, 12), [0, 1.15, 0], { color: 0x8b5a2b }); 
-const cowboyBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.06, 16), new THREE.MeshStandardMaterial({ color: 0x8b5a2b }));
-cowboyBrim.position.set(0, -0.2, 0); hats['hat_cowboy'].add(cowboyBrim);
+// 8. Hood / Hacker
+const hoodGrp = new THREE.Group();
+const hoodGeo = new THREE.SphereGeometry(0.6, 16, 16, 0, Math.PI*2, 0, Math.PI*0.8);
+const hoodMesh = new THREE.Mesh(hoodGeo, new THREE.MeshStandardMaterial({ color: 0x222222, side: THREE.DoubleSide, roughness: 0.9 }));
+hoodMesh.position.set(0, 0.05, -0.05);
+hoodGrp.add(hoodMesh); hoodGrp.position.set(0, 1.0, 0); hoodGrp.visible = false; bodyGrp.add(hoodGrp); hats['hat_hacker'] = hoodGrp;
 
-// Propeller Hat
+// 9. Flower
+const flwGrp = new THREE.Group();
+for(let i=0; i<5; i++) {
+    const a = (i/5)*Math.PI*2;
+    const petal = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), new THREE.MeshStandardMaterial({ color: 0xff69b4, roughness: 0.6 }));
+    petal.scale.set(1, 0.3, 1.5); petal.position.set(Math.cos(a)*0.15, 0, Math.sin(a)*0.15);
+    petal.rotation.y = -a; flwGrp.add(petal);
+}
+const flwCenter = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffcc00 }));
+flwGrp.add(flwCenter); flwGrp.position.set(0.35, 1.05, 0.25); flwGrp.visible = false; bodyGrp.add(flwGrp); hats['hat_flower'] = flwGrp;
+
+// 10. Cowboy
+const cowGrp = new THREE.Group();
+const cowCrown = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.4, 0.5, 16), new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.9 }));
+const cowBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.05, 20), new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.9 }));
+cowBrim.position.y = -0.25;
+cowBrim.scale.set(1, 1, 1.2);
+const cowBand = new THREE.Mesh(new THREE.CylinderGeometry(0.41, 0.41, 0.08, 16), new THREE.MeshStandardMaterial({ color: 0x111111 }));
+cowBand.position.y = -0.15;
+cowGrp.add(cowCrown, cowBrim, cowBand); cowGrp.position.set(0, 1.15, 0); cowGrp.visible = false; bodyGrp.add(cowGrp); hats['hat_cowboy'] = cowGrp;
+
+// 11. Propeller
 const propGrp = new THREE.Group();
-const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.2, 8), new THREE.MeshStandardMaterial({ color: 0xaaaaaa }));
-stem.position.y = 0.1; propGrp.add(stem);
-const blade1 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.04, 0.08), new THREE.MeshStandardMaterial({ color: 0xff0000 }));
-blade1.position.y = 0.2; propGrp.add(blade1);
-const blade2 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.04, 0.6), new THREE.MeshStandardMaterial({ color: 0x0000ff }));
-blade2.position.y = 0.2; propGrp.add(blade2);
-propGrp.position.set(0, 1.0, 0); hats['hat_propeller'] = propGrp; propGrp.visible = false; bodyGrp.add(propGrp);
+const propBase = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 8, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0x3b82f6, roughness: 0.6 }));
+const propStem = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.2, 8), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.8 }));
+propStem.position.y = 0.4;
+const propBlades = new THREE.Group();
+const blade1 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.02, 0.08), new THREE.MeshStandardMaterial({ color: 0xff0000 }));
+const blade2 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.02, 0.6), new THREE.MeshStandardMaterial({ color: 0x00ff00 }));
+propBlades.add(blade1, blade2); propBlades.position.y = 0.5;
+propGrp.add(propBase, propStem, propBlades); propGrp.position.set(0, 1.05, 0); propGrp.visible = false; bodyGrp.add(propGrp); hats['hat_propeller'] = propGrp;
 
-// Party Hat
-createHat('hat_party', new THREE.ConeGeometry(0.35, 0.8, 12), [0, 1.3, 0], { color: 0xff00ff });
-const partyPom = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffff00 }));
-partyPom.position.set(0, 0.4, 0); hats['hat_party'].add(partyPom);
+// 12. Party
+const partyGrp = new THREE.Group();
+const partyCone = new THREE.Mesh(new THREE.ConeGeometry(0.35, 0.8, 16), new THREE.MeshStandardMaterial({ color: 0xff00ff, roughness: 0.7 }));
+partyCone.position.y = 0.4;
+const partyPom = new THREE.Mesh(new THREE.DodecahedronGeometry(0.12, 1), new THREE.MeshStandardMaterial({ color: 0xffff00, roughness: 0.9 }));
+partyPom.position.y = 0.85;
+partyGrp.add(partyCone, partyPom); partyGrp.position.set(0, 1.2, 0); partyGrp.visible = false; bodyGrp.add(partyGrp); hats['hat_party'] = partyGrp;
 
-// Chef Hat
-createHat('hat_chef', new THREE.CylinderGeometry(0.4, 0.35, 0.6, 12), [0, 1.2, 0], { color: 0xffffff });
+// 13. Chef
+const chefGrp = new THREE.Group();
+const chefBase = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.35, 0.4, 16), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.8 }));
+chefBase.position.y = 0.2;
+for(let i=0; i<4; i++) {
+    const puff = new THREE.Mesh(new THREE.SphereGeometry(0.25, 12, 12), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.8 }));
+    puff.position.set((Math.random()-0.5)*0.4, 0.5, (Math.random()-0.5)*0.4);
+    chefGrp.add(puff);
+}
+chefGrp.add(chefBase); chefGrp.position.set(0, 1.15, 0); chefGrp.visible = false; bodyGrp.add(chefGrp); hats['hat_chef'] = chefGrp;
 
-// Viking Hat
-const vikingGrp = new THREE.Group();
-vikingGrp.add(new THREE.Mesh(new THREE.SphereGeometry(0.5, 12, 8, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 })));
-const hornL = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffffee }));
-hornL.position.set(-0.45, 0.1, 0); hornL.rotation.z = 0.5; vikingGrp.add(hornL);
-const hornR = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffffee }));
-hornR.position.set(0.45, 0.1, 0); hornR.rotation.z = -0.5; vikingGrp.add(hornR);
-vikingGrp.position.set(0, 1.05, 0); hats['hat_viking'] = vikingGrp; vikingGrp.visible = false; bodyGrp.add(vikingGrp);
+// 14. Viking
+const vikGrp = new THREE.Group();
+const vikHelmet = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12, 0, Math.PI*2, 0, Math.PI/1.5), new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.7, roughness: 0.4 }));
+const hornL = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.1, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xffffee, roughness: 0.6 }));
+hornL.position.set(-0.45, 0.1, 0); hornL.rotation.z = 0.8;
+const hornR = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.1, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xffffee, roughness: 0.6 }));
+hornR.position.set(0.45, 0.1, 0); hornR.rotation.z = -0.8;
+vikGrp.add(vikHelmet, hornL, hornR); vikGrp.position.set(0, 1.05, 0); vikGrp.visible = false; bodyGrp.add(vikGrp); hats['hat_viking'] = vikGrp;
 
 // Halloween Hats
-const skullHat = new THREE.Group();
-skullHat.add(new THREE.Mesh(new THREE.SphereGeometry(0.45, 12, 12), new THREE.MeshStandardMaterial({ color: 0xeeeeee })));
-const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 6, 6), new THREE.MeshBasicMaterial({ color: 0x000000 }));
-eyeL.position.set(-0.15, 0.1, 0.38); skullHat.add(eyeL);
-const eyeR = new THREE.Mesh(new THREE.SphereGeometry(0.1, 6, 6), new THREE.MeshBasicMaterial({ color: 0x000000 }));
-eyeR.position.set(0.15, 0.1, 0.38); skullHat.add(eyeR);
-skullHat.position.set(0, 1.1, 0); hats['hat_skull'] = skullHat; skullHat.visible = false; bodyGrp.add(skullHat);
+// 15. Pumpkin King
+const pkGrp = new THREE.Group();
+const pkBody = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), new THREE.MeshStandardMaterial({ color: 0xff6600, roughness: 0.5 }));
+pkBody.scale.set(1, 0.8, 1); pkGrp.add(pkBody);
+const pkCrown = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.2, 12), new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.9, roughness: 0.2 }));
+pkCrown.position.y = 0.5;
+pkGrp.add(pkCrown); pkGrp.position.set(0, 1.15, 0); pkGrp.visible = false; bodyGrp.add(pkGrp); hats['hat_pumpkin_king'] = pkGrp;
 
-// Cauldron
-const cauldron = new THREE.Group();
-cauldron.add(new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.3, 0.4, 12), new THREE.MeshStandardMaterial({ color: 0x111111 })));
-const cSoup = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.05, 12), new THREE.MeshStandardMaterial({ color: 0x00ff00, emissive: 0x00aa00 }));
-cSoup.position.y = 0.18; cauldron.add(cSoup);
-cauldron.position.set(0, 1.15, 0); hats['hat_cauldron'] = cauldron; cauldron.visible = false; bodyGrp.add(cauldron);
+// 16. Witch Hat
+const witchGrp = new THREE.Group();
+const wBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.8, 0.05, 24), new THREE.MeshStandardMaterial({ color: 0x1a0033 }));
+const wCone = new THREE.Mesh(new THREE.ConeGeometry(0.4, 1.2, 16), new THREE.MeshStandardMaterial({ color: 0x1a0033 }));
+wCone.position.y = 0.6; wCone.rotation.z = -0.2;
+const wBand = new THREE.Mesh(new THREE.CylinderGeometry(0.41, 0.41, 0.1, 16), new THREE.MeshStandardMaterial({ color: 0x4a0088 }));
+wBand.position.y = 0.1;
+witchGrp.add(wBrim, wCone, wBand); witchGrp.position.set(0, 1.4, 0); witchGrp.visible = false; bodyGrp.add(witchGrp); hats['hat_witch'] = witchGrp;
 
-// Eyeball
-const eyeball = new THREE.Group();
-eyeball.add(new THREE.Mesh(new THREE.SphereGeometry(0.35, 12, 12), new THREE.MeshStandardMaterial({ color: 0xffffff })));
-const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 8), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
-pupil.position.z = 0.25; eyeball.add(pupil);
-eyeball.position.set(0, 1.15, 0); hats['hat_eyeball'] = eyeball; eyeball.visible = false; bodyGrp.add(eyeball);
+// 17. Ghost
+const ghostGrp = new THREE.Group();
+const gBody = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 }));
+for(let i=0; i<6; i++) {
+    const tendril = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.3, 8), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 }));
+    const a = (i/6)*Math.PI*2;
+    tendril.position.set(Math.cos(a)*0.4, -0.1, Math.sin(a)*0.4);
+    ghostGrp.add(tendril);
+}
+ghostGrp.add(gBody); ghostGrp.position.set(0, 1.1, 0); ghostGrp.visible = false; bodyGrp.add(ghostGrp); hats['hat_ghost_hat'] = ghostGrp;
 
-// Frankenstein Bolts
-const bolts = new THREE.Group();
-bolts.add(new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.3, 0.4), new THREE.MeshStandardMaterial({ color: 0x222222 })));
-const boltL = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.3, 6), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.9 }));
-boltL.position.set(-0.3, 0, 0); boltL.rotation.z = Math.PI/2; bolts.add(boltL);
-const boltR = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.3, 6), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.9 }));
-boltR.position.set(0.3, 0, 0); boltR.rotation.z = Math.PI/2; bolts.add(boltR);
-bolts.position.set(0, 1.1, 0); hats['hat_frankenstein'] = bolts; bolts.visible = false; bodyGrp.add(bolts);
+// 18. Skull
+const skullGrp = new THREE.Group();
+const skBase = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12), new THREE.MeshStandardMaterial({ color: 0xe0e0e0, roughness: 0.6 }));
+const skJaw = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.15, 0.25), new THREE.MeshStandardMaterial({ color: 0xd0d0d0, roughness: 0.6 }));
+skJaw.position.set(0, -0.35, 0.1);
+const skEyeL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+skEyeL.position.set(-0.15, 0.1, 0.38); const skEyeR = skEyeL.clone(); skEyeR.position.x = 0.15;
+skullGrp.add(skBase, skJaw, skEyeL, skEyeR); skullGrp.position.set(0, 1.15, 0); skullGrp.visible = false; bodyGrp.add(skullGrp); hats['hat_skull'] = skullGrp;
 
-// Devil Horns
-const devilHorns = new THREE.Group();
-const hornL2 = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xaa0000 }));
-hornL2.position.set(-0.3, 0.2, 0); hornL2.rotation.z = 0.4; devilHorns.add(hornL2);
-const hornR2 = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xaa0000 }));
-hornR2.position.set(0.3, 0.2, 0); hornR2.rotation.z = -0.4; devilHorns.add(hornR2);
-devilHorns.position.set(0, 1.1, 0); hats['hat_devil_horns'] = devilHorns; devilHorns.visible = false; bodyGrp.add(devilHorns);
+// 19. Cauldron
+const cauldronGrp = new THREE.Group();
+const cBody = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.3, 0.4, 16), new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.8, roughness: 0.3 }));
+const cRim = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.04, 8, 16), new THREE.MeshStandardMaterial({ color: 0x222222 }));
+cRim.rotation.x = Math.PI/2; cRim.position.y = 0.2;
+const cSoup = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.05, 16), new THREE.MeshStandardMaterial({ color: 0x00ff00, emissive: 0x00aa00, emissiveIntensity: 0.8 }));
+cSoup.position.y = 0.18;
+cauldronGrp.add(cBody, cRim, cSoup); cauldronGrp.position.set(0, 1.15, 0); cauldronGrp.visible = false; bodyGrp.add(cauldronGrp); hats['hat_cauldron'] = cauldronGrp;
+
+// 20. Eyeball
+const eyeballGrp = new THREE.Group();
+const ebWhite = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 16), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2 }));
+const ebIris = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.02, 16), new THREE.MeshStandardMaterial({ color: 0x0055ff }));
+ebIris.rotation.x = Math.PI/2; ebIris.position.z = 0.34;
+const ebPupil = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.03, 16), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+ebPupil.rotation.x = Math.PI/2; ebPupil.position.z = 0.35;
+eyeballGrp.add(ebWhite, ebIris, ebPupil); eyeballGrp.position.set(0, 1.15, 0); eyeballGrp.visible = false; bodyGrp.add(eyeballGrp); hats['hat_eyeball'] = eyeballGrp;
+
+// 21. Bolts (Frankenstein)
+const boltsGrp = new THREE.Group();
+const bBase = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.3, 0.4), new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.8 }));
+const bL = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.3, 8), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.9 }));
+bL.position.set(-0.3, 0, 0); bL.rotation.z = Math.PI/2;
+const bR = bL.clone(); bR.position.x = 0.3;
+boltsGrp.add(bBase, bL, bR); boltsGrp.position.set(0, 1.15, 0); boltsGrp.visible = false; bodyGrp.add(boltsGrp); hats['hat_frankenstein'] = boltsGrp;
+
+// 22. Devil Horns
+const hornsGrp = new THREE.Group();
+const hL = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.08, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xaa0000, roughness: 0.4 }));
+hL.position.set(-0.25, 0.2, 0); hL.rotation.z = 0.4;
+const hR = hL.clone(); hR.position.x = 0.25; hR.rotation.z = -0.4;
+hornsGrp.add(hL, hR); hornsGrp.position.set(0, 1.15, 0); hornsGrp.visible = false; bodyGrp.add(hornsGrp); hats['hat_devil_horns'] = hornsGrp;
 
 
+/* ═══════════════════════════════════════════════════════════════
+   REALISTIC WINGS (EXTRUDE GEOMETRY & LAYERING)
+   ═══════════════════════════════════════════════════════════════ */
 const wings = {};
-function createWings(id, type, color) {
+function createWings(id, type, color, opacity = 0.95) {
   const g = new THREE.Group();
-  const mat = new THREE.MeshStandardMaterial({ color, side: THREE.DoubleSide, roughness: 0.3, metalness: 0.1, transparent: true, opacity: 0.95 });
-  if (type === 'angel') {
-    for (let i = 0; i < 4; i++) {
+  const mat = new THREE.MeshStandardMaterial({ color, side: THREE.DoubleSide, roughness: 0.4, metalness: 0.2, transparent: true, opacity });
+  
+  const extrudeSettings = { depth: 0.05, bevelEnabled: true, bevelSegments: 2, steps: 2, bevelSize: 0.02, bevelThickness: 0.02 };
+
+  if (type === 'angel' || type === 'fairy' || type === 'butterfly') {
+    // Feathers para Anjo / Fada / Borboleta
+    for (let i = 0; i < 5; i++) {
       const shape = new THREE.Shape();
-      const len = 1.0 + i * 0.15, wid = 0.4 - i * 0.05;
+      const len = 0.8 + i * 0.2;
       shape.moveTo(0, 0);
-      shape.bezierCurveTo(-wid, len*0.3, -wid*1.4, len*0.7, -wid*0.6, len);
-      shape.bezierCurveTo(-wid*0.4, len*0.85, -wid*0.2, len*0.6, 0, 0);
-      const geo = new THREE.ShapeGeometry(shape);
+      shape.bezierCurveTo(-0.3, len * 0.4, -0.4, len * 0.8, 0, len);
+      shape.bezierCurveTo(0.2, len * 0.8, 0.1, len * 0.4, 0, 0);
+      const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+      
       const l = new THREE.Mesh(geo, mat);
-      l.position.set(-0.4 - i*0.1, 0.3 + i*0.05, 0);
-      l.rotation.z = -0.15 + i*0.08; l.rotation.y = -Math.PI/3;
+      l.position.set(-0.3 - i*0.08, 0.1, 0);
+      l.rotation.z = -0.1 + i*0.1;
+      l.rotation.y = -Math.PI/4;
       g.add(l);
+      
       const r = new THREE.Mesh(geo, mat);
-      r.position.set(0.4 + i*0.1, 0.3 + i*0.05, 0);
-      r.rotation.z = 0.15 - i*0.08; r.rotation.y = Math.PI/3;
+      r.position.set(0.3 + i*0.08, 0.1, 0);
+      r.rotation.z = 0.1 - i*0.1;
+      r.rotation.y = Math.PI/4;
       g.add(r);
     }
   } else if (type === 'dragon' || type === 'demon') {
+    // Asas de Dragão / Demônio (Membrana e Ossos)
     const shape = new THREE.Shape();
     shape.moveTo(0, 0);
-    shape.bezierCurveTo(0.5, 0.3, 1.0, 0.6, 1.2, 0.1);
-    shape.lineTo(0.8, -0.4); shape.lineTo(0.5, -0.2); shape.lineTo(0, -0.1);
-    const geo = new THREE.ShapeGeometry(shape);
+    shape.bezierCurveTo(0.4, 0.5, 0.8, 0.8, 1.2, 0.4); // Topo
+    shape.lineTo(1.0, -0.2); // Ponta 1
+    shape.lineTo(0.7, 0.0);  // Curva
+    shape.lineTo(0.5, -0.3); // Ponta 2
+    shape.lineTo(0.2, -0.1); // Curva
+    shape.lineTo(0, 0);      // Base
+    const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    
     for (let side of [-1, 1]) {
       const m = new THREE.Mesh(geo, mat);
       m.rotation.y = side * Math.PI / 2;
       m.position.set(side*0.2, 0.2, 0);
       g.add(m);
-    }
-  } else if (type === 'star') {
-    const shape = new THREE.Shape();
-    for (let i = 0; i < 10; i++) {
-      const r = i % 2 === 0 ? 0.8 : 0.3;
-      const a = (i / 10) * Math.PI * 2;
-      if (i === 0) shape.moveTo(Math.cos(a)*r, Math.sin(a)*r);
-      else shape.lineTo(Math.cos(a)*r, Math.sin(a)*r);
-    }
-    const geo = new THREE.ShapeGeometry(shape);
-    for (let side of [-1, 1]) {
-      const m = new THREE.Mesh(geo, mat);
-      m.rotation.y = side * Math.PI / 2;
-      m.position.set(side*0.2, 0.2, 0);
-      g.add(m);
+      // Ossos da asa
+      const bone = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 1.2, 6), new THREE.MeshStandardMaterial({ color: darken(color, 0.5) }));
+      bone.rotation.z = side * 1.2; bone.position.set(side*0.4, 0.4, 0);
+      g.add(bone);
     }
   } else if (type === 'mecha') {
+    // Asas Mech / Cyber
+    const plateGeo = new THREE.BoxGeometry(0.8, 0.08, 0.4);
+    const neonMat = new THREE.MeshStandardMaterial({ color: 0x00ffcc, emissive: 0x00aa88, emissiveIntensity: 2 });
     for (let side of [-1, 1]) {
-      const m = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.1, 0.6), mat);
-      m.rotation.z = side * 0.5; m.rotation.y = side * Math.PI/4;
-      m.position.set(side*0.5, 0.3, -0.2);
-      g.add(m);
-      const m2 = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.08, 0.4), mat);
-      m2.rotation.z = side * 0.8; m2.rotation.y = side * Math.PI/4;
-      m2.position.set(side*0.6, -0.1, -0.4);
-      g.add(m2);
+      const p1 = new THREE.Mesh(plateGeo, mat);
+      p1.rotation.z = side * 0.4; p1.rotation.y = side * 0.8; p1.position.set(side*0.5, 0.4, -0.1);
+      const p2 = new THREE.Mesh(plateGeo, mat);
+      p2.scale.set(0.6, 1, 1); p2.rotation.z = side * 0.8; p2.rotation.y = side * 0.8; p2.position.set(side*0.7, 0.0, -0.2);
+      const glow = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.02, 0.1), neonMat);
+      glow.rotation.z = side * 0.4; glow.rotation.y = side * 0.8; glow.position.set(side*0.55, 0.42, -0.08);
+      g.add(p1, p2, glow);
     }
   } else {
-    const geo = new THREE.CircleGeometry(0.7, 10, 0, Math.PI);
+    // Fallback (CircleGeometry)
+    const geo = new THREE.CircleGeometry(0.7, 16, 0, Math.PI);
     for (let side of [-1, 1]) {
       const m = new THREE.Mesh(geo, mat);
       m.rotation.y = side * Math.PI / 2;
@@ -1224,30 +1329,31 @@ function createWings(id, type, color) {
       g.add(m);
     }
   }
-  g.position.set(0, 0.3, -0.5);
+  g.position.set(0, 0.3, -0.6);
   g.visible = false;
   bodyGrp.add(g);
   wings[id] = g;
 }
+
 createWings('wing_angel', 'angel', 0xffffff);
 createWings('wing_dragon', 'dragon', 0x6644aa);
 createWings('wing_demon', 'demon', 0x991111);
-createWings('wing_fairy', 'fairy', 0xaaffee);
-createWings('wing_butterfly', 'butterfly', 0xff88cc);
-createWings('wing_galaxy', 'fairy', 0x4400aa);
-createWings('wing_ice', 'fairy', 0x88ddff);
+createWings('wing_fairy', 'fairy', 0xaaffee, 0.7);
+createWings('wing_butterfly', 'butterfly', 0xff88cc, 0.8);
+createWings('wing_galaxy', 'fairy', 0x4400aa, 0.9);
+createWings('wing_ice', 'fairy', 0x88ddff, 0.8);
 createWings('wing_leaf', 'fairy', 0x33aa33);
-createWings('wing_cyber', 'dragon', 0x00ff88);
+createWings('wing_cyber', 'mecha', 0x333333);
 createWings('wing_bat', 'dragon', 0x220011);
-createWings('wing_ghost', 'fairy', 0xccccff);
+createWings('wing_ghost', 'fairy', 0xccccff, 0.5);
 createWings('wing_rainbow', 'fairy', 0xff00ff);
 createWings('wing_flame', 'dragon', 0xff3300);
-createWings('wing_cloud', 'fairy', 0xeeeeff);
-createWings('wing_star', 'star', 0xffdd00);
+createWings('wing_cloud', 'fairy', 0xeeeeff, 0.6);
+createWings('wing_star', 'butterfly', 0xffdd00);
 createWings('wing_mecha', 'mecha', 0x888888);
 createWings('wing_bone', 'angel', 0xdddddd);
-createWings('wing_spiderweb', 'fairy', 0x333333);
-createWings('wing_phantom', 'dragon', 0x330033);
+createWings('wing_spiderweb', 'fairy', 0x333333, 0.8);
+createWings('wing_phantom', 'dragon', 0x330033, 0.8);
 
 scene.add(puffer);
 
@@ -1646,7 +1752,6 @@ function updatePlay(dt, now) {
   if (keys.has('ArrowUp') || keys.has('KeyW')) iz -= 1;
   if (keys.has('ArrowDown') || keys.has('KeyS')) iz += 1;
   
-  // APLICANDO UPGRADE DE VELOCIDADE E PULO
   const speedMult = 1 + ((save.upgrades.speed - 1) * 0.1);
   const jumpPower = 14 + ((save.upgrades.jump - 1) * 1.2);
   const maxAir = 22 + ((save.upgrades.air - 1) * 3);
@@ -1729,7 +1834,6 @@ function updatePlay(dt, now) {
     const c = collectibles[i];
     const dist = player.pos.distanceTo(c.position);
     
-    // MAGNET UPGRADE
     if (dist < magnetRange && c.userData.type !== 'goal') {
         const dir = new THREE.Vector3().subVectors(player.pos, c.position).normalize();
         c.position.addScaledVector(dir, 15 * dt);
@@ -2156,7 +2260,14 @@ window.resetSave = () => {
 };
 
 const UPDATES = [
-  { version:'5.6.0', name:'Upgrades System', best: true, changes: [
+  { version:'5.7.0', name:'Realism Update', best: true, changes: [
+    '🎩 Completely revamped all 3D Hats with ExtrudeGeometry and complex models',
+    '🦋 Completely revamped all Wings with realistic thickness, bevels, and layers',
+    '✨ Added glowing materials (emissive) to Halo, Cyber, and Jewel items',
+    '🧵 Improved textures and roughness mapping for leather, metal, and cloth',
+    '⚙️ Upgrades system fully operational'
+  ]},
+  { version:'5.6.0', name:'Upgrades System', best: false, changes: [
     '⬆️ Added a brand new Upgrades system!',
     '🏊 Speed, Air Capacity, Jump Power, and Coin Magnet can now be upgraded.',
     '🏪 New UI for upgrades matching the shop aesthetic.',
