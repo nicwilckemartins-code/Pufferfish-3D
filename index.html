@@ -539,7 +539,16 @@ window.importSave = () => {
   } catch(e) { showToast('❌ Código inválido!'); }
 };
 
-const CODES = {};
+/* ═══════════════════════════════════════════════════════════════
+   CODES SYSTEM (AQUI ESTÃO OS CÓDIGOS)
+   ═══════════════════════════════════════════════════════════════ */
+const CODES = {
+  'WELCOME': { coins: 100, pumpkins: 5, xp: 50 },
+  'PUFFER': { coins: 250, pumpkins: 10, xp: 100 },
+  'AURA': { coins: 500, pumpkins: 25, xp: 200 },
+  'HALLOWEEN': { pumpkins: 100, xp: 50 },
+  'THANKS': { coins: 1000, pumpkins: 50, xp: 500 }
+};
 
 window.redeemCode = () => {
   const input = document.getElementById('codeInput');
@@ -915,6 +924,9 @@ function animateFins(now, speed = 1) {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   HATS (FIXED MODELS & POSITIONS)
+   ═══════════════════════════════════════════════════════════════ */
 const hats = {};
 function createHat(id, geo, pos, extra) {
   const g = new THREE.Group();
@@ -942,56 +954,75 @@ createHat('hat_wizard', new THREE.ConeGeometry(0.5, 1.1, 12), [0, 1.55, 0], { co
 createHat('hat_ghost_hat', new THREE.SphereGeometry(0.5, 12, 10, 0, Math.PI*2, 0, Math.PI/2), [0, 1.1, 0], { color: 0xffffff, transparent: true, opacity: 0.7 });
 createHat('hat_pumpkin_king', new THREE.SphereGeometry(0.55, 16, 12), [0, 1.2, 0], { color: 0xff6600 });
 
-// New Base Hats
-createHat('hat_cowboy', new THREE.CylinderGeometry(0.35, 0.4, 0.5, 12), [0, 1.1, 0], { color: 0x8b5a2b }); 
-const cowboyBrim = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.08, 8, 16), new THREE.MeshStandardMaterial({ color: 0x8b5a2b }));
-cowboyBrim.rotation.x = Math.PI / 2; cowboyBrim.position.set(0, 0.85, 0); hats['hat_cowboy'].add(cowboyBrim);
+// Pirate Hat (FIXED: Added missing mesh)
+createHat('hat_pirate', new THREE.ConeGeometry(0.6, 0.4, 3), [0, 1.1, 0], { color: 0x111111 });
+const skull = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+skull.position.set(0, 1.15, 0.35); hats['hat_pirate'].add(skull);
 
+// Hood/Hacker (FIXED: Added missing mesh)
+createHat('hat_hacker', new THREE.SphereGeometry(0.6, 16, 12, 0, Math.PI*2, 0, Math.PI/1.5), [0, 1.0, -0.05], { color: 0x222222 });
+
+// Flower (FIXED: Added missing mesh & colors)
+createHat('hat_flower', new THREE.TorusGeometry(0.2, 0.1, 8, 12), [0.35, 1.0, 0.25], { color: 0xff69b4 });
+const flowerCenter = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffcc00 }));
+flowerCenter.position.set(0.35, 1.0, 0.25); hats['hat_flower'].add(flowerCenter);
+
+// Cowboy Hat (FIXED: Brim position)
+createHat('hat_cowboy', new THREE.CylinderGeometry(0.35, 0.4, 0.5, 12), [0, 1.15, 0], { color: 0x8b5a2b }); 
+const cowboyBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.06, 16), new THREE.MeshStandardMaterial({ color: 0x8b5a2b }));
+cowboyBrim.position.set(0, -0.2, 0); hats['hat_cowboy'].add(cowboyBrim);
+
+// Propeller Hat (FIXED: Blades & stem grouped properly)
 const propGrp = new THREE.Group();
-propGrp.add(new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.2, 8), new THREE.MeshStandardMaterial({ color: 0xaaaaaa })));
-const propBlade = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.04, 0.08), new THREE.MeshStandardMaterial({ color: 0xff0000 }));
-propBlade.position.y = 0.12; propGrp.add(propBlade);
-const propBlade2 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.04, 0.6), new THREE.MeshStandardMaterial({ color: 0x0000ff }));
-propBlade2.position.y = 0.12; propGrp.add(propBlade2);
-propGrp.position.set(0, 1.2, 0); hats['hat_propeller'] = propGrp; propGrp.visible = false; bodyGrp.add(propGrp);
+const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.2, 8), new THREE.MeshStandardMaterial({ color: 0xaaaaaa }));
+stem.position.y = 0.1; propGrp.add(stem);
+const blade1 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.04, 0.08), new THREE.MeshStandardMaterial({ color: 0xff0000 }));
+blade1.position.y = 0.2; propGrp.add(blade1);
+const blade2 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.04, 0.6), new THREE.MeshStandardMaterial({ color: 0x0000ff }));
+blade2.position.y = 0.2; propGrp.add(blade2);
+propGrp.position.set(0, 1.0, 0); hats['hat_propeller'] = propGrp; propGrp.visible = false; bodyGrp.add(propGrp);
 
+// Party Hat (FIXED: Pom-pom position)
 createHat('hat_party', new THREE.ConeGeometry(0.35, 0.8, 12), [0, 1.3, 0], { color: 0xff00ff });
 const partyPom = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffff00 }));
-partyPom.position.set(0, 1.75, 0); hats['hat_party'].add(partyPom);
+partyPom.position.set(0, 0.4, 0); hats['hat_party'].add(partyPom);
 
+// Chef Hat
 createHat('hat_chef', new THREE.CylinderGeometry(0.4, 0.35, 0.6, 12), [0, 1.2, 0], { color: 0xffffff });
 
+// Viking Hat (FIXED: Slightly higher position)
 const vikingGrp = new THREE.Group();
 vikingGrp.add(new THREE.Mesh(new THREE.SphereGeometry(0.5, 12, 8, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 })));
 const hornL = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffffee }));
 hornL.position.set(-0.45, 0.1, 0); hornL.rotation.z = 0.5; vikingGrp.add(hornL);
 const hornR = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffffee }));
 hornR.position.set(0.45, 0.1, 0); hornR.rotation.z = -0.5; vikingGrp.add(hornR);
-vikingGrp.position.set(0, 1.0, 0); hats['hat_viking'] = vikingGrp; vikingGrp.visible = false; bodyGrp.add(vikingGrp);
+vikingGrp.position.set(0, 1.05, 0); hats['hat_viking'] = vikingGrp; vikingGrp.visible = false; bodyGrp.add(vikingGrp);
 
 // Halloween Hats
 const skullHat = new THREE.Group();
 skullHat.add(new THREE.Mesh(new THREE.SphereGeometry(0.45, 12, 12), new THREE.MeshStandardMaterial({ color: 0xeeeeee })));
 const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 6, 6), new THREE.MeshBasicMaterial({ color: 0x000000 }));
-eyeL.position.set(-0.15, 0.1, 0.4); skullHat.add(eyeL);
+eyeL.position.set(-0.15, 0.1, 0.38); skullHat.add(eyeL);
 const eyeR = new THREE.Mesh(new THREE.SphereGeometry(0.1, 6, 6), new THREE.MeshBasicMaterial({ color: 0x000000 }));
-eyeR.position.set(0.15, 0.1, 0.4); skullHat.add(eyeR);
+eyeR.position.set(0.15, 0.1, 0.38); skullHat.add(eyeR);
 skullHat.position.set(0, 1.1, 0); hats['hat_skull'] = skullHat; skullHat.visible = false; bodyGrp.add(skullHat);
 
+// Cauldron (FIXED: Handle removed, liquid position fixed)
 const cauldron = new THREE.Group();
 cauldron.add(new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.3, 0.4, 12), new THREE.MeshStandardMaterial({ color: 0x111111 })));
-const cHandle = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.03, 6, 12, Math.PI), new THREE.MeshStandardMaterial({ color: 0x111111 }));
-cHandle.position.y = 0.2; cauldron.add(cHandle);
-const cSoup = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.05, 12), new THREE.MeshStandardMaterial({ color: 0x00ff00, emissive: 0x00aa00 }));
-cSoup.position.y = 0.2; cauldron.add(cSoup);
+const cSoup = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.05, 12), new THREE.MeshStandardMaterial({ color: 0x00ff00, emissive: 0x00aa00 }));
+cSoup.position.y = 0.18; cauldron.add(cSoup);
 cauldron.position.set(0, 1.15, 0); hats['hat_cauldron'] = cauldron; cauldron.visible = false; bodyGrp.add(cauldron);
 
+// Eyeball
 const eyeball = new THREE.Group();
 eyeball.add(new THREE.Mesh(new THREE.SphereGeometry(0.35, 12, 12), new THREE.MeshStandardMaterial({ color: 0xffffff })));
 const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 8), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
 pupil.position.z = 0.25; eyeball.add(pupil);
 eyeball.position.set(0, 1.15, 0); hats['hat_eyeball'] = eyeball; eyeball.visible = false; bodyGrp.add(eyeball);
 
+// Frankenstein Bolts
 const bolts = new THREE.Group();
 bolts.add(new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.3, 0.4), new THREE.MeshStandardMaterial({ color: 0x222222 })));
 const boltL = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.3, 6), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.9 }));
@@ -1000,6 +1031,7 @@ const boltR = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.3, 6), new
 boltR.position.set(0.3, 0, 0); boltR.rotation.z = Math.PI/2; bolts.add(boltR);
 bolts.position.set(0, 1.1, 0); hats['hat_frankenstein'] = bolts; bolts.visible = false; bodyGrp.add(bolts);
 
+// Devil Horns
 const devilHorns = new THREE.Group();
 const hornL2 = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xaa0000 }));
 hornL2.position.set(-0.3, 0.2, 0); hornL2.rotation.z = 0.4; devilHorns.add(hornL2);
@@ -1515,7 +1547,6 @@ function updatePlay(dt, now) {
       player.vel.y = 14; 
       player.flapCd = 0.28; 
       SFX.jump(); 
-      // MELHORIA: Partículas ao pular
       spawnParticles(player.pos.x, player.pos.y - 0.5, player.pos.z, 0xffffff, 6);
     }
     if (diveHeld) player.vel.y -= 20 * dt;
@@ -1568,15 +1599,13 @@ function updatePlay(dt, now) {
     }
   }
   
-  // MELHORIA: Ímã de Moedas
   for (let i = collectibles.length - 1; i >= 0; i--) {
     const c = collectibles[i];
     const dist = player.pos.distanceTo(c.position);
     
-    // Atrai moedas próximas
     if (dist < 3.5 && c.userData.type !== 'goal') {
         const dir = new THREE.Vector3().subVectors(player.pos, c.position).normalize();
-        c.position.addScaledVector(dir, 15 * dt); // Velocidade do ímã
+        c.position.addScaledVector(dir, 15 * dt);
     }
 
     if (dist < 1.8) {
@@ -1606,7 +1635,6 @@ function updatePlay(dt, now) {
   puffer.position.copy(player.pos);
   puffer.scale.setScalar(1 + player.inflation * 0.75);
   
-  // Lógica correta dos espinhos
   for (const s of spikes) {
     s.mesh.visible = !player.inWater && player.inflation > 0.1; 
   }
@@ -2001,35 +2029,39 @@ window.resetSave = () => {
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   RESTORED FULL UPDATE LOG
+   UPDATE LOG (CÓDIGOS REMOVIDOS)
    ═══════════════════════════════════════════════════════════════ */
 const UPDATES = [
-  { version:'5.4.0', name:'Aura & Spikes Fix', best: true, changes: [
-    '🐡 Pufferfish is back and prominent in the menus',
-    '🐟 Inflated with spikes in all menus (no more invisible fish)',
-    '✨ Showcase scenario is now much brighter and more eye-catching',
-    '🧲 Coin Magnet added (coins fly to you when close)',
-    '💨 Jump particles added for better game feel',
-    '🎥 Dynamic camera smoothing'
+  { version:'5.5.0', name:'Cosmetic Fixes', best: true, changes: [
+    '🛠️ Fixed glitched parts on some hats (Party, Cowboy, Propeller, Cauldron)',
+    '👒 Added missing 3D models for Pirate, Hood, and Flower hats',
+    '🎨 Fixed hat color mismatches',
+    '🎁 Added hidden redeemable codes for players to find (Check Settings)'
+  ]},
+  { version:'5.4.0', name:'Aura & Spikes Fix', best: false, changes: [
+    'Pufferfish is back and prominent in the menus',
+    'Inflated with spikes in all menus (no more invisible fish)',
+    'Showcase scenario is now much brighter and more eye-catching',
+    'Coin Magnet added (coins fly to you when close)',
+    'Jump particles added for better game feel',
+    'Dynamic camera smoothing'
   ]},
   { version:'5.3.0', name:'Massive Cosmetic Update', best: false, changes: [
-    '🐡 Spike scaling fixed (they grow with the body)',
-    '💧 In-game spikes correctly show only when inflated out of water',
-    '✨ Added 20 new base skins (40 total)',
-    '✨ Added 5 new base wings (Star, Mecha, Rainbow, Flame, Cloud)',
-    '✨ Added 5 new base hats (Cowboy, Propeller, Party, Viking, Chef)',
-    '🎃 Added 4 new Halloween skins (Ghost, Mummy, Skeleton, Werewolf)',
-    '🎃 Added 3 new Halloween wings (Bone, Spiderweb, Phantom)',
-    '🎃 Added 5 new Halloween hats (Skull, Cauldron, Eyeball, Bolts, Devil Horns)',
-    '🔥 Total cosmetics is now OVER 90!'
+    'Spike scaling fixed (they grow with the body)',
+    'In-game spikes correctly show only when inflated out of water',
+    'Added 20 new base skins (40 total)',
+    'Added 5 new base wings (Star, Mecha, Rainbow, Flame, Cloud)',
+    'Added 5 new base hats (Cowboy, Propeller, Party, Viking, Chef)',
+    'Added 4 new Halloween skins, 3 wings, 5 hats',
+    'Total cosmetics is now OVER 90!'
   ]},
   { version:'5.2.0', name:'Shop & Save Update', best: false, changes: [
-    '💰 Shop and Halloween Shop now show your balance',
-    '🐟 Lateral fins redesigned - bigger, cuter, match skin color',
-    '🎃 Giant Jack-o-Lantern replaces witch NPC in Halloween shop',
-    '🎟️ Codes section added to settings',
-    '🆔 Device-based save system with unique ID',
-    '💾 Auto-migration from old save keys'
+    'Shop and Halloween Shop now show your balance',
+    'Lateral fins redesigned - bigger, cuter, match skin color',
+    'Giant Jack-o-Lantern replaces witch NPC in Halloween shop',
+    'Redeem section added to settings',
+    'Device-based save system with unique ID',
+    'Auto-migration from old save keys'
   ]},
   { version:'5.1.0', name:'Polish Update', best: false, changes: [
     'Witch NPC redesigned with full detail',
