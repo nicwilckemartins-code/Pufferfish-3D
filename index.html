@@ -191,7 +191,7 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 /* Other UIs */
 .custom-header { position: absolute; top: 0; left: 0; right: 0; padding: 25px; background: linear-gradient(180deg, rgba(3,8,16,0.95), transparent); display: flex; justify-content: center; align-items: center; z-index: 60; pointer-events: none; }
 .custom-header h2 { margin: 0; color: #fff; font-size: 24px; }
-.custom-footer { display: none; } /* Old footer hidden */
+.custom-footer { display: none; }
 #halloweenScreen .shop-right-panel { border-left-color: rgba(255, 102, 0, 0.3); }
 #halloweenScreen .tab.active { background: rgba(255,102,0,0.15); color: #ff6600; border-color: #ff6600; }
 #halloweenScreen .item-info-ui { border-color: #ff6600; }
@@ -872,8 +872,8 @@ function getUpgradeStat(key) {
 
 window.openUpgrades = () => {
   SFX.click();
-  showScreen('upgradeScreen');
   gameState.mode = 'upgrades';
+  showScreen('upgradeScreen');
   showcaseScene.visible = true;
   showcaseLight.intensity = 2.5;
   showcaseAccent.intensity = 1.5;
@@ -1092,37 +1092,27 @@ const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x0a1e33, 60, 160);
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 300);
 
+// Função que ajusta a câmera dependendo da orientação do celular
 function updateCameraLayout() {
     const w = window.innerWidth;
     const h = window.innerHeight;
     camera.aspect = w / h;
+    camera.clearViewOffset();
 
     if (gameState.mode === 'showcase' || gameState.mode === 'halloween') {
-        if (h > w) {
-            // Portrait
-            camera.fov = 65;
-            camera.setViewOffset(w, h, 0, 0, w * 0.5, h);
-        } else {
-            // Landscape
-            if (w > 800) {
-                // Desktop
-                camera.fov = 60;
-                camera.setViewOffset(w, h, 0, 0, w * 0.45, h);
-            } else {
-                // Mobile Landscape
-                camera.fov = 75;
-                camera.setViewOffset(w, h, 0, 0, w * 0.4, h);
-            }
-        }
+        if (h > w) camera.fov = 65;
+        else if (w > 800) camera.fov = 60;
+        else camera.fov = 75; // Celular deitado
     } else {
-        camera.clearViewOffset();
         if (h > w) camera.fov = 65;
         else camera.fov = 60;
     }
+    
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
 }
 window.addEventListener('resize', updateCameraLayout);
+updateCameraLayout();
 
 scene.add(new THREE.HemisphereLight(0xb8ddff, 0x0a1e33, 1.3));
 const sunLight = new THREE.DirectionalLight(0xfff0d0, 1.5);
@@ -2411,7 +2401,6 @@ function die() {
   document.getElementById('goCombo').textContent = gameState.combo;
   document.getElementById('goLevel').textContent = save.level;
   window.showScreen('gameOverScreen');
-  updateCameraLayout();
 }
 window.retryStage = () => window.loadStage(gameState.worldIdx, gameState.stageIdx);
 
@@ -2459,7 +2448,6 @@ function winLevel() {
   document.getElementById('winMessage').textContent = t.winMessages[Math.floor(Math.random() * t.winMessages.length)];
   document.getElementById('winEmoji').textContent = emojis[Math.floor(Math.random() * emojis.length)];
   window.showScreen('winScreen');
-  updateCameraLayout();
 }
 window.nextStage = () => { const n = gameState.stageIdx + 1; if (n >= STAGES_PER_WORLD) window.openWorlds(); else window.loadStage(gameState.worldIdx, n); };
 
@@ -2551,7 +2539,7 @@ window.goMenu = () => {
   startMusic();
 };
 
-window.openWorlds = () => { SFX.click(); clearPreview(); showScreen('worldScreen'); renderWorlds(); };
+window.openWorlds = () => { SFX.click(); gameState.mode = 'menu'; clearPreview(); showScreen('worldScreen'); renderWorlds(); };
 function renderWorlds() {
   const list = document.getElementById('worlds-list');
   list.innerHTML = '';
@@ -2571,6 +2559,7 @@ function renderWorlds() {
 }
 window.openStageSelect = (worldIdx) => {
   gameState.worldIdx = worldIdx;
+  gameState.mode = 'menu';
   showScreen('stageScreen');
   document.getElementById('stage-screen-title').textContent = WORLDS[worldIdx].name.toUpperCase();
   const grid = document.getElementById('stages-grid');
@@ -2591,8 +2580,8 @@ window.openStageSelect = (worldIdx) => {
 
 window.openCustomize = () => {
   SFX.click();
-  showScreen('customizeScreen');
   gameState.mode = 'showcase';
+  showScreen('customizeScreen');
   clearPreview();
   showcaseScene.visible = true;
   showcaseLight.intensity = 2.5;
@@ -2608,8 +2597,8 @@ window.openCustomize = () => {
 };
 window.openShop = () => {
   SFX.click();
-  showScreen('shopScreen');
   gameState.mode = 'showcase';
+  showScreen('shopScreen');
   clearPreview();
   showcaseScene.visible = true;
   showcaseLight.intensity = 2.5;
@@ -2626,8 +2615,8 @@ window.openShop = () => {
 };
 window.openHalloween = () => {
   SFX.click();
-  showScreen('halloweenScreen');
   gameState.mode = 'halloween';
+  showScreen('halloweenScreen');
   clearPreview();
   showcaseScene.visible = true;
   showcaseLight.intensity = 2.0;
@@ -2644,6 +2633,7 @@ window.openHalloween = () => {
 };
 window.openSettings = () => {
   SFX.click();
+  gameState.mode = 'menu';
   showScreen('settingsScreen');
   clearPreview();
   showcaseScene.visible = false; giantPumpkin.visible = false;
@@ -2667,6 +2657,7 @@ function keyName(code) {
 }
 window.openUpdates = () => {
   SFX.click();
+  gameState.mode = 'menu';
   showScreen('updatesScreen');
   clearPreview();
   showcaseScene.visible = false; giantPumpkin.visible = false;
@@ -2831,7 +2822,12 @@ window.resetSave = () => {
 };
 
 const UPDATES = [
-  { version:'6.1.1', name:'UI Bugfix & Mobile Fix', best: true, changes: [
+  { version:'6.1.2', name:'Mobile 3D Preview Fix', best: true, changes: [
+    '📱 Fixed the 3D Pufferfish preview missing on mobile devices',
+    '📷 Camera now dynamically shifts to the left panel instead of clipping the screen',
+    '🛠️ Ensured `gameState` updates correctly before the camera recalculates'
+  ]},
+  { version:'6.1.1', name:'UI Bugfix & Mobile Fix', best: false, changes: [
     '🛠️ Fixed a bug where the item name and price were showing as default text in the shop.',
     '📱 Improved mobile landscape layout (Panels no longer overlap).',
     '📷 3D Camera now centers the Pufferfish perfectly on the left side of the screen on mobile.',
@@ -2971,7 +2967,13 @@ function loop(now) {
     showcaseLight.intensity = 0; showcaseAccent.intensity = 0;
   } else if (gameState.mode === 'halloween') {
     showcaseScene.visible = true;
-    puffer.position.set(-1.5, 0.5, 0);
+    
+    // Posicionamento dinâmico para mobile e desktop
+    let camX = -1.5;
+    if (window.innerWidth < window.innerHeight) camX = -1.2;
+    else if (window.innerWidth < 900) camX = -2.5;
+    
+    puffer.position.set(camX, 0.5, 0);
     puffer.rotation.y += dt * 0.4;
     puffer.scale.setScalar(1.2 + Math.sin(now * 0.003) * 0.05);
     tailPivot.rotation.y = Math.sin(now * 0.005) * 0.4;
@@ -2983,18 +2985,24 @@ function loop(now) {
     });
 
     giantPumpkin.visible = true;
-    giantPumpkin.position.set(1.5, 0.1, -1);
+    giantPumpkin.position.set(camX + 3, 0.1, -1);
     giantPumpkin.rotation.y = Math.sin(now * 0.0008) * 0.35;
     giantPumpkin.scale.setScalar(0.75);
 
     animateShowcase(now, dt);
 
-    camera.position.set(-1.5, 1.8, 6.5);
-    camera.lookAt(-1.5, 0.5, 0);
+    camera.position.set(camX, 1.8, 6.5);
+    camera.lookAt(camX, 0.5, 0);
     water.visible = false;
   } else if (gameState.mode === 'showcase' || gameState.mode === 'upgrades') {
     showcaseScene.visible = true;
-    puffer.position.set(-1.5, 0.5, 0);
+    
+    // Posicionamento dinâmico para mobile e desktop
+    let camX = -1.5;
+    if (window.innerWidth < window.innerHeight) camX = -1.2;
+    else if (window.innerWidth < 900) camX = -2.5;
+    
+    puffer.position.set(camX, 0.5, 0);
     puffer.rotation.y += dt * 0.5;
     puffer.scale.setScalar(1.5 + Math.sin(now * 0.003) * 0.05); 
     tailPivot.rotation.y = Math.sin(now * 0.005) * 0.4;
@@ -3009,8 +3017,8 @@ function loop(now) {
 
     animateShowcase(now, dt);
 
-    camera.position.set(-1.5, 1.8, 6.5);
-    camera.lookAt(-1.5, 0.5, 0);
+    camera.position.set(camX, 1.8, 6.5);
+    camera.lookAt(camX, 0.5, 0);
     water.visible = false;
   } else {
     showcaseScene.visible = false; giantPumpkin.visible = false;
@@ -3082,4 +3090,4 @@ window.addEventListener('load', () => {
 });
 </script>
 </body>
-       </html>
+           </html>
