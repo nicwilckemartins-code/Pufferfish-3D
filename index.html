@@ -124,73 +124,120 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .tut-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.2);transition:.3s;}
 .tut-dot.active{background:var(--acc);box-shadow:0 0 10px var(--acc);transform:scale(1.3);}
 .tut-dot.done{background:var(--green);}
-#customizeScreen,#shopScreen,#halloweenScreen,#upgradeScreen{justify-content:flex-end;padding:0;background:transparent;backdrop-filter:none;}
-.custom-header{position:absolute;top:0;left:0;right:0;padding:25px;background:linear-gradient(180deg,rgba(3,8,16,0.95),transparent);display:flex;justify-content:center;align-items:center;z-index:60;}
-.custom-header h2{margin:0;color:#fff;font-size:24px;}
-.shop-balance{position:absolute;right:25px;top:25px;background:var(--panel);padding:8px 16px;border-radius:99px;font-size:14px;font-weight:900;color:var(--gold);border:1px solid var(--border);display:flex;align-items:center;gap:6px;box-shadow:0 4px 10px rgba(0,0,0,0.5);backdrop-filter:blur(10px);}
-.shop-balance.pump{color:var(--pumpkin);border-color:rgba(255,154,60,0.4);}
-.custom-footer{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(3,8,16,0.98),rgba(3,8,16,0.85),transparent);padding:20px;max-height:60vh;display:flex;flex-direction:column;gap:12px;}
-.tabs{display:flex;gap:8px;justify-content:center;overflow-x:auto;padding-bottom:6px;}
-.tab{flex:1;max-width:100px;padding:12px 6px;border-radius:12px;font-size:11px;font-weight:900;background:rgba(255,255,255,0.05);color:var(--sub);border:1px solid var(--border);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:.2s;}
-.tab.active{background:rgba(0,243,255,0.15);color:var(--acc);border-color:var(--acc);}
-.tab i{font-size:20px;}
-.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:12px;max-height:40vh;overflow-y:auto;padding:4px;}
-.item-card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;position:relative;transition:.2s;}
-.item-card:active{transform:scale(0.95);}
-.item-card.eq{border-color:var(--green);background:rgba(57,255,20,0.1);}
-.item-card .icon{font-size:34px;height:40px;display:flex;align-items:center;justify-content:center;}
-.item-card .color-dot{width:36px;height:36px;border-radius:50%;border:2px solid #fff;}
-.item-card .name{font-size:11px;font-weight:900;text-align:center;color:#fff;line-height:1.2;}
-.item-card .price{font-size:11px;color:var(--gold);font-weight:900;background:rgba(0,0,0,0.6);padding:3px 10px;border-radius:99px;display:flex;align-items:center;gap:4px;}
-.item-card .price.pump{color:var(--pumpkin);}
-.item-card .eq-tag{position:absolute;inset:0;background:rgba(57,255,20,0.85);color:#000;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;border-radius:12px;opacity:0;transition:.2s;}
-.item-card.eq .eq-tag{opacity:1;}
-.upgrade-list { display:flex; flex-direction:column; gap:10px; width:100%; max-width:440px; max-height:50vh; overflow-y:auto; padding:4px; }
-.upgrade-card { display:flex; align-items:center; gap:14px; padding:14px; border-radius:16px; background:var(--panel); border:2px solid var(--border); cursor:pointer; transition:all .2s; text-align:left; }
-.upgrade-card:active { transform:scale(0.97); }
-.upgrade-card.maxed { opacity:.7; border-color:var(--gold); cursor:default; }
-.upgrade-icon { width:50px; height:50px; border-radius:12px; background:rgba(0,243,255,0.1); color:var(--acc); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
-.upgrade-card.maxed .upgrade-icon { color:var(--gold); background:rgba(255,204,0,0.1); }
-.upgrade-info { flex:1; }
-.upgrade-info h3 { font-size:16px; color:#fff; margin-bottom:2px; }
-.upgrade-info p { font-size:12px; color:var(--sub); margin:0; }
-.upgrade-stat { font-size:13px; color:var(--green); font-weight:800; margin-top:4px; }
-.upgrade-btn { padding:8px 14px; border-radius:10px; background:rgba(255,204,0,0.15); border:1px solid var(--gold); color:var(--gold); font-weight:900; font-family:'Nunito'; font-size:13px; display:flex; align-items:center; gap:6px; white-space:nowrap; }
-.upgrade-btn:active { background:rgba(255,204,0,0.3); }
-.upgrade-btn.disabled { opacity:0.5; background:transparent; border-color:var(--sub); color:var(--sub); pointer-events:none; }
-.settings-box{background:var(--panel);padding:20px;border-radius:20px;width:100%;max-width:420px;border:1px solid var(--border);text-align:left;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow);max-height:70vh;overflow-y:auto;}
-.setting-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:700;color:var(--txt);gap:12px;flex-wrap:wrap;}
-.setting-row select,.setting-row input{padding:10px 12px;border-radius:8px;background:rgba(0,0,0,0.3);border:1px solid var(--border);color:var(--txt);font-family:'Nunito';outline:none;font-weight:700;}
-.setting-row button{padding:10px 16px;border-radius:8px;background:rgba(0,243,255,0.2);border:1px solid var(--acc);color:var(--txt);font-weight:800;cursor:pointer;font-family:'Nunito';}
-.setting-row input[type=range]{width:130px;accent-color:var(--acc);padding:0;}
-.setting-row input[type=text]{flex:1;min-width:100px;font-size:13px;letter-spacing:1px;}
-.setting-section{font-size:11px;font-weight:900;color:var(--acc);letter-spacing:2px;text-transform:uppercase;margin-top:6px;padding-top:10px;border-top:1px solid var(--border);}
-.theme-picker{display:flex;gap:8px;flex-wrap:wrap;}
-.theme-dot{width:30px;height:30px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:.2s;}
-.theme-dot.active{border-color:#fff;box-shadow:0 0 15px currentColor;transform:scale(1.1);}
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.stat-item{background:rgba(0,0,0,0.3);padding:10px;border-radius:10px;text-align:center;}
-.stat-label{font-size:10px;color:var(--sub);font-weight:900;letter-spacing:1px;text-transform:uppercase;}
-.stat-value{font-size:20px;color:var(--gold);font-weight:900;font-family:'Fredoka';margin-top:3px;}
-.device-id{font-family:monospace;font-size:11px;color:var(--gold);background:rgba(0,0,0,0.4);padding:8px 12px;border-radius:8px;border:1px solid var(--border);letter-spacing:1px;word-break:break-all;text-align:center;cursor:pointer;}
-.device-id:active{background:rgba(0,0,0,0.6);}
-#modal-confirm{z-index:9999;background:rgba(0,0,0,0.85);}
-.confirm-box{background:var(--panel);padding:30px;border-radius:24px;border:1px solid var(--border);max-width:360px;width:100%;text-align:center;}
-.confirm-box h3{color:var(--gold);margin-bottom:15px;font-size:22px;}
-.confirm-box p{font-size:16px;margin-bottom:25px;color:var(--txt);}
-.confirm-box .row{display:flex;gap:12px;}
-.confirm-box button{flex:1;padding:14px;border-radius:12px;border:none;font-weight:900;font-size:16px;cursor:pointer;font-family:'Fredoka';}
-#toast{position:fixed;bottom:160px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,243,255,0.95);color:#000;padding:14px 28px;border-radius:99px;font-weight:900;font-size:15px;opacity:0;transition:all .3s;z-index:1000;pointer-events:none;font-family:'Fredoka';max-width:90vw;text-align:center;}
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-#updList .update-card{background:var(--panel);padding:16px;border-radius:12px;margin-bottom:10px;border:1px solid var(--border);text-align:left;}
-#updList .update-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
-#updList .update-version{font-size:16px;font-weight:800;color:var(--acc);font-family:'Fredoka';}
-#updList .update-name{font-size:14px;color:var(--txt);}
-#updList .best-badge{background:var(--red);color:#fff;font-size:10px;font-weight:900;padding:3px 10px;border-radius:99px;animation:pulse 1.5s infinite;}
-#updList ul{padding-left:20px;font-size:13px;color:var(--sub);margin:0;}
-#updList li{margin:3px 0;}
 
-/* MOBILE ORIENTATION OPTIMIZATIONS */
+/* ═══════════════════════════════════════════════════════════════
+   SHOP / INVENTORY NEW UI
+   ═══════════════════════════════════════════════════════════════ */
+#customizeScreen, #shopScreen, #halloweenScreen {
+    padding: 0; background: transparent; backdrop-filter: none;
+    display: flex; flex-direction: row; justify-content: flex-start; align-items: stretch;
+}
+.shop-left-panel {
+    width: 45%; height: 100vh; position: relative; pointer-events: none;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
+}
+.shop-right-panel {
+    width: 55%; height: 100vh; background: rgba(3,8,16,0.85); backdrop-filter: blur(10px);
+    display: flex; flex-direction: column; pointer-events: auto; padding: 20px;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5); border-left: 1px solid var(--border);
+    transform: translateX(100%); transition: transform 0.3s ease-out;
+}
+.shop-right-panel.open { transform: translateX(0); }
+.shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; margin-top: 40px; }
+.shop-header h2 { margin: 0; color: #fff; font-size: 24px; }
+.shop-balance { background: var(--panel); padding: 8px 16px; border-radius: 99px; font-size: 14px; font-weight: 900; color: var(--gold); border: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+.shop-balance.pump { color: var(--pumpkin); border-color: rgba(255,154,60,0.4); }
+.tabs { display: flex; gap: 8px; justify-content: center; padding-bottom: 6px; margin-bottom: 10px; }
+.tab { flex: 1; max-width: 100px; padding: 12px 6px; border-radius: 12px; font-size: 11px; font-weight: 900; background: rgba(255,255,255,0.05); color: var(--sub); border: 1px solid var(--border); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: .2s; }
+.tab.active { background: rgba(0,243,255,0.15); color: var(--acc); border-color: var(--acc); }
+.tab i { font-size: 20px; }
+.items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 12px; flex: 1; overflow-y: auto; padding: 4px; align-content: start; }
+.item-card { background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; position: relative; transition: .2s; }
+.item-card:active { transform: scale(0.95); }
+.item-card.eq { border-color: var(--green); background: rgba(57,255,20,0.1); }
+.item-card.selected { border-color: var(--gold); box-shadow: 0 0 15px var(--gold); transform: scale(1.05); z-index: 2; }
+.item-card .icon { font-size: 34px; height: 40px; display: flex; align-items: center; justify-content: center; }
+.item-card .color-dot { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #fff; }
+.item-card .name { font-size: 11px; font-weight: 900; text-align: center; color: #fff; line-height: 1.2; }
+.item-card .price { font-size: 11px; color: var(--gold); font-weight: 900; background: rgba(0,0,0,0.6); padding: 3px 10px; border-radius: 99px; display: flex; align-items: center; gap: 4px; }
+.item-card .price.pump { color: var(--pumpkin); }
+.item-card .eq-tag { position: absolute; inset: 0; background: rgba(57,255,20,0.85); color: #000; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; border-radius: 12px; opacity: 0; transition: .2s; }
+.item-card.eq .eq-tag { opacity: 1; }
+
+/* Sliding UI */
+.item-info-ui {
+    background: var(--panel); border: 2px solid var(--acc); border-radius: 16px; padding: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8); pointer-events: auto; display: flex; flex-direction: column; gap: 12px;
+    transform: translateY(150%); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.item-info-ui.show { transform: translateY(0); }
+.item-info-ui h3 { margin: 0; font-size: 20px; color: #fff; text-align: center; }
+.item-info-ui .info-price { font-size: 16px; color: var(--gold); font-weight: 900; display: flex; justify-content: center; align-items: center; gap: 6px; }
+.item-info-ui .info-price.pump { color: var(--pumpkin); }
+.item-info-ui .info-actions { display: flex; justify-content: center; margin-top: 4px; }
+.item-info-ui .info-actions .btn { width: 100%; margin: 0; padding: 12px; font-size: 16px; }
+
+/* Modals */
+#modal-confirm { z-index: 9999; background: rgba(0,0,0,0.85); }
+.confirm-box { background: var(--panel); padding: 30px; border-radius: 24px; border: 2px solid var(--acc); max-width: 360px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.8); animation: pop 0.4s ease-out; }
+.confirm-box h3 { color: #fff; margin-bottom: 15px; font-size: 22px; }
+.confirm-box p { font-size: 16px; margin-bottom: 25px; color: var(--txt); font-weight: 700; }
+.confirm-box .row { display: flex; gap: 12px; }
+.confirm-box button { flex: 1; padding: 14px; border-radius: 12px; border: none; font-weight: 900; font-size: 16px; cursor: pointer; font-family: 'Fredoka'; transition: 0.2s; }
+.confirm-box .btn-yes { background: linear-gradient(135deg, var(--green), #008800); color: #000; }
+.confirm-box .btn-no { background: linear-gradient(135deg, var(--red), #880022); color: #fff; }
+.confirm-box button:active { transform: scale(0.95); }
+
+/* Other UIs */
+.custom-header { position: absolute; top: 0; left: 0; right: 0; padding: 25px; background: linear-gradient(180deg, rgba(3,8,16,0.95), transparent); display: flex; justify-content: center; align-items: center; z-index: 60; pointer-events: none; }
+.custom-header h2 { margin: 0; color: #fff; font-size: 24px; }
+.custom-footer { display: none; } /* Old footer hidden */
+#halloweenScreen .shop-right-panel { border-left-color: rgba(255, 102, 0, 0.3); }
+#halloweenScreen .tab.active { background: rgba(255,102,0,0.15); color: #ff6600; border-color: #ff6600; }
+#halloweenScreen .item-info-ui { border-color: #ff6600; }
+#halloweenScreen .item-info-ui .btn.pri { background: linear-gradient(135deg, #ff6600, #cc4400); color: #fff; }
+#halloweenScreen .shop-header h2 { color: #ff6600; text-shadow: 0 0 10px #ff6600; }
+
+.upgrade-list { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 440px; max-height: 50vh; overflow-y: auto; padding: 4px; }
+.upgrade-card { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 16px; background: var(--panel); border: 2px solid var(--border); cursor: pointer; transition: all .2s; text-align: left; }
+.upgrade-card:active { transform: scale(0.97); }
+.upgrade-card.maxed { opacity: .7; border-color: var(--gold); cursor: default; }
+.upgrade-icon { width: 50px; height: 50px; border-radius: 12px; background: rgba(0,243,255,0.1); color: var(--acc); display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+.upgrade-card.maxed .upgrade-icon { color: var(--gold); background: rgba(255,204,0,0.1); }
+.upgrade-info { flex: 1; }
+.upgrade-info h3 { font-size: 16px; color: #fff; margin-bottom: 2px; }
+.upgrade-info p { font-size: 12px; color: var(--sub); margin: 0; }
+.upgrade-stat { font-size: 13px; color: var(--green); font-weight: 800; margin-top: 4px; }
+.upgrade-btn { padding: 8px 14px; border-radius: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold); color: var(--gold); font-weight: 900; font-family: 'Nunito'; font-size: 13px; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.upgrade-btn:active { background: rgba(255,204,0,0.3); }
+.upgrade-btn.disabled { opacity: 0.5; background: transparent; border-color: var(--sub); color: var(--sub); pointer-events: none; }
+.settings-box { background: var(--panel); padding: 20px; border-radius: 20px; width: 100%; max-width: 420px; border: 1px solid var(--border); text-align: left; display: flex; flex-direction: column; gap: 14px; box-shadow: var(--shadow); max-height: 70vh; overflow-y: auto; }
+.setting-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; color: var(--txt); gap: 12px; flex-wrap: wrap; }
+.setting-row select, .setting-row input { padding: 10px 12px; border-radius: 8px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: var(--txt); font-family: 'Nunito'; outline: none; font-weight: 700; }
+.setting-row button { padding: 10px 16px; border-radius: 8px; background: rgba(0,243,255,0.2); border: 1px solid var(--acc); color: var(--txt); font-weight: 800; cursor: pointer; font-family: 'Nunito'; }
+.setting-row input[type=range] { width: 130px; accent-color: var(--acc); padding: 0; }
+.setting-row input[type=text] { flex: 1; min-width: 100px; font-size: 13px; letter-spacing: 1px; }
+.setting-section { font-size: 11px; font-weight: 900; color: var(--acc); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; padding-top: 10px; border-top: 1px solid var(--border); }
+.theme-picker { display: flex; gap: 8px; flex-wrap: wrap; }
+.theme-dot { width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: .2s; }
+.theme-dot.active { border-color: #fff; box-shadow: 0 0 15px currentColor; transform: scale(1.1); }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.stat-item { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px; text-align: center; }
+.stat-label { font-size: 10px; color: var(--sub); font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+.stat-value { font-size: 20px; color: var(--gold); font-weight: 900; font-family: 'Fredoka'; margin-top: 3px; }
+.device-id { font-family: monospace; font-size: 11px; color: var(--gold); background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); letter-spacing: 1px; word-break: break-all; text-align: center; cursor: pointer; }
+.device-id:active { background: rgba(0,0,0,0.6); }
+#toast { position: fixed; bottom: 160px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(0,243,255,0.95); color: #000; padding: 14px 28px; border-radius: 99px; font-weight: 900; font-size: 15px; opacity: 0; transition: all .3s; z-index: 1000; pointer-events: none; font-family: 'Fredoka'; max-width: 90vw; text-align: center; }
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#updList .update-card { background: var(--panel); padding: 16px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border); text-align: left; }
+#updList .update-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+#updList .update-version { font-size: 16px; font-weight: 800; color: var(--acc); font-family: 'Fredoka'; }
+#updList .update-name { font-size: 14px; color: var(--txt); }
+#updList .best-badge { background: var(--red); color: #fff; font-size: 10px; font-weight: 900; padding: 3px 10px; border-radius: 99px; animation: pulse 1.5s infinite; }
+#updList ul { padding-left: 20px; font-size: 13px; color: var(--sub); margin: 0; }
+#updList li { margin: 3px 0; }
+
+/* Mobile Landscape Adjustments */
 @media (max-height: 500px) and (orientation: landscape) {
     #mainMenu { padding: 10px 15px; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; }
     #mainMenu .menu-top { width: auto; flex: 1; min-width: 200px; margin-top: 10px;}
@@ -199,34 +246,21 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .menu-grid .btn { height: 48px; padding: 8px 10px; font-size: 11px; }
     .btn.pri { margin-bottom: 2px; height: 48px; font-size: 14px; }
-    #hud { padding-top: 5px; gap: 5px; }
-    .hud-top { max-width: 100%; padding: 0 10px; }
-    .air-container { max-width: 200px; height: 14px; }
-    .air-text { font-size: 9px; }
-    .xp-container { max-width: 150px; height: 6px; }
-    #lvl-title { font-size: 12px; margin-top: 2px; }
-    #joy-base { width: 100px; height: 100px; left: 15px; bottom: 15px; }
-    #joy-knob { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
-    #btn-jump { width: 65px; height: 65px; bottom: 90px; right: 15px; }
-    #btn-dive { width: 65px; height: 65px; bottom: 15px; right: 90px; }
-    .btn-mob i { font-size: 22px; }
-    .custom-footer { max-height: 70vh; padding: 10px 15px; }
-    .items-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; max-height: 45vh; }
+    .shop-left-panel { width: 35%; padding: 10px; }
+    .shop-right-panel { width: 65%; padding: 10px; }
+    .shop-header { margin-top: 10px; margin-bottom: 5px; }
+    .shop-header h2 { font-size: 18px; }
+    .shop-balance { padding: 5px 10px; font-size: 12px; }
+    .items-grid { grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 8px; }
     .item-card { padding: 8px 4px; }
     .item-card .icon { font-size: 24px; height: 30px; }
     .item-card .name { font-size: 10px; }
     .item-card .color-dot { width: 26px; height: 26px; }
-    .tab { padding: 8px 4px; font-size: 10px; }
+    .tab { padding: 6px 4px; font-size: 10px; }
     .tab i { font-size: 16px; }
-    .upgrade-list { max-height: 55vh; }
-    .upgrade-card { padding: 10px; }
-}
-@media (max-width: 400px) and (orientation: portrait) {
-    .menu-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .menu-grid .btn { padding: 12px 8px; font-size: 12px; }
-    #mainMenu { padding: 15px 15px 20px; }
-    .top-stats { gap: 8px; }
-    .top-stat { padding: 6px 12px; font-size: 12px; }
+    .item-info-ui { padding: 10px; gap: 8px; }
+    .item-info-ui h3 { font-size: 16px; }
+    .item-info-ui .info-actions .btn { padding: 8px; font-size: 14px; }
 }
 </style>
 </head>
@@ -308,54 +342,86 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     <h2>UPGRADES</h2>
     <div class="shop-balance"><i class="ph ph-coin"></i> <span id="upgradeCoinBalance">0</span></div>
   </div>
-  <div class="custom-footer" style="max-height:55vh;">
+  <div class="custom-footer" style="max-height:55vh; display:flex;">
     <div class="upgrade-list" id="upgrade-list"></div>
   </div>
 </div>
 
+<!-- INVENTORY -->
 <div class="overlay hidden" id="customizeScreen">
-  <button class="back-btn" onclick="window.goMenu()"><i class="ph ph-arrow-left"></i></button>
-  <div class="custom-header"><h2>INVENTORY</h2></div>
-  <div class="custom-footer">
-    <div class="tabs" id="tabs-custom">
-      <button class="tab active" data-t="skin" onclick="window.switchTab('custom','skin')"><i class="ph ph-fish"></i>SKINS</button>
-      <button class="tab" data-t="wing" onclick="window.switchTab('custom','wing')"><i class="ph ph-feather"></i>WINGS</button>
-      <button class="tab" data-t="hat" onclick="window.switchTab('custom','hat')"><i class="ph ph-crown"></i>HATS</button>
+    <div class="shop-left-panel">
+        <div class="item-info-ui" id="itemInfoUI">
+            <h3 id="infoName">Item Name</h3>
+            <div class="info-price" id="infoPrice"><i class="ph ph-coin"></i> <span id="infoPriceVal">0</span></div>
+            <div class="info-actions">
+                <button class="btn pri" id="infoActionBtn">EQUIP</button>
+            </div>
+        </div>
     </div>
-    <div class="items-grid" id="grid-custom"></div>
-  </div>
+    <div class="shop-right-panel open">
+        <button class="back-btn" style="right:20px; left:auto;" onclick="window.goMenu()"><i class="ph ph-arrow-right"></i></button>
+        <div class="shop-header">
+            <h2>INVENTORY</h2>
+        </div>
+        <div class="tabs" id="tabs-custom">
+            <button class="tab active" data-t="skin" onclick="window.switchTab('custom','skin')"><i class="ph ph-fish"></i>SKINS</button>
+            <button class="tab" data-t="wing" onclick="window.switchTab('custom','wing')"><i class="ph ph-feather"></i>WINGS</button>
+            <button class="tab" data-t="hat" onclick="window.switchTab('custom','hat')"><i class="ph ph-crown"></i>HATS</button>
+        </div>
+        <div class="items-grid" id="grid-custom"></div>
+    </div>
 </div>
 
+<!-- SHOP -->
 <div class="overlay hidden" id="shopScreen">
-  <button class="back-btn" onclick="window.goMenu()"><i class="ph ph-arrow-left"></i></button>
-  <div class="custom-header">
-    <h2>SHOP</h2>
-    <div class="shop-balance"><i class="ph ph-coin"></i> <span id="shopCoinBalance">0</span></div>
-  </div>
-  <div class="custom-footer">
-    <div class="tabs" id="tabs-shop">
-      <button class="tab active" data-t="skin" onclick="window.switchTab('shop','skin')"><i class="ph ph-fish"></i>SKINS</button>
-      <button class="tab" data-t="wing" onclick="window.switchTab('shop','wing')"><i class="ph ph-feather"></i>WINGS</button>
-      <button class="tab" data-t="hat" onclick="window.switchTab('shop','hat')"><i class="ph ph-crown"></i>HATS</button>
+    <div class="shop-left-panel">
+        <div class="item-info-ui" id="itemInfoUI">
+            <h3 id="infoName">Item Name</h3>
+            <div class="info-price" id="infoPrice"><i class="ph ph-coin"></i> <span id="infoPriceVal">0</span></div>
+            <div class="info-actions">
+                <button class="btn pri" id="infoActionBtn">BUY</button>
+            </div>
+        </div>
     </div>
-    <div class="items-grid" id="grid-shop"></div>
-  </div>
+    <div class="shop-right-panel open">
+        <button class="back-btn" style="right:20px; left:auto;" onclick="window.goMenu()"><i class="ph ph-arrow-right"></i></button>
+        <div class="shop-header">
+            <h2>SHOP</h2>
+            <div class="shop-balance"><i class="ph ph-coin"></i> <span id="shopCoinBalance">0</span></div>
+        </div>
+        <div class="tabs" id="tabs-shop">
+            <button class="tab active" data-t="skin" onclick="window.switchTab('shop','skin')"><i class="ph ph-fish"></i>SKINS</button>
+            <button class="tab" data-t="wing" onclick="window.switchTab('shop','wing')"><i class="ph ph-feather"></i>WINGS</button>
+            <button class="tab" data-t="hat" onclick="window.switchTab('shop','hat')"><i class="ph ph-crown"></i>HATS</button>
+        </div>
+        <div class="items-grid" id="grid-shop"></div>
+    </div>
 </div>
 
+<!-- HALLOWEEN SHOP -->
 <div class="overlay hidden" id="halloweenScreen">
-  <button class="back-btn" onclick="window.goMenu()"><i class="ph ph-arrow-left"></i></button>
-  <div class="custom-header">
-    <h2 style="color:#ff6600;text-shadow:0 0 20px #ff6600;">🎃 HALLOWEEN SHOP 🎃</h2>
-    <div class="shop-balance pump"><i class="ph ph-pumpkin"></i> <span id="shopPumpkinCount">0</span></div>
-  </div>
-  <div class="custom-footer">
-    <div class="tabs" id="tabs-halloween">
-      <button class="tab active" data-t="skin" onclick="window.switchTab('halloween','skin')"><i class="ph ph-fish"></i>SKINS</button>
-      <button class="tab" data-t="wing" onclick="window.switchTab('halloween','wing')"><i class="ph ph-feather"></i>WINGS</button>
-      <button class="tab" data-t="hat" onclick="window.switchTab('halloween','hat')"><i class="ph ph-crown"></i>HATS</button>
+    <div class="shop-left-panel">
+        <div class="item-info-ui" id="itemInfoUI">
+            <h3 id="infoName">Item Name</h3>
+            <div class="info-price pump" id="infoPrice"><i class="ph ph-pumpkin"></i> <span id="infoPriceVal">0</span></div>
+            <div class="info-actions">
+                <button class="btn pri" id="infoActionBtn">BUY</button>
+            </div>
+        </div>
     </div>
-    <div class="items-grid" id="grid-halloween"></div>
-  </div>
+    <div class="shop-right-panel open">
+        <button class="back-btn" style="right:20px; left:auto;" onclick="window.goMenu()"><i class="ph ph-arrow-right"></i></button>
+        <div class="shop-header">
+            <h2>🎃 HALLOWEEN</h2>
+            <div class="shop-balance pump"><i class="ph ph-pumpkin"></i> <span id="shopPumpkinCount">0</span></div>
+        </div>
+        <div class="tabs" id="tabs-halloween">
+            <button class="tab active" data-t="skin" onclick="window.switchTab('halloween','skin')"><i class="ph ph-fish"></i>SKINS</button>
+            <button class="tab" data-t="wing" onclick="window.switchTab('halloween','wing')"><i class="ph ph-feather"></i>WINGS</button>
+            <button class="tab" data-t="hat" onclick="window.switchTab('halloween','hat')"><i class="ph ph-crown"></i>HATS</button>
+        </div>
+        <div class="items-grid" id="grid-halloween"></div>
+    </div>
 </div>
 
 <div class="overlay hidden" id="settingsScreen">
@@ -461,6 +527,18 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     <div class="tut-text" id="tutText">Use the joystick to move around</div>
     <div class="tut-dots" id="tutDots"></div>
     <button class="btn pri" onclick="window.nextTutorialStep()" id="tutBtn"><i class="ph ph-arrow-right"></i> GOT IT!</button>
+  </div>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+<div class="overlay hidden" id="modal-confirm">
+  <div class="confirm-box">
+    <h3 id="confirmTitle">Are you sure?</h3>
+    <p id="confirmMsg">Do you want to buy this item?</p>
+    <div class="row">
+      <button class="btn-yes" id="confirmYesBtn">YES</button>
+      <button class="btn-no" id="confirmNoBtn">NO</button>
+    </div>
   </div>
 </div>
 
@@ -606,9 +684,6 @@ window.importSave = () => {
   } catch(e) { showToast('❌ Código inválido!'); }
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   NOVOS CÓDIGOS AQUI
-   ═══════════════════════════════════════════════════════════════ */
 const CODES = {
   'WELCOME': { coins: 100, pumpkins: 5, xp: 50 },
   'PUFFER': { coins: 250, pumpkins: 10, xp: 100 },
@@ -683,7 +758,12 @@ const SFX = {
   purchase: () => { [880, 1100, 1320].forEach((f, i) => setTimeout(() => playTone(f, 0.1, 'square', 0.08), i * 60)); },
   splash: () => playTone(200, 0.2, 'sine', 0.1, 80),
   levelUp: () => { [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(() => playTone(f, 0.2, 'square', 0.1), i * 80)); },
-  combo: () => playTone(1200, 0.08, 'square', 0.08)
+  combo: () => playTone(1200, 0.08, 'square', 0.08),
+  cash: () => { 
+      playTone(1500, 0.1, 'square', 0.15); 
+      setTimeout(() => playTone(2000, 0.15, 'square', 0.15), 50); 
+      setTimeout(() => playTone(2500, 0.3, 'square', 0.15), 100); 
+  }
 };
 const MELODY = [262, 330, 392, 330, 262, 294, 349, 294, 262, 330, 392, 523, 392, 330, 262, 196];
 function startMusic() {
@@ -850,7 +930,7 @@ window.buyUpgrade = (key) => {
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   EXPANDED COSMETICS DATA (50 Skins, 45 Wings, 44 Hats)
+   COSMETICS DATA
    ═══════════════════════════════════════════════════════════════ */
 const SKIN_COLORS = [
   0xf5b71d, 0x3b82f6, 0x22c55e, 0xef4444, 0xa855f7, 0xec4899, 0x14b8a6, 0xf97316, 0x84cc16, 0x06b6d4,
@@ -870,7 +950,6 @@ const WINGS = [
   { id:'wing_star', name:'Star', cost:450, icon:'ph-star' }, { id:'wing_mecha', name:'Mecha', cost:800, icon:'ph-robot' },
   { id:'wing_rainbow', name:'Rainbow', cost:700, icon:'ph-rainbow' }, { id:'wing_flame', name:'Flame', cost:300, icon:'ph-fire' },
   { id:'wing_cloud', name:'Cloud', cost:280, icon:'ph-cloud' },
-  // +30 NEW WINGS
   { id:'wing_phoenix', name:'Phoenix', cost:900, icon:'ph-fire' }, { id:'wing_shadow', name:'Shadow', cost:850, icon:'ph-moon' },
   { id:'wing_crystal', name:'Crystal', cost:750, icon:'ph-diamond' }, { id:'wing_nature', name:'Nature', cost:300, icon:'ph-tree' },
   { id:'wing_ocean', name:'Ocean', cost:350, icon:'ph-drop' }, { id:'wing_storm', name:'Storm', cost:650, icon:'ph-lightning' },
@@ -899,9 +978,8 @@ const HATS = [
   { id:'hat_chef', name:'Chef', cost:140, icon:'ph-cooking-pot' }, { id:'hat_police', name:'Police', cost:190, icon:'ph-shield-star' },
   { id:'hat_firefighter', name:'Firefighter', cost:210, icon:'ph-fire-truck' }, { id:'hat_space', name:'Space', cost:450, icon:'ph-rocket' },
   { id:'hat_sombrero', name:'Sombrero', cost:130, icon:'ph-sun' },
-  // +25 NEW HATS
-  { id:'hat_bunny', name:'Bunny Ears', cost:100, icon:'ph-rabbit' }, { id:'hat_cat', name:'Cat Ears', cost:100, icon:'ph-cat' },
-  { id:'hat_fedora', name:'Fedora', cost:150, icon:'ph-fedora' }, { id:'hat_beanie', name:'Beanie', cost:80, icon:'ph-beanie' },
+  { id:'hat_bunny', name:'Bunny Ears', cost:100, icon:'ph-star' }, { id:'hat_cat', name:'Cat Ears', cost:100, icon:'ph-cat' },
+  { id:'hat_fedora', name:'Fedora', cost:150, icon:'ph-crown' }, { id:'hat_beanie', name:'Beanie', cost:80, icon:'ph-circle' },
   { id:'hat_antenna', name:'Antenna', cost:120, icon:'ph-wifi' }, { id:'hat_bow', name:'Bow', cost:90, icon:'ph-gift' },
   { id:'hat_bucket', name:'Bucket', cost:70, icon:'ph-bucket' }, { id:'hat_diving', name:'Diving', cost:250, icon:'ph-water' },
   { id:'hat_duck', name:'Duck', cost:110, icon:'ph-bird' }, { id:'hat_fez', name:'Fez', cost:130, icon:'ph-square' },
@@ -911,7 +989,7 @@ const HATS = [
   { id:'hat_mushroom', name:'Mushroom', cost:130, icon:'ph-tree' }, { id:'hat_ninja', name:'Ninja', cost:200, icon:'ph-user-focus' },
   { id:'hat_roman', name:'Roman', cost:240, icon:'ph-shield' }, { id:'hat_sheriff', name:'Sheriff', cost:180, icon:'ph-star' },
   { id:'hat_tiara', name:'Tiara', cost:300, icon:'ph-diamond' }, { id:'hat_traffic', name:'Traffic', cost:60, icon:'ph-traffic-cone' },
-  { id:'hat_unicorn', name:'Unicorn', cost:350, icon:'ph-horse' }, { id:'hat_astronaut', name:'Astronaut', cost:400, icon:'ph-rocket' },
+  { id:'hat_unicorn', name:'Unicorn', cost:350, icon:'ph-star' }, { id:'hat_astronaut', name:'Astronaut', cost:400, icon:'ph-rocket' },
   { id:'hat_jester', name:'Jester', cost:260, icon:'ph-mask-happy' }
 ];
 
@@ -976,8 +1054,16 @@ const WORLD_ENV = [
 ];
 
 const TRANSLATIONS = {
-  en: { winMessages:['YOU ROCK!!!','AWESOME!!!','AMAZING!!!','FANTASTIC!!!','INCREDIBLE!!!','SUPERSTAR!!!','BRILLIANT!!!','LEGENDARY!!!','UNSTOPPABLE!!!'] },
-  pt: { winMessages:['ISSO FOI ÓTIMO!!!','INCRÍVEL!!!','FANTÁSTICO!!!','SENSACIONAL!!!','GENIAL!!!','LENDÁRIO!!!','BRILHANTE!!!','PERFEITO!!!','IMPARÁVEL!!!'] }
+  en: { 
+      winMessages:['YOU ROCK!!!','AWESOME!!!','AMAZING!!!','FANTASTIC!!!','INCREDIBLE!!!','SUPERSTAR!!!','BRILLIANT!!!','LEGENDARY!!!','UNSTOPPABLE!!!'],
+      confirmBuy: 'Are you sure you want to buy this???', yes: 'YES', no: 'NO', 
+      noMoney: 'Not enough {currency}!', bought: 'You bought {item}!', coins: 'Coins', pumpkins: 'Pumpkins'
+  },
+  pt: { 
+      winMessages:['ISSO FOI ÓTIMO!!!','INCRÍVEL!!!','FANTÁSTICO!!!','SENSACIONAL!!!','GENIAL!!!','LENDÁRIO!!!','BRILHANTE!!!','PERFEITO!!!','IMPARÁVEL!!!'],
+      confirmBuy: 'Você tem certeza que quer comprar isso???', yes: 'SIM', no: 'NÃO',
+      noMoney: 'Sem {currency} suficiente!', bought: 'Você comprou o(a) {item}!', coins: 'Moedas', pumpkins: 'Abóboras'
+  }
 };
 window.changeLanguage = (lang) => { save.lang = lang; persistSave(); };
 window.showToast = (msg) => {
@@ -1149,10 +1235,9 @@ function animateFins(now, speed = 1) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   REALISTIC HATS
+   HATS
    ═══════════════════════════════════════════════════════════════ */
 const hats = {};
-
 // 1. Cap
 const capGrp = new THREE.Group();
 const capDome = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xdd3344, roughness: 0.8 }));
@@ -1509,7 +1594,7 @@ const uniHorn = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.5, 8), new THREE.Me
 uniHorn.position.y = 0.25;
 uniGrp.add(uniHorn); uniGrp.position.set(0, 1.1, 0); uniGrp.visible = false; bodyGrp.add(uniGrp); hats['hat_unicorn'] = uniGrp;
 
-// 42. Astronaut (Different from Space)
+// 42. Astronaut
 const astroGrp = new THREE.Group();
 const astroDome = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), new THREE.MeshStandardMaterial({ color: 0xeeeeee, metalness: 0.7, roughness: 0.4 }));
 astroDome.scale.set(1, 1.1, 1);
@@ -1530,8 +1615,7 @@ for(let i=0; i<3; i++) {
 }
 jesterGrp.position.set(0, 1.1, 0); jesterGrp.visible = false; bodyGrp.add(jesterGrp); hats['hat_jester'] = jesterGrp;
 
-
-// Halloween Hats (from previous code)
+// Halloween Hats
 const pkGrp = new THREE.Group();
 const pkBody = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), new THREE.MeshStandardMaterial({ color: 0xff6600, roughness: 0.5 }));
 pkBody.scale.set(1, 0.8, 1); pkGrp.add(pkBody);
@@ -1596,13 +1680,12 @@ hornsGrp.add(hL, hR); hornsGrp.position.set(0, 1.15, 0); hornsGrp.visible = fals
 
 
 /* ═══════════════════════════════════════════════════════════════
-   REALISTIC WINGS (EXTRUDE GEOMETRY & LAYERING)
+   WINGS
    ═══════════════════════════════════════════════════════════════ */
 const wings = {};
 function createWings(id, type, color, opacity = 0.95) {
   const g = new THREE.Group();
   const mat = new THREE.MeshStandardMaterial({ color, side: THREE.DoubleSide, roughness: 0.4, metalness: 0.2, transparent: true, opacity });
-  
   const extrudeSettings = { depth: 0.05, bevelEnabled: true, bevelSegments: 2, steps: 2, bevelSize: 0.02, bevelThickness: 0.02 };
 
   if (type === 'angel' || type === 'fairy' || type === 'butterfly') {
@@ -1613,87 +1696,43 @@ function createWings(id, type, color, opacity = 0.95) {
       shape.bezierCurveTo(-0.3, len * 0.4, -0.4, len * 0.8, 0, len);
       shape.bezierCurveTo(0.2, len * 0.8, 0.1, len * 0.4, 0, 0);
       const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-      
       const l = new THREE.Mesh(geo, mat);
-      l.position.set(-0.3 - i*0.08, 0.1, 0);
-      l.rotation.z = -0.1 + i*0.1;
-      l.rotation.y = -Math.PI/4;
-      g.add(l);
-      
+      l.position.set(-0.3 - i*0.08, 0.1, 0); l.rotation.z = -0.1 + i*0.1; l.rotation.y = -Math.PI/4; g.add(l);
       const r = new THREE.Mesh(geo, mat);
-      r.position.set(0.3 + i*0.08, 0.1, 0);
-      r.rotation.z = 0.1 - i*0.1;
-      r.rotation.y = Math.PI/4;
-      g.add(r);
+      r.position.set(0.3 + i*0.08, 0.1, 0); r.rotation.z = 0.1 - i*0.1; r.rotation.y = Math.PI/4; g.add(r);
     }
   } else if (type === 'dragon' || type === 'demon') {
     const shape = new THREE.Shape();
-    shape.moveTo(0, 0);
-    shape.bezierCurveTo(0.4, 0.5, 0.8, 0.8, 1.2, 0.4);
-    shape.lineTo(1.0, -0.2);
-    shape.lineTo(0.7, 0.0);
-    shape.lineTo(0.5, -0.3);
-    shape.lineTo(0.2, -0.1);
-    shape.lineTo(0, 0);
+    shape.moveTo(0, 0); shape.bezierCurveTo(0.4, 0.5, 0.8, 0.8, 1.2, 0.4); shape.lineTo(1.0, -0.2); shape.lineTo(0.7, 0.0); shape.lineTo(0.5, -0.3); shape.lineTo(0.2, -0.1); shape.lineTo(0, 0);
     const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-    
     for (let side of [-1, 1]) {
-      const m = new THREE.Mesh(geo, mat);
-      m.rotation.y = side * Math.PI / 2;
-      m.position.set(side*0.2, 0.2, 0);
-      g.add(m);
+      const m = new THREE.Mesh(geo, mat); m.rotation.y = side * Math.PI / 2; m.position.set(side*0.2, 0.2, 0); g.add(m);
       const bone = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 1.2, 6), new THREE.MeshStandardMaterial({ color: darken(color, 0.5) }));
-      bone.rotation.z = side * 1.2; bone.position.set(side*0.4, 0.4, 0);
-      g.add(bone);
+      bone.rotation.z = side * 1.2; bone.position.set(side*0.4, 0.4, 0); g.add(bone);
     }
   } else if (type === 'mecha') {
     const plateGeo = new THREE.BoxGeometry(0.8, 0.08, 0.4);
     const neonMat = new THREE.MeshStandardMaterial({ color: 0x00ffcc, emissive: 0x00aa88, emissiveIntensity: 2 });
     for (let side of [-1, 1]) {
-      const p1 = new THREE.Mesh(plateGeo, mat);
-      p1.rotation.z = side * 0.4; p1.rotation.y = side * 0.8; p1.position.set(side*0.5, 0.4, -0.1);
-      const p2 = new THREE.Mesh(plateGeo, mat);
-      p2.scale.set(0.6, 1, 1); p2.rotation.z = side * 0.8; p2.rotation.y = side * 0.8; p2.position.set(side*0.7, 0.0, -0.2);
-      const glow = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.02, 0.1), neonMat);
-      glow.rotation.z = side * 0.4; glow.rotation.y = side * 0.8; glow.position.set(side*0.55, 0.42, -0.08);
-      g.add(p1, p2, glow);
+      const p1 = new THREE.Mesh(plateGeo, mat); p1.rotation.z = side * 0.4; p1.rotation.y = side * 0.8; p1.position.set(side*0.5, 0.4, -0.1); g.add(p1);
+      const p2 = new THREE.Mesh(plateGeo, mat); p2.scale.set(0.6, 1, 1); p2.rotation.z = side * 0.8; p2.rotation.y = side * 0.8; p2.position.set(side*0.7, 0.0, -0.2); g.add(p2);
+      const glow = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.02, 0.1), neonMat); glow.rotation.z = side * 0.4; glow.rotation.y = side * 0.8; glow.position.set(side*0.55, 0.42, -0.08); g.add(glow);
     }
   } else {
     const geo = new THREE.CircleGeometry(0.7, 16, 0, Math.PI);
-    for (let side of [-1, 1]) {
-      const m = new THREE.Mesh(geo, mat);
-      m.rotation.y = side * Math.PI / 2;
-      m.position.set(side*0.2, 0.2, 0);
-      g.add(m);
-    }
+    for (let side of [-1, 1]) { const m = new THREE.Mesh(geo, mat); m.rotation.y = side * Math.PI / 2; m.position.set(side*0.2, 0.2, 0); g.add(m); }
   }
-  g.position.set(0, 0.3, -0.6);
-  g.visible = false;
-  bodyGrp.add(g);
-  wings[id] = g;
+  g.position.set(0, 0.3, -0.6); g.visible = false; bodyGrp.add(g); wings[id] = g;
 }
 
-createWings('wing_angel', 'angel', 0xffffff);
-createWings('wing_dragon', 'dragon', 0x6644aa);
-createWings('wing_demon', 'demon', 0x991111);
-createWings('wing_fairy', 'fairy', 0xaaffee, 0.7);
-createWings('wing_butterfly', 'butterfly', 0xff88cc, 0.8);
-createWings('wing_galaxy', 'fairy', 0x4400aa, 0.9);
-createWings('wing_ice', 'fairy', 0x88ddff, 0.8);
-createWings('wing_leaf', 'fairy', 0x33aa33);
-createWings('wing_cyber', 'mecha', 0x333333);
-createWings('wing_bat', 'dragon', 0x220011);
-createWings('wing_ghost', 'fairy', 0xccccff, 0.5);
-createWings('wing_rainbow', 'fairy', 0xff00ff);
-createWings('wing_flame', 'dragon', 0xff3300);
-createWings('wing_cloud', 'fairy', 0xeeeeff, 0.6);
-createWings('wing_star', 'butterfly', 0xffdd00);
-createWings('wing_mecha', 'mecha', 0x888888);
-createWings('wing_bone', 'angel', 0xdddddd);
-createWings('wing_spiderweb', 'fairy', 0x333333, 0.8);
+createWings('wing_angel', 'angel', 0xffffff); createWings('wing_dragon', 'dragon', 0x6644aa); createWings('wing_demon', 'demon', 0x991111);
+createWings('wing_fairy', 'fairy', 0xaaffee, 0.7); createWings('wing_butterfly', 'butterfly', 0xff88cc, 0.8); createWings('wing_galaxy', 'fairy', 0x4400aa, 0.9);
+createWings('wing_ice', 'fairy', 0x88ddff, 0.8); createWings('wing_leaf', 'fairy', 0x33aa33); createWings('wing_cyber', 'mecha', 0x333333);
+createWings('wing_bat', 'dragon', 0x220011); createWings('wing_ghost', 'fairy', 0xccccff, 0.5); createWings('wing_rainbow', 'fairy', 0xff00ff);
+createWings('wing_flame', 'dragon', 0xff3300); createWings('wing_cloud', 'fairy', 0xeeeeff, 0.6); createWings('wing_star', 'butterfly', 0xffdd00);
+createWings('wing_mecha', 'mecha', 0x888888); createWings('wing_bone', 'angel', 0xdddddd); createWings('wing_spiderweb', 'fairy', 0x333333, 0.8);
 createWings('wing_phantom', 'dragon', 0x330033, 0.8);
 
-// 30 NEW WING CREATIONS
 const newWingDefs = [
   ['wing_phoenix', 'dragon', 0xff6600], ['wing_shadow', 'demon', 0x111111], ['wing_crystal', 'fairy', 0x88ffff, 0.6],
   ['wing_nature', 'fairy', 0x228b22], ['wing_ocean', 'fairy', 0x0066cc, 0.8], ['wing_storm', 'dragon', 0xffff00],
@@ -1706,11 +1745,7 @@ const newWingDefs = [
   ['wing_fiend', 'demon', 0x990000], ['wing_seraph', 'angel', 0xffd700], ['wing_nebula', 'fairy', 0xaa00aa],
   ['wing_supernova', 'dragon', 0xffaa00], ['wing_origami', 'fairy', 0xffffff], ['wing_glass', 'fairy', 0xccffff, 0.3]
 ];
-
-newWingDefs.forEach(w => {
-  createWings(w[0], w[1], w[2], w[3] || 0.95);
-});
-
+newWingDefs.forEach(w => { createWings(w[0], w[1], w[2], w[3] || 0.95); });
 
 scene.add(puffer);
 
@@ -1721,21 +1756,24 @@ function darken(hex, amount) {
   return (Math.floor(r) << 16) | (Math.floor(g) << 8) | Math.floor(b);
 }
 
-window.equipPuffer = () => {
-  const skinData = ALL_SKINS.find(s => s.id === save.skin) || ALL_SKINS[0];
+window.updatePufferVisuals = (data) => {
+  const skinData = ALL_SKINS.find(s => s.id === data.skin) || ALL_SKINS[0];
   const c = skinData.color;
   bodyMat.map = createSkinTexture(c, darken(c, 0.3));
   bodyMat.needsUpdate = true;
   tailMat.color.setHex(c);
   finMat.color.setHex(c);
   spikeMat.color.setHex(darken(c, 0.4));
-  for (let k in hats) hats[k].visible = (k === save.hat);
-  for (let k in wings) wings[k].visible = (k === save.wing);
+  for (let k in hats) hats[k].visible = (k === data.hat);
+  for (let k in wings) wings[k].visible = (k === data.wing);
 };
+window.equipPuffer = () => window.updatePufferVisuals(save);
 
 /* ═══════════════════════════════════════════════════════════════
-   SHOWCASE SCENE
+   SHOWCASE SCENE & PREVIEW SYSTEM
    ═══════════════════════════════════════════════════════════════ */
+let currentPreview = null;
+
 function createShowcaseScene() {
   const group = new THREE.Group();
   const backdropMat = new THREE.ShaderMaterial({
@@ -1832,14 +1870,11 @@ function createGiantPumpkin() {
   const group = new THREE.Group();
   const bodyMat = new THREE.MeshStandardMaterial({ color: 0xff6600, emissive: 0x441100, emissiveIntensity: 0.35, roughness: 0.6 });
   const body = new THREE.Mesh(new THREE.SphereGeometry(1.4, 28, 20), bodyMat);
-  body.scale.set(1, 0.85, 1);
-  body.castShadow = true; group.add(body);
+  body.scale.set(1, 0.85, 1); body.castShadow = true; group.add(body);
   for (let i = 0; i < 8; i++) {
     const a = (i / 8) * Math.PI * 2;
     const ridge = new THREE.Mesh(new THREE.SphereGeometry(0.38, 10, 14), new THREE.MeshStandardMaterial({ color: 0xcc4400, roughness: 0.55 }));
-    ridge.scale.set(0.8, 1.05, 0.8);
-    ridge.position.set(Math.cos(a) * 1.15, 0, Math.sin(a) * 1.15);
-    ridge.castShadow = true; group.add(ridge);
+    ridge.scale.set(0.8, 1.05, 0.8); ridge.position.set(Math.cos(a) * 1.15, 0, Math.sin(a) * 1.15); ridge.castShadow = true; group.add(ridge);
   }
   const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.28, 0.7, 10), new THREE.MeshStandardMaterial({ color: 0x3a5a2a, roughness: 0.9 }));
   stem.position.set(0.1, 1.25, 0); stem.rotation.z = 0.15; stem.castShadow = true; group.add(stem);
@@ -1848,18 +1883,10 @@ function createGiantPumpkin() {
   const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.32, 5), new THREE.MeshStandardMaterial({ color: 0x3d8b3a }));
   leaf.position.set(-0.4, 1.15, 0.2); leaf.rotation.z = -0.7; group.add(leaf);
   const faceMat = new THREE.MeshBasicMaterial({ color: 0xffdd00 });
-  for (let sx of [-0.5, 0.5]) {
-    const eye = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.42, 3), faceMat);
-    eye.rotation.z = Math.PI; eye.position.set(sx, 0.35, 1.22); group.add(eye);
-  }
-  const mouth = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.12, 0.05), faceMat);
-  mouth.position.set(0, -0.35, 1.28); group.add(mouth);
-  for (let i = 0; i < 4; i++) {
-    const tooth = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.22, 0.05), faceMat);
-    tooth.position.set(-0.33 + i * 0.22, -0.22, 1.28); group.add(tooth);
-  }
-  const nose = new THREE.Mesh(new THREE.ConeGeometry(0.13, 0.2, 3), faceMat);
-  nose.rotation.z = Math.PI; nose.position.set(0, 0.1, 1.35); group.add(nose);
+  for (let sx of [-0.5, 0.5]) { const eye = new THREE.Mesh(new THREE.ConeGeometry(0.28, 0.42, 3), faceMat); eye.rotation.z = Math.PI; eye.position.set(sx, 0.35, 1.22); group.add(eye); }
+  const mouth = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.12, 0.05), faceMat); mouth.position.set(0, -0.35, 1.28); group.add(mouth);
+  for (let i = 0; i < 4; i++) { const tooth = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.22, 0.05), faceMat); tooth.position.set(-0.33 + i * 0.22, -0.22, 1.28); group.add(tooth); }
+  const nose = new THREE.Mesh(new THREE.ConeGeometry(0.13, 0.2, 3), faceMat); nose.rotation.z = Math.PI; nose.position.set(0, 0.1, 1.35); group.add(nose);
   const glow = new THREE.PointLight(0xff6600, 2, 10); glow.position.set(0, 0.5, 1.2); group.add(glow);
   return group;
 }
@@ -1868,7 +1895,7 @@ giantPumpkin.visible = false;
 scene.add(giantPumpkin);
 
 /* ═══════════════════════════════════════════════════════════════
-   LEVEL GENERATION & NEW DECORATIONS
+   LEVEL GENERATION & DECORATIONS
    ═══════════════════════════════════════════════════════════════ */
 let currentLevel = null;
 let levelObjects = [];
@@ -2045,7 +2072,6 @@ function addDecorations(theme, platform, list) {
     for (let i = 0; i < 3; i++) { const p = randPos(); const spike = new THREE.Mesh(new THREE.ConeGeometry(0.25, 1 + Math.random()*0.5, 6), new THREE.MeshStandardMaterial({ color: 0xccf0ff, emissive: 0x88ddff, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.1, transparent: true, opacity: 0.85 })); spike.position.set(p.px, y+0.9, p.pz); spike.castShadow = true; scene.add(spike); list.push(spike); }
     for (let i = 0; i < 2; i++) { const p = randPos(); const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.35), new THREE.MeshStandardMaterial({ color: 0xaaddff, emissive: 0x4488cc, emissiveIntensity: 0.6, metalness: 0.9, roughness: 0.1 })); crystal.position.set(p.px, y+0.6, p.pz); crystal.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); scene.add(crystal); list.push(crystal); }
   } 
-  // NEW THEMES
   else if (theme === 'desert') {
     for (let i = 0; i < 2; i++) { 
       const p = randPos(); 
@@ -2460,8 +2486,16 @@ window.showScreen = (id) => {
   if (id) document.getElementById(id).classList.remove('hidden');
 };
 
+window.clearPreview = () => {
+    currentPreview = null;
+    document.getElementById('itemInfoUI').classList.remove('show');
+    updatePufferVisuals(save);
+    document.querySelectorAll('.item-card').forEach(c => c.classList.remove('selected'));
+};
+
 window.goMenu = () => {
   gameState.mode = 'menu';
+  clearPreview();
   showScreen('mainMenu');
   showcaseScene.visible = false; giantPumpkin.visible = false;
   showcaseLight.intensity = 0; showcaseAccent.intensity = 0;
@@ -2487,7 +2521,7 @@ window.goMenu = () => {
   startMusic();
 };
 
-window.openWorlds = () => { SFX.click(); showScreen('worldScreen'); renderWorlds(); };
+window.openWorlds = () => { SFX.click(); clearPreview(); showScreen('worldScreen'); renderWorlds(); };
 function renderWorlds() {
   const list = document.getElementById('worlds-list');
   list.innerHTML = '';
@@ -2529,6 +2563,7 @@ window.openCustomize = () => {
   SFX.click();
   showScreen('customizeScreen');
   gameState.mode = 'showcase';
+  clearPreview();
   showcaseScene.visible = true;
   showcaseLight.intensity = 2.5;
   showcaseAccent.intensity = 1.5;
@@ -2545,6 +2580,7 @@ window.openShop = () => {
   SFX.click();
   showScreen('shopScreen');
   gameState.mode = 'showcase';
+  clearPreview();
   showcaseScene.visible = true;
   showcaseLight.intensity = 2.5;
   showcaseAccent.intensity = 1.5;
@@ -2562,6 +2598,7 @@ window.openHalloween = () => {
   SFX.click();
   showScreen('halloweenScreen');
   gameState.mode = 'halloween';
+  clearPreview();
   showcaseScene.visible = true;
   showcaseLight.intensity = 2.0;
   showcaseAccent.intensity = 2.0;
@@ -2578,6 +2615,7 @@ window.openHalloween = () => {
 window.openSettings = () => {
   SFX.click();
   showScreen('settingsScreen');
+  clearPreview();
   showcaseScene.visible = false; giantPumpkin.visible = false;
   showcaseLight.intensity = 0; showcaseAccent.intensity = 0;
   document.getElementById('langSelect').value = save.lang;
@@ -2600,16 +2638,98 @@ function keyName(code) {
 window.openUpdates = () => {
   SFX.click();
   showScreen('updatesScreen');
+  clearPreview();
   showcaseScene.visible = false; giantPumpkin.visible = false;
   showcaseLight.intensity = 0; showcaseAccent.intensity = 0;
   renderUpdates();
 };
 window.switchTab = (mode, tab) => {
   SFX.click();
+  clearPreview();
   document.querySelectorAll(`#tabs-${mode} .tab`).forEach(t => t.classList.remove('active'));
   document.querySelector(`#tabs-${mode} .tab[data-t="${tab}"]`).classList.add('active');
   renderGrid(mode, tab);
 };
+
+window.selectItem = (it, tab, mode, isOwned) => {
+  document.querySelectorAll('.item-card').forEach(c => c.classList.remove('selected'));
+  const card = document.querySelector(`.item-card[data-id="${it.id}"]`);
+  if (card) card.classList.add('selected');
+
+  currentPreview = { type: tab, id: it.id };
+  
+  const previewData = { ...save, [tab]: it.id };
+  updatePufferVisuals(previewData);
+
+  const t = TRANSLATIONS[save.lang] || TRANSLATIONS.en;
+  const currency = mode === 'halloween' ? t.pumpkins : t.coins;
+
+  const ui = document.getElementById('itemInfoUI');
+  document.getElementById('infoName').textContent = it.name;
+  
+  const priceEl = document.getElementById('infoPrice');
+  const priceVal = document.getElementById('infoPriceVal');
+  
+  if (isOwned) {
+    priceEl.style.display = 'none';
+    document.getElementById('infoActionBtn').textContent = save.lang === 'pt' ? 'EQUIPAR' : 'EQUIP';
+    document.getElementById('infoActionBtn').className = 'btn pri';
+  } else {
+    priceEl.style.display = 'flex';
+    priceVal.textContent = it.cost;
+    document.getElementById('infoActionBtn').textContent = save.lang === 'pt' ? 'COMPRAR' : 'BUY';
+    document.getElementById('infoActionBtn').className = 'btn gold';
+  }
+  
+  ui.classList.add('show');
+
+  document.getElementById('infoActionBtn').onclick = () => {
+    if (isOwned) {
+      save[tab] = it.id;
+      persistSave();
+      updatePufferVisuals(save);
+      ui.classList.remove('show');
+      SFX.purchase();
+    } else {
+      if (save[mode === 'halloween' ? 'pumpkins' : 'coins'] < it.cost) {
+        SFX.lose();
+        showToast(t.noMoney.replace('{currency}', currency));
+        return;
+      }
+      
+      document.getElementById('confirmTitle').textContent = t.confirmBuy;
+      const confirmModal = document.getElementById('modal-confirm');
+      confirmModal.classList.remove('hidden');
+      document.getElementById('confirmYesBtn').textContent = t.yes;
+      document.getElementById('confirmNoBtn').textContent = t.no;
+      
+      document.getElementById('confirmYesBtn').onclick = () => {
+        confirmModal.classList.add('hidden');
+        save[mode === 'halloween' ? 'pumpkins' : 'coins'] -= it.cost;
+        
+        const ownedKey = mode === 'halloween' ? 'ownedHalloween' : 'owned' + tab.charAt(0).toUpperCase() + tab.slice(1) + 's';
+        save[ownedKey].push(it.id);
+        
+        persistSave();
+        updateHUD();
+        
+        SFX.cash();
+        showToast(t.bought.replace('{item}', it.name));
+        
+        save[tab] = it.id;
+        persistSave();
+        updatePufferVisuals(save);
+        ui.classList.remove('show');
+        renderGrid(mode, tab);
+      };
+      
+      document.getElementById('confirmNoBtn').onclick = () => {
+        confirmModal.classList.add('hidden');
+      };
+    }
+  };
+};
+
 window.renderGrid = (mode, tab) => {
   const grid = document.getElementById(`grid-${mode}`);
   grid.innerHTML = '';
@@ -2617,17 +2737,23 @@ window.renderGrid = (mode, tab) => {
   if (mode === 'halloween') items = HALLOWEEN_ITEMS[tab] || [];
   else if (mode === 'shop') items = tab === 'skin' ? SKINS : (tab === 'wing' ? WINGS : HATS);
   else items = tab === 'skin' ? ALL_SKINS : (tab === 'wing' ? ALL_WINGS : ALL_HATS);
+  
   const baseOwnedKey = 'owned' + tab.charAt(0).toUpperCase() + tab.slice(1) + 's';
   const halloweenIds = new Set((HALLOWEEN_ITEMS[tab] || []).map(h => h.id));
+  
   items.forEach(it => {
     const isHalloweenItem = halloweenIds.has(it.id);
     const ownedArr = isHalloweenItem ? save.ownedHalloween : save[baseOwnedKey];
     const isOwned = ownedArr.includes(it.id) || it.cost === 0;
     if (mode === 'custom' && !isOwned) return;
     if ((mode === 'shop' || mode === 'halloween') && isOwned) return;
+
     const card = document.createElement('div');
     card.className = 'item-card ' + (save[tab] === it.id ? 'eq' : '');
+    card.dataset.id = it.id;
+    
     const icon = it.color ? `<div class="color-dot" style="background: #${it.color.toString(16).padStart(6,'0')}"></div>` : `<div class="icon"><i class="ph ${it.icon}"></i></div>`;
+    
     if (mode === 'shop' || mode === 'halloween') {
       const priceClass = mode === 'halloween' ? 'pump' : '';
       const coinIcon = mode === 'halloween' ? 'ph-pumpkin' : 'ph-coin';
@@ -2635,28 +2761,8 @@ window.renderGrid = (mode, tab) => {
     } else {
       card.innerHTML = `${icon}<div class="name">${it.name}</div><div class="eq-tag">EQUIPPED</div>`;
     }
-    card.onclick = () => {
-      if (mode === 'custom') {
-        save[tab] = it.id; persistSave();
-        equipPuffer();
-        SFX.click();
-        renderGrid(mode, tab);
-      } else {
-        const currency = mode === 'halloween' ? 'pumpkins' : 'coins';
-        if (save[currency] >= it.cost) {
-          save[currency] -= it.cost;
-          const targetArr = isHalloweenItem ? save.ownedHalloween : save[baseOwnedKey];
-          targetArr.push(it.id);
-          persistSave(); updateHUD();
-          SFX.purchase();
-          renderGrid(mode, tab);
-          showToast('✨ Purchased!');
-        } else {
-          SFX.lose();
-          showToast('Not enough ' + (mode === 'halloween' ? 'pumpkins! 🎃' : 'coins!'));
-        }
-      }
-    };
+    
+    card.onclick = () => window.selectItem(it, tab, mode, isOwned);
     grid.appendChild(card);
   });
 };
@@ -2690,7 +2796,16 @@ window.resetSave = () => {
 };
 
 const UPDATES = [
-  { version:'6.0.0', name:'Colossal Expansion Update', best: true, changes: [
+  { version:'6.1.0', name:'Shop UI & Preview Update', best: true, changes: [
+    '🛍️ Completely redesigned Shop and Inventory UI (Items on the right, Puffer on the left)',
+    '🔍 Real-time 3D Preview system (check out items before buying/equipping)',
+    '📥 New animated sliding UI from the bottom for item details',
+    '💬 Added localization for Buy/Equip confirmations and success messages',
+    '💸 Classic "TIQUIM!!!" cash register sound on purchase',
+    '🔄 Preview resets automatically if you leave the shop without applying changes',
+    '🛠️ Fixed missing icons on several Hats and Wings'
+  ]},
+  { version:'6.0.0', name:'Colossal Expansion Update', best: false, changes: [
     '🌍 Added 5 NEW WORLDS (Desert Oasis, Cyber City, Haunted Graveyard, Jungle Ruins, Cosmic Void)',
     '🏛️ Added new unique 3D decorations for all 10 worlds',
     '🐟 Added 10 new Base Skins (Total 50 colors)',
@@ -2815,7 +2930,7 @@ function loop(now) {
     showcaseLight.intensity = 0; showcaseAccent.intensity = 0;
   } else if (gameState.mode === 'halloween') {
     showcaseScene.visible = true;
-    puffer.position.set(1.6, 0.6, 0);
+    puffer.position.set(-1.5, 0.5, 0);
     puffer.rotation.y += dt * 0.4;
     puffer.scale.setScalar(1.2 + Math.sin(now * 0.003) * 0.05);
     tailPivot.rotation.y = Math.sin(now * 0.005) * 0.4;
@@ -2827,18 +2942,18 @@ function loop(now) {
     });
 
     giantPumpkin.visible = true;
-    giantPumpkin.position.set(-1.4, 0.1, 0);
+    giantPumpkin.position.set(1.5, 0.1, -1);
     giantPumpkin.rotation.y = Math.sin(now * 0.0008) * 0.35;
     giantPumpkin.scale.setScalar(0.75);
 
     animateShowcase(now, dt);
 
-    camera.position.set(0, 2.2, 7.5);
-    camera.lookAt(0, 0.8, 0);
+    camera.position.set(-1.5, 1.8, 6.5);
+    camera.lookAt(-1.5, 0.5, 0);
     water.visible = false;
   } else if (gameState.mode === 'showcase' || gameState.mode === 'upgrades') {
     showcaseScene.visible = true;
-    puffer.position.set(0, 0.5, 0);
+    puffer.position.set(-1.5, 0.5, 0);
     puffer.rotation.y += dt * 0.5;
     puffer.scale.setScalar(1.5 + Math.sin(now * 0.003) * 0.05); 
     tailPivot.rotation.y = Math.sin(now * 0.005) * 0.4;
@@ -2853,8 +2968,8 @@ function loop(now) {
 
     animateShowcase(now, dt);
 
-    camera.position.set(0, 1.8, 6.5);
-    camera.lookAt(0, 0.5, 0);
+    camera.position.set(-1.5, 1.8, 6.5);
+    camera.lookAt(-1.5, 0.5, 0);
     water.visible = false;
   } else {
     showcaseScene.visible = false; giantPumpkin.visible = false;
@@ -2925,4 +3040,4 @@ window.addEventListener('load', () => {
 });
 </script>
 </body>
-</html>
+      </html>
