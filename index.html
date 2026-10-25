@@ -54,7 +54,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .overlay h2{font-size:clamp(24px,6vw,36px);color:var(--acc);margin-bottom:20px;text-shadow:0 0 10px rgba(0,243,255,0.5);animation:slide-up .6s ease;}
 .overlay p{font-size:15px;color:var(--sub);margin:5px 0;max-width:480px;line-height:1.5;}
 
-/* FIXED MAIN MENU LAYOUT */
 #mainMenu{justify-content:space-between;padding:25px 20px 30px;backdrop-filter:none;background:linear-gradient(180deg,rgba(3,8,16,0.95) 0%,rgba(3,8,16,0.55) 18%,rgba(3,8,16,0.05) 35%,rgba(3,8,16,0.05) 62%,rgba(3,8,16,0.7) 82%,rgba(3,8,16,0.97) 100%);}
 #mainMenu .menu-top{display:flex;flex-direction:column;align-items:center;width:100%;gap:6px;}
 #mainMenu .menu-middle{flex:1;min-height:180px;pointer-events:none;}
@@ -194,6 +193,59 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 #updList .best-badge{background:var(--red);color:#fff;font-size:10px;font-weight:900;padding:3px 10px;border-radius:99px;animation:pulse 1.5s infinite;}
 #updList ul{padding-left:20px;font-size:13px;color:var(--sub);margin:0;}
 #updList li{margin:3px 0;}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE ORIENTATION OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-height: 500px) and (orientation: landscape) {
+    /* Menu Principal em Landscape (Celular deitado) */
+    #mainMenu { padding: 10px 15px; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    #mainMenu .menu-top { width: auto; flex: 1; min-width: 200px; margin-top: 10px;}
+    #mainMenu .menu-middle { display: none; /* Esconde o espaço do peixe para ganhar espaço */ }
+    #mainMenu .menu-bottom { width: auto; flex: 1; min-width: 300px; gap: 8px; }
+    
+    .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .menu-grid .btn { height: 48px; padding: 8px 10px; font-size: 11px; }
+    .btn.pri { margin-bottom: 2px; height: 48px; font-size: 14px; }
+    
+    /* HUD durante o jogo em Landscape */
+    #hud { padding-top: 5px; gap: 5px; }
+    .hud-top { max-width: 100%; padding: 0 10px; }
+    .air-container { max-width: 200px; height: 14px; }
+    .air-text { font-size: 9px; }
+    .xp-container { max-width: 150px; height: 6px; }
+    #lvl-title { font-size: 12px; margin-top: 2px; }
+    
+    /* Controles no Jogo em Landscape */
+    #joy-base { width: 100px; height: 100px; left: 15px; bottom: 15px; }
+    #joy-knob { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
+    #btn-jump { width: 65px; height: 65px; bottom: 90px; right: 15px; }
+    #btn-dive { width: 65px; height: 65px; bottom: 15px; right: 90px; }
+    .btn-mob i { font-size: 22px; }
+    
+    /* Loja e Inventário em Landscape */
+    .custom-footer { max-height: 70vh; padding: 10px 15px; }
+    .items-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; max-height: 45vh; }
+    .item-card { padding: 8px 4px; }
+    .item-card .icon { font-size: 24px; height: 30px; }
+    .item-card .name { font-size: 10px; }
+    .item-card .color-dot { width: 26px; height: 26px; }
+    .tab { padding: 8px 4px; font-size: 10px; }
+    .tab i { font-size: 16px; }
+    
+    .upgrade-list { max-height: 55vh; }
+    .upgrade-card { padding: 10px; }
+}
+
+/* Portrait (Celular em pé) - Otimização leve */
+@media (max-width: 400px) and (orientation: portrait) {
+    .menu-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .menu-grid .btn { padding: 12px 8px; font-size: 12px; }
+    #mainMenu { padding: 15px 15px 20px; }
+    .top-stats { gap: 8px; }
+    .top-stat { padding: 6px 12px; font-size: 12px; }
+}
+
 </style>
 </head>
 <body>
@@ -438,6 +490,8 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
    ═══════════════════════════════════════════════════════════════ */
 const IS_MOBILE = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 const STAGES_PER_WORLD = 15;
+
+if (IS_MOBILE) document.body.classList.add('is-mobile');
 
 function generateDeviceId() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -822,6 +876,7 @@ const WINGS = [
   { id:'wing_cloud', name:'Cloud', cost:280, icon:'ph-cloud' }
 ];
 
+// NOVOS CHAPÉUS ADICIONADOS AQUI
 const HATS = [
   { id:'hat_0', name:'None', cost:0, icon:'ph-x' }, { id:'hat_cap', name:'Cap', cost:50, icon:'ph-baseball-cap' },
   { id:'hat_tophat', name:'Top Hat', cost:120, icon:'ph-crown' }, { id:'hat_crown', name:'Crown', cost:250, icon:'ph-crown-simple' },
@@ -830,7 +885,11 @@ const HATS = [
   { id:'hat_pumpkin', name:'Pumpkin', cost:150, icon:'ph-pumpkin' }, { id:'hat_wizard', name:'Wizard', cost:220, icon:'ph-magic-wand' },
   { id:'hat_cowboy', name:'Cowboy', cost:160, icon:'ph-cowboy-hat' }, { id:'hat_propeller', name:'Propeller', cost:200, icon:'ph-fan' },
   { id:'hat_party', name:'Party', cost:60, icon:'ph-confetti' }, { id:'hat_viking', name:'Viking', cost:350, icon:'ph-shield' },
-  { id:'hat_chef', name:'Chef', cost:140, icon:'ph-cooking-pot' }
+  { id:'hat_chef', name:'Chef', cost:140, icon:'ph-cooking-pot' },
+  { id:'hat_police', name:'Police', cost:190, icon:'ph-shield-star' },
+  { id:'hat_firefighter', name:'Firefighter', cost:210, icon:'ph-fire-truck' },
+  { id:'hat_space', name:'Space', cost:450, icon:'ph-rocket' },
+  { id:'hat_sombrero', name:'Sombrero', cost:130, icon:'ph-sun' }
 ];
 
 const HALLOWEEN_ITEMS = {
@@ -896,7 +955,7 @@ window.showToast = (msg) => {
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   THREE.JS SETUP
+   THREE.JS SETUP & MOBILE ORIENTATION
    ═══════════════════════════════════════════════════════════════ */
 const canvas = document.getElementById('c');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
@@ -908,6 +967,28 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x0a1e33, 60, 160);
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 300);
+
+// Função que ajusta a câmera dependendo da orientação do celular
+function updateCameraLayout() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    
+    if (window.innerHeight > window.innerWidth) {
+        // Modo Retrato (Portrait) - Celular em pé
+        camera.fov = 65; 
+    } else {
+        // Modo Paisagem (Landscape) - Celular deitado
+        // Aumenta o FOV para mostrar mais do cenário na tela larga e curta
+        if (window.innerWidth > 800) {
+            camera.fov = 60; // Desktop/Tablet
+        } else {
+            camera.fov = 75; // Celular deitado
+        }
+    }
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', updateCameraLayout);
+updateCameraLayout(); // Executa ao carregar
 
 scene.add(new THREE.HemisphereLight(0xb8ddff, 0x0a1e33, 1.3));
 const sunLight = new THREE.DirectionalLight(0xfff0d0, 1.5);
@@ -1185,8 +1266,43 @@ const hornR = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.1, 0.4, 8), new 
 hornR.position.set(0.45, 0.1, 0); hornR.rotation.z = -0.8;
 vikGrp.add(vikHelmet, hornL, hornR); vikGrp.position.set(0, 1.05, 0); vikGrp.visible = false; bodyGrp.add(vikGrp); hats['hat_viking'] = vikGrp;
 
+// 15. Police
+const policeGrp = new THREE.Group();
+const policeDome = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0x112244, roughness: 0.7 }));
+const policeBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.05, 16), new THREE.MeshStandardMaterial({ color: 0x112244, roughness: 0.7 }));
+policeBrim.position.set(0, 0, 0.15); policeBrim.scale.set(1, 1, 1.3);
+const policeBadge = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.02, 6), new THREE.MeshStandardMaterial({ color: 0xffcc00, metalness: 0.9 }));
+policeBadge.rotation.x = Math.PI/2; policeBadge.position.set(0, 0.25, 0.42);
+policeGrp.add(policeDome, policeBrim, policeBadge); policeGrp.position.set(0, 1.05, 0); policeGrp.visible = false; bodyGrp.add(policeGrp); hats['hat_police'] = policeGrp;
+
+// 16. Firefighter
+const fireGrp = new THREE.Group();
+const fireDome = new THREE.Mesh(new THREE.SphereGeometry(0.48, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xcc2222, roughness: 0.4, metalness: 0.3 }));
+const fireBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.05, 16), new THREE.MeshStandardMaterial({ color: 0xcc2222, roughness: 0.4, metalness: 0.3 }));
+fireBrim.position.set(0, 0, 0.2); fireBrim.scale.set(1, 1, 1.3);
+const fireVisor = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.15, 0.1), new THREE.MeshStandardMaterial({ color: 0xffdd00, transparent: true, opacity: 0.7 }));
+fireVisor.position.set(0, 0.1, 0.45);
+fireGrp.add(fireDome, fireBrim, fireVisor); fireGrp.position.set(0, 1.05, 0); fireGrp.visible = false; bodyGrp.add(fireGrp); hats['hat_firefighter'] = fireGrp;
+
+// 17. Space
+const spaceGrp = new THREE.Group();
+const spaceGlass = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), new THREE.MeshStandardMaterial({ color: 0x88ddff, transparent: true, opacity: 0.4, roughness: 0.1, metalness: 0.8 }));
+const spaceNeck = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.15, 16), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.8, roughness: 0.3 }));
+spaceNeck.position.y = -0.45;
+spaceGrp.add(spaceGlass, spaceNeck); spaceGrp.position.set(0, 1.1, 0); spaceGrp.visible = false; bodyGrp.add(spaceGrp); hats['hat_space'] = spaceGrp;
+
+// 18. Sombrero
+const somGrp = new THREE.Group();
+const somBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 0.05, 24), new THREE.MeshStandardMaterial({ color: 0xd4a373, roughness: 0.8 }));
+const somCone = new THREE.Mesh(new THREE.ConeGeometry(0.4, 0.6, 16), new THREE.MeshStandardMaterial({ color: 0xd4a373, roughness: 0.8 }));
+somCone.position.y = 0.35;
+const somBand = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.1, 16), new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.7 }));
+somBand.position.y = 0.05;
+somGrp.add(somBrim, somCone, somBand); somGrp.position.set(0, 1.15, 0); somGrp.visible = false; bodyGrp.add(somGrp); hats['hat_sombrero'] = somGrp;
+
+
 // Halloween Hats
-// 15. Pumpkin King
+// 19. Pumpkin King
 const pkGrp = new THREE.Group();
 const pkBody = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), new THREE.MeshStandardMaterial({ color: 0xff6600, roughness: 0.5 }));
 pkBody.scale.set(1, 0.8, 1); pkGrp.add(pkBody);
@@ -1194,7 +1310,7 @@ const pkCrown = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.2, 12), ne
 pkCrown.position.y = 0.5;
 pkGrp.add(pkCrown); pkGrp.position.set(0, 1.15, 0); pkGrp.visible = false; bodyGrp.add(pkGrp); hats['hat_pumpkin_king'] = pkGrp;
 
-// 16. Witch Hat
+// 20. Witch Hat
 const witchGrp = new THREE.Group();
 const wBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.8, 0.05, 24), new THREE.MeshStandardMaterial({ color: 0x1a0033 }));
 const wCone = new THREE.Mesh(new THREE.ConeGeometry(0.4, 1.2, 16), new THREE.MeshStandardMaterial({ color: 0x1a0033 }));
@@ -1203,7 +1319,7 @@ const wBand = new THREE.Mesh(new THREE.CylinderGeometry(0.41, 0.41, 0.1, 16), ne
 wBand.position.y = 0.1;
 witchGrp.add(wBrim, wCone, wBand); witchGrp.position.set(0, 1.4, 0); witchGrp.visible = false; bodyGrp.add(witchGrp); hats['hat_witch'] = witchGrp;
 
-// 17. Ghost
+// 21. Ghost
 const ghostGrp = new THREE.Group();
 const gBody = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 }));
 for(let i=0; i<6; i++) {
@@ -1214,7 +1330,7 @@ for(let i=0; i<6; i++) {
 }
 ghostGrp.add(gBody); ghostGrp.position.set(0, 1.1, 0); ghostGrp.visible = false; bodyGrp.add(ghostGrp); hats['hat_ghost_hat'] = ghostGrp;
 
-// 18. Skull
+// 22. Skull
 const skullGrp = new THREE.Group();
 const skBase = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12), new THREE.MeshStandardMaterial({ color: 0xe0e0e0, roughness: 0.6 }));
 const skJaw = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.15, 0.25), new THREE.MeshStandardMaterial({ color: 0xd0d0d0, roughness: 0.6 }));
@@ -1223,7 +1339,7 @@ const skEyeL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Mes
 skEyeL.position.set(-0.15, 0.1, 0.38); const skEyeR = skEyeL.clone(); skEyeR.position.x = 0.15;
 skullGrp.add(skBase, skJaw, skEyeL, skEyeR); skullGrp.position.set(0, 1.15, 0); skullGrp.visible = false; bodyGrp.add(skullGrp); hats['hat_skull'] = skullGrp;
 
-// 19. Cauldron
+// 23. Cauldron
 const cauldronGrp = new THREE.Group();
 const cBody = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.3, 0.4, 16), new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.8, roughness: 0.3 }));
 const cRim = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.04, 8, 16), new THREE.MeshStandardMaterial({ color: 0x222222 }));
@@ -1232,7 +1348,7 @@ const cSoup = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.05, 16), n
 cSoup.position.y = 0.18;
 cauldronGrp.add(cBody, cRim, cSoup); cauldronGrp.position.set(0, 1.15, 0); cauldronGrp.visible = false; bodyGrp.add(cauldronGrp); hats['hat_cauldron'] = cauldronGrp;
 
-// 20. Eyeball
+// 24. Eyeball
 const eyeballGrp = new THREE.Group();
 const ebWhite = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 16), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2 }));
 const ebIris = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.02, 16), new THREE.MeshStandardMaterial({ color: 0x0055ff }));
@@ -1241,7 +1357,7 @@ const ebPupil = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.03, 16),
 ebPupil.rotation.x = Math.PI/2; ebPupil.position.z = 0.35;
 eyeballGrp.add(ebWhite, ebIris, ebPupil); eyeballGrp.position.set(0, 1.15, 0); eyeballGrp.visible = false; bodyGrp.add(eyeballGrp); hats['hat_eyeball'] = eyeballGrp;
 
-// 21. Bolts (Frankenstein)
+// 25. Bolts (Frankenstein)
 const boltsGrp = new THREE.Group();
 const bBase = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.3, 0.4), new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.8 }));
 const bL = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.3, 8), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.9 }));
@@ -1249,7 +1365,7 @@ bL.position.set(-0.3, 0, 0); bL.rotation.z = Math.PI/2;
 const bR = bL.clone(); bR.position.x = 0.3;
 boltsGrp.add(bBase, bL, bR); boltsGrp.position.set(0, 1.15, 0); boltsGrp.visible = false; bodyGrp.add(boltsGrp); hats['hat_frankenstein'] = boltsGrp;
 
-// 22. Devil Horns
+// 26. Devil Horns
 const hornsGrp = new THREE.Group();
 const hL = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.08, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xaa0000, roughness: 0.4 }));
 hL.position.set(-0.25, 0.2, 0); hL.rotation.z = 0.4;
@@ -2260,12 +2376,17 @@ window.resetSave = () => {
 };
 
 const UPDATES = [
-  { version:'5.7.0', name:'Realism Update', best: true, changes: [
+  { version:'5.8.0', name:'Mobile Landscape & Hats', best: true, changes: [
+    '📱 Dynamic Mobile Optimization (Landscape/Portrait)',
+    '📷 Camera now automatically adjusts FOV when the phone is tilted',
+    '🧭 UI Elements reorganized for mobile landscape orientation',
+    '👒 Added 4 New Hats: Police, Firefighter, Space, Sombrero'
+  ]},
+  { version:'5.7.0', name:'Realism Update', best: false, changes: [
     '🎩 Completely revamped all 3D Hats with ExtrudeGeometry and complex models',
     '🦋 Completely revamped all Wings with realistic thickness, bevels, and layers',
     '✨ Added glowing materials (emissive) to Halo, Cyber, and Jewel items',
-    '🧵 Improved textures and roughness mapping for leather, metal, and cloth',
-    '⚙️ Upgrades system fully operational'
+    '🧵 Improved textures and roughness mapping for leather, metal, and cloth'
   ]},
   { version:'5.6.0', name:'Upgrades System', best: false, changes: [
     '⬆️ Added a brand new Upgrades system!',
@@ -2450,11 +2571,8 @@ function loop(now) {
   }
 }
 
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+window.addEventListener('resize', updateCameraLayout);
+
 if (!IS_MOBILE) document.querySelectorAll('.pc-only').forEach(el => el.style.display = 'flex');
 
 window.addEventListener('load', () => {
