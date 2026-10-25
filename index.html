@@ -53,12 +53,10 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .overlay h1{font-size:clamp(38px,10vw,64px);color:#fff;text-shadow:0 0 20px var(--acc),0 0 40px var(--acc);margin-bottom:5px;animation:slide-up .5s ease;}
 .overlay h2{font-size:clamp(24px,6vw,36px);color:var(--acc);margin-bottom:20px;text-shadow:0 0 10px rgba(0,243,255,0.5);animation:slide-up .6s ease;}
 .overlay p{font-size:15px;color:var(--sub);margin:5px 0;max-width:480px;line-height:1.5;}
-
 #mainMenu{justify-content:space-between;padding:25px 20px 30px;backdrop-filter:none;background:linear-gradient(180deg,rgba(3,8,16,0.95) 0%,rgba(3,8,16,0.55) 18%,rgba(3,8,16,0.05) 35%,rgba(3,8,16,0.05) 62%,rgba(3,8,16,0.7) 82%,rgba(3,8,16,0.97) 100%);}
 #mainMenu .menu-top{display:flex;flex-direction:column;align-items:center;width:100%;gap:6px;}
 #mainMenu .menu-middle{flex:1;min-height:180px;pointer-events:none;}
 #mainMenu .menu-bottom{display:flex;flex-direction:column;align-items:center;width:100%;max-width:460px;gap:12px;}
-
 .btn{padding:14px 30px;font-family:'Fredoka',sans-serif;font-size:16px;background:var(--panel);color:#fff;border:2px solid var(--acc);border-radius:14px;cursor:pointer;transition:all .2s;min-width:250px;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;font-weight:600;backdrop-filter:blur(10px);box-shadow:0 4px 15px rgba(0,0,0,0.5);}
 .btn:active{transform:scale(0.96);background:rgba(0,243,255,0.2);}
 .btn.pri{background:linear-gradient(135deg,var(--acc),#0088cc);color:#000;border:none;font-weight:800;width:100%;margin-top:0;margin-bottom:6px;}
@@ -67,11 +65,9 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .btn.halloween{background:linear-gradient(135deg,#ff6600,#6600cc);border:none;color:#fff;animation:glow-pulse 2s infinite;}
 .btn.ghost{background:transparent;border-color:var(--border);color:var(--sub);}
 .btn i{font-size:22px;}
-
 .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;}
 .menu-grid .btn{margin:0;min-width:0;padding:14px 10px;font-size:13px;height:56px;justify-content:flex-start;padding-left:16px;}
 .menu-grid .btn i{font-size:20px;width:24px;text-align:center;margin-right:8px;}
-
 .top-stats{display:flex;gap:12px;z-index:60;justify-content:center;}
 .top-stat{background:var(--panel);padding:8px 18px;border-radius:99px;font-size:14px;font-weight:900;color:var(--gold);border:1px solid var(--border);display:flex;align-items:center;gap:8px;box-shadow:0 4px 10px rgba(0,0,0,0.5);}
 .top-stat.pump{color:var(--pumpkin);border-color:rgba(255,154,60,0.4);}
@@ -194,36 +190,26 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 #updList ul{padding-left:20px;font-size:13px;color:var(--sub);margin:0;}
 #updList li{margin:3px 0;}
 
-/* ═══════════════════════════════════════════════════════════════
-   MOBILE ORIENTATION OPTIMIZATIONS
-   ═══════════════════════════════════════════════════════════════ */
+/* MOBILE ORIENTATION OPTIMIZATIONS */
 @media (max-height: 500px) and (orientation: landscape) {
-    /* Menu Principal em Landscape (Celular deitado) */
     #mainMenu { padding: 10px 15px; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; }
     #mainMenu .menu-top { width: auto; flex: 1; min-width: 200px; margin-top: 10px;}
-    #mainMenu .menu-middle { display: none; /* Esconde o espaço do peixe para ganhar espaço */ }
+    #mainMenu .menu-middle { display: none; }
     #mainMenu .menu-bottom { width: auto; flex: 1; min-width: 300px; gap: 8px; }
-    
     .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .menu-grid .btn { height: 48px; padding: 8px 10px; font-size: 11px; }
     .btn.pri { margin-bottom: 2px; height: 48px; font-size: 14px; }
-    
-    /* HUD durante o jogo em Landscape */
     #hud { padding-top: 5px; gap: 5px; }
     .hud-top { max-width: 100%; padding: 0 10px; }
     .air-container { max-width: 200px; height: 14px; }
     .air-text { font-size: 9px; }
     .xp-container { max-width: 150px; height: 6px; }
     #lvl-title { font-size: 12px; margin-top: 2px; }
-    
-    /* Controles no Jogo em Landscape */
     #joy-base { width: 100px; height: 100px; left: 15px; bottom: 15px; }
     #joy-knob { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
     #btn-jump { width: 65px; height: 65px; bottom: 90px; right: 15px; }
     #btn-dive { width: 65px; height: 65px; bottom: 15px; right: 90px; }
     .btn-mob i { font-size: 22px; }
-    
-    /* Loja e Inventário em Landscape */
     .custom-footer { max-height: 70vh; padding: 10px 15px; }
     .items-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; max-height: 45vh; }
     .item-card { padding: 8px 4px; }
@@ -232,12 +218,9 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     .item-card .color-dot { width: 26px; height: 26px; }
     .tab { padding: 8px 4px; font-size: 10px; }
     .tab i { font-size: 16px; }
-    
     .upgrade-list { max-height: 55vh; }
     .upgrade-card { padding: 10px; }
 }
-
-/* Portrait (Celular em pé) - Otimização leve */
 @media (max-width: 400px) and (orientation: portrait) {
     .menu-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
     .menu-grid .btn { padding: 12px 8px; font-size: 12px; }
@@ -245,7 +228,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     .top-stats { gap: 8px; }
     .top-stat { padding: 6px 12px; font-size: 12px; }
 }
-
 </style>
 </head>
 <body>
@@ -624,12 +606,25 @@ window.importSave = () => {
   } catch(e) { showToast('❌ Código inválido!'); }
 };
 
+/* ═══════════════════════════════════════════════════════════════
+   NOVOS CÓDIGOS AQUI
+   ═══════════════════════════════════════════════════════════════ */
 const CODES = {
   'WELCOME': { coins: 100, pumpkins: 5, xp: 50 },
   'PUFFER': { coins: 250, pumpkins: 10, xp: 100 },
   'AURA': { coins: 500, pumpkins: 25, xp: 200 },
   'HALLOWEEN': { pumpkins: 100, xp: 50 },
-  'THANKS': { coins: 1000, pumpkins: 50, xp: 500 }
+  'THANKS': { coins: 1000, pumpkins: 50, xp: 500 },
+  'OCEAN': { coins: 500, xp: 100 },
+  'CYBER': { coins: 500, xp: 100 },
+  'SPOOKY': { pumpkins: 50, xp: 100 },
+  'DESERT': { coins: 500, xp: 100 },
+  'JUNGLE': { coins: 500, xp: 100 },
+  'COSMOS': { coins: 1000, xp: 500 },
+  'MASTER': { coins: 2000, pumpkins: 100, xp: 1000 },
+  'MEGA': { coins: 5000 },
+  'GOLDEN': { pumpkins: 200 },
+  'LEGEND': { coins: 10000, pumpkins: 500, xp: 5000 }
 };
 
 window.redeemCode = () => {
@@ -855,13 +850,14 @@ window.buyUpgrade = (key) => {
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   EXPANDED COSMETICS DATA
+   EXPANDED COSMETICS DATA (50 Skins, 45 Wings, 44 Hats)
    ═══════════════════════════════════════════════════════════════ */
 const SKIN_COLORS = [
   0xf5b71d, 0x3b82f6, 0x22c55e, 0xef4444, 0xa855f7, 0xec4899, 0x14b8a6, 0xf97316, 0x84cc16, 0x06b6d4,
   0xff6b6b, 0xffd700, 0x8b5cf6, 0x10b981, 0xf43f5e, 0xf59e0b, 0x0ea5e9, 0x6366f1, 0x94a3b8, 0x1e293b,
   0xbef264, 0x2dd4bf, 0xfb923c, 0xe879f9, 0xfacc15, 0x60a5fa, 0x4ade80, 0xf87171, 0xc084fc, 0xf472b6,
-  0x5eead4, 0xfcd34d, 0xa3e635, 0x38bdf8, 0x818cf8, 0xd8b4fe, 0xfda4af, 0xfde047, 0x86efac, 0x7dd3fc
+  0x5eead4, 0xfcd34d, 0xa3e635, 0x38bdf8, 0x818cf8, 0xd8b4fe, 0xfda4af, 0xfde047, 0x86efac, 0x7dd3fc,
+  0xff0000, 0x00ff00, 0x0000ff, 0xffffff, 0x000000, 0x888888, 0xff00ff, 0xffff00, 0x00ffff, 0x8b4513
 ];
 const SKINS = SKIN_COLORS.map((c, i) => ({ id: 'skin_' + i, name: 'Skin ' + (i+1), color: c, cost: i === 0 ? 0 : Math.floor(50 * Math.pow(1.5, i/4)) }));
 
@@ -873,10 +869,25 @@ const WINGS = [
   { id:'wing_galaxy', name:'Galaxy', cost:600, icon:'ph-planet' }, { id:'wing_ice', name:'Ice', cost:220, icon:'ph-snowflake' },
   { id:'wing_star', name:'Star', cost:450, icon:'ph-star' }, { id:'wing_mecha', name:'Mecha', cost:800, icon:'ph-robot' },
   { id:'wing_rainbow', name:'Rainbow', cost:700, icon:'ph-rainbow' }, { id:'wing_flame', name:'Flame', cost:300, icon:'ph-fire' },
-  { id:'wing_cloud', name:'Cloud', cost:280, icon:'ph-cloud' }
+  { id:'wing_cloud', name:'Cloud', cost:280, icon:'ph-cloud' },
+  // +30 NEW WINGS
+  { id:'wing_phoenix', name:'Phoenix', cost:900, icon:'ph-fire' }, { id:'wing_shadow', name:'Shadow', cost:850, icon:'ph-moon' },
+  { id:'wing_crystal', name:'Crystal', cost:750, icon:'ph-diamond' }, { id:'wing_nature', name:'Nature', cost:300, icon:'ph-tree' },
+  { id:'wing_ocean', name:'Ocean', cost:350, icon:'ph-drop' }, { id:'wing_storm', name:'Storm', cost:650, icon:'ph-lightning' },
+  { id:'wing_earth', name:'Earth', cost:400, icon:'ph-globe' }, { id:'wing_light', name:'Light', cost:800, icon:'ph-sun' },
+  { id:'wing_dark', name:'Dark', cost:800, icon:'ph-moon' }, { id:'wing_soul', name:'Soul', cost:600, icon:'ph-ghost' },
+  { id:'wing_neon', name:'Neon', cost:550, icon:'ph-lightbulb' }, { id:'wing_magma', name:'Magma', cost:700, icon:'ph-mountains' },
+  { id:'wing_frost', name:'Frost', cost:500, icon:'ph-snowflake' }, { id:'wing_toxic', name:'Toxic', cost:450, icon:'ph-flask' },
+  { id:'wing_bubble', name:'Bubble', cost:250, icon:'ph-circle' }, { id:'wing_ghostly', name:'Ghostly', cost:400, icon:'ph-ghost' },
+  { id:'wing_cyberpunk', name:'Cyberpunk', cost:900, icon:'ph-cpu' }, { id:'wing_gold', name:'Gold', cost:1200, icon:'ph-crown' },
+  { id:'wing_silver', name:'Silver', cost:1000, icon:'ph-circle' }, { id:'wing_bronze', name:'Bronze', cost:800, icon:'ph-circle' },
+  { id:'wing_plasma', name:'Plasma', cost:850, icon:'ph-lightning' }, { id:'wing_quantum', name:'Quantum', cost:1500, icon:'ph-atom' },
+  { id:'wing_void', name:'Void', cost:1400, icon:'ph-circle' }, { id:'wing_angelic', name:'Angelic', cost:1000, icon:'ph-feather' },
+  { id:'wing_fiend', name:'Fiend', cost:900, icon:'ph-devil' }, { id:'wing_seraph', name:'Seraph', cost:1300, icon:'ph-eye' },
+  { id:'wing_nebula', name:'Nebula', cost:1100, icon:'ph-planet' }, { id:'wing_supernova', name:'Supernova', cost:1600, icon:'ph-star' },
+  { id:'wing_origami', name:'Origami', cost:300, icon:'ph-paper-plane' }, { id:'wing_glass', name:'Glass', cost:600, icon:'ph-wine' }
 ];
 
-// NOVOS CHAPÉUS ADICIONADOS AQUI
 const HATS = [
   { id:'hat_0', name:'None', cost:0, icon:'ph-x' }, { id:'hat_cap', name:'Cap', cost:50, icon:'ph-baseball-cap' },
   { id:'hat_tophat', name:'Top Hat', cost:120, icon:'ph-crown' }, { id:'hat_crown', name:'Crown', cost:250, icon:'ph-crown-simple' },
@@ -885,11 +896,23 @@ const HATS = [
   { id:'hat_pumpkin', name:'Pumpkin', cost:150, icon:'ph-pumpkin' }, { id:'hat_wizard', name:'Wizard', cost:220, icon:'ph-magic-wand' },
   { id:'hat_cowboy', name:'Cowboy', cost:160, icon:'ph-cowboy-hat' }, { id:'hat_propeller', name:'Propeller', cost:200, icon:'ph-fan' },
   { id:'hat_party', name:'Party', cost:60, icon:'ph-confetti' }, { id:'hat_viking', name:'Viking', cost:350, icon:'ph-shield' },
-  { id:'hat_chef', name:'Chef', cost:140, icon:'ph-cooking-pot' },
-  { id:'hat_police', name:'Police', cost:190, icon:'ph-shield-star' },
-  { id:'hat_firefighter', name:'Firefighter', cost:210, icon:'ph-fire-truck' },
-  { id:'hat_space', name:'Space', cost:450, icon:'ph-rocket' },
-  { id:'hat_sombrero', name:'Sombrero', cost:130, icon:'ph-sun' }
+  { id:'hat_chef', name:'Chef', cost:140, icon:'ph-cooking-pot' }, { id:'hat_police', name:'Police', cost:190, icon:'ph-shield-star' },
+  { id:'hat_firefighter', name:'Firefighter', cost:210, icon:'ph-fire-truck' }, { id:'hat_space', name:'Space', cost:450, icon:'ph-rocket' },
+  { id:'hat_sombrero', name:'Sombrero', cost:130, icon:'ph-sun' },
+  // +25 NEW HATS
+  { id:'hat_bunny', name:'Bunny Ears', cost:100, icon:'ph-rabbit' }, { id:'hat_cat', name:'Cat Ears', cost:100, icon:'ph-cat' },
+  { id:'hat_fedora', name:'Fedora', cost:150, icon:'ph-fedora' }, { id:'hat_beanie', name:'Beanie', cost:80, icon:'ph-beanie' },
+  { id:'hat_antenna', name:'Antenna', cost:120, icon:'ph-wifi' }, { id:'hat_bow', name:'Bow', cost:90, icon:'ph-gift' },
+  { id:'hat_bucket', name:'Bucket', cost:70, icon:'ph-bucket' }, { id:'hat_diving', name:'Diving', cost:250, icon:'ph-water' },
+  { id:'hat_duck', name:'Duck', cost:110, icon:'ph-bird' }, { id:'hat_fez', name:'Fez', cost:130, icon:'ph-square' },
+  { id:'hat_flowercrown', name:'Flower Crown', cost:140, icon:'ph-flower' }, { id:'hat_grad', name:'Grad Cap', cost:160, icon:'ph-graduation-cap' },
+  { id:'hat_headphones', name:'Headphones', cost:180, icon:'ph-headphones' }, { id:'hat_icecream', name:'Ice Cream', cost:120, icon:'ph-ice-cream' },
+  { id:'hat_mining', name:'Mining', cost:220, icon:'ph-pickaxe' }, { id:'hat_mohawk', name:'Mohawk', cost:110, icon:'ph-user' },
+  { id:'hat_mushroom', name:'Mushroom', cost:130, icon:'ph-tree' }, { id:'hat_ninja', name:'Ninja', cost:200, icon:'ph-user-focus' },
+  { id:'hat_roman', name:'Roman', cost:240, icon:'ph-shield' }, { id:'hat_sheriff', name:'Sheriff', cost:180, icon:'ph-star' },
+  { id:'hat_tiara', name:'Tiara', cost:300, icon:'ph-diamond' }, { id:'hat_traffic', name:'Traffic', cost:60, icon:'ph-traffic-cone' },
+  { id:'hat_unicorn', name:'Unicorn', cost:350, icon:'ph-horse' }, { id:'hat_astronaut', name:'Astronaut', cost:400, icon:'ph-rocket' },
+  { id:'hat_jester', name:'Jester', cost:260, icon:'ph-mask-happy' }
 ];
 
 const HALLOWEEN_ITEMS = {
@@ -931,14 +954,25 @@ const WORLDS = [
   { id:1, name:'Dark Cave', theme:'cave', color:0x3a4a58, primary:'#8b5cf6', icon:'ph-mountains', desc:'Mysterious underground caverns' },
   { id:2, name:'Sky Islands', theme:'sky', color:0x6a8a55, primary:'#38bdf8', icon:'ph-cloud', desc:'Floating islands in the clouds' },
   { id:3, name:'Volcanic Core', theme:'volcano', color:0x5a2a1a, primary:'#ff4400', icon:'ph-fire', desc:'Molten rivers and fiery embers' },
-  { id:4, name:'Frozen Abyss', theme:'ice', color:0x6a9cc9, primary:'#88ddff', icon:'ph-snowflake', desc:'Frozen crystals and icy winds' }
+  { id:4, name:'Frozen Abyss', theme:'ice', color:0x6a9cc9, primary:'#88ddff', icon:'ph-snowflake', desc:'Frozen crystals and icy winds' },
+  { id:5, name:'Desert Oasis', theme:'desert', color:0xd4a373, primary:'#ffcc00', icon:'ph-sun', desc:'Golden sands and ancient ruins' },
+  { id:6, name:'Cyber City', theme:'cyber', color:0x112244, primary:'#00ffcc', icon:'ph-cpu', desc:'Neon lights and high tech' },
+  { id:7, name:'Haunted Graveyard', theme:'graveyard', color:0x2a2a35, primary:'#8b5cf6', icon:'ph-ghost', desc:'Spooky tombstones and fog' },
+  { id:8, name:'Jungle Ruins', theme:'jungle', color:0x2d4a22, primary:'#39ff14', icon:'ph-tree', desc:'Overgrown temples and vines' },
+  { id:9, name:'Cosmic Void', theme:'space', color:0x050510, primary:'#ff00ff', icon:'ph-planet', desc:'Floating asteroids in deep space' }
 ];
+
 const WORLD_ENV = [
   { skyTop:0x1e6fbf, skyBottom:0x87c8ee, water:0x1e86b8, fog:0x0a1e33 },
   { skyTop:0x0a0510, skyBottom:0x1a1520, water:0x1a2a3a, fog:0x050208 },
   { skyTop:0x4a90c9, skyBottom:0xc9e8ff, water:0x7ec8f0, fog:0x8098b8 },
   { skyTop:0x5a1a00, skyBottom:0xff6633, water:0xff3300, fog:0x2a0800 },
-  { skyTop:0x001a3a, skyBottom:0x88ddff, water:0x44aaee, fog:0x1a2a4a }
+  { skyTop:0x001a3a, skyBottom:0x88ddff, water:0x44aaee, fog:0x1a2a4a },
+  { skyTop:0xffaa00, skyBottom:0xffdd88, water:0x4488aa, fog:0xccaa66 },
+  { skyTop:0x000000, skyBottom:0x111133, water:0x001133, fog:0x000011 },
+  { skyTop:0x0a0a10, skyBottom:0x2a1a30, water:0x1a1020, fog:0x050208 },
+  { skyTop:0x0a2010, skyBottom:0x4a8a40, water:0x205030, fog:0x102a15 },
+  { skyTop:0x000000, skyBottom:0x1a002a, water:0x0a001a, fog:0x000000 }
 ];
 
 const TRANSLATIONS = {
@@ -968,27 +1002,19 @@ const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x0a1e33, 60, 160);
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 300);
 
-// Função que ajusta a câmera dependendo da orientação do celular
 function updateCameraLayout() {
     camera.aspect = window.innerWidth / window.innerHeight;
-    
     if (window.innerHeight > window.innerWidth) {
-        // Modo Retrato (Portrait) - Celular em pé
         camera.fov = 65; 
     } else {
-        // Modo Paisagem (Landscape) - Celular deitado
-        // Aumenta o FOV para mostrar mais do cenário na tela larga e curta
-        if (window.innerWidth > 800) {
-            camera.fov = 60; // Desktop/Tablet
-        } else {
-            camera.fov = 75; // Celular deitado
-        }
+        if (window.innerWidth > 800) { camera.fov = 60; } 
+        else { camera.fov = 75; }
     }
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 window.addEventListener('resize', updateCameraLayout);
-updateCameraLayout(); // Executa ao carregar
+updateCameraLayout();
 
 scene.add(new THREE.HemisphereLight(0xb8ddff, 0x0a1e33, 1.3));
 const sunLight = new THREE.DirectionalLight(0xfff0d0, 1.5);
@@ -1123,7 +1149,7 @@ function animateFins(now, speed = 1) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   REALISTIC HATS (EXTRUDE GEOMETRY & COMPOUND MODELS)
+   REALISTIC HATS
    ═══════════════════════════════════════════════════════════════ */
 const hats = {};
 
@@ -1300,9 +1326,212 @@ const somBand = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.1, 16), 
 somBand.position.y = 0.05;
 somGrp.add(somBrim, somCone, somBand); somGrp.position.set(0, 1.15, 0); somGrp.visible = false; bodyGrp.add(somGrp); hats['hat_sombrero'] = somGrp;
 
+// 19. Bunny Ears
+const bunnyGrp = new THREE.Group();
+const bunL = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.1, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffffff }));
+bunL.position.set(-0.2, 0.25, 0); bunL.rotation.z = 0.2;
+const bunR = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.1, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffffff }));
+bunR.position.set(0.2, 0.25, 0); bunR.rotation.z = -0.2;
+bunnyGrp.add(bunL, bunR); bunnyGrp.position.set(0, 1.1, 0); bunnyGrp.visible = false; bodyGrp.add(bunnyGrp); hats['hat_bunny'] = bunnyGrp;
 
-// Halloween Hats
-// 19. Pumpkin King
+// 20. Cat Ears
+const catGrp = new THREE.Group();
+const catL = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.3, 4), new THREE.MeshStandardMaterial({ color: 0x111111 }));
+catL.position.set(-0.25, 0.15, 0);
+const catR = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.3, 4), new THREE.MeshStandardMaterial({ color: 0x111111 }));
+catR.position.set(0.25, 0.15, 0);
+catGrp.add(catL, catR); catGrp.position.set(0, 1.1, 0); catGrp.visible = false; bodyGrp.add(catGrp); hats['hat_cat'] = catGrp;
+
+// 21. Fedora
+const fedGrp = new THREE.Group();
+const fedCrown = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.4, 0.4, 16), new THREE.MeshStandardMaterial({ color: 0x333333 }));
+const fedBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.65, 0.05, 20), new THREE.MeshStandardMaterial({ color: 0x333333 }));
+fedBrim.position.y = -0.2;
+fedGrp.add(fedCrown, fedBrim); fedGrp.position.set(0, 1.15, 0); fedGrp.visible = false; bodyGrp.add(fedGrp); hats['hat_fedora'] = fedGrp;
+
+// 22. Beanie
+const beanGrp = new THREE.Group();
+const beanDome = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xff8800 }));
+const beanRim = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.1, 16), new THREE.MeshStandardMaterial({ color: 0xcc6600 }));
+beanRim.position.y = 0.05;
+beanGrp.add(beanDome, beanRim); beanGrp.position.set(0, 1.05, 0); beanGrp.visible = false; bodyGrp.add(beanGrp); hats['hat_beanie'] = beanGrp;
+
+// 23. Antenna
+const antGrp = new THREE.Group();
+const antStem = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0x555555 }));
+antStem.position.y = 0.2;
+const antBall = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), new THREE.MeshStandardMaterial({ color: 0xff0000, emissive: 0x550000, emissiveIntensity: 1 }));
+antBall.position.y = 0.4;
+antGrp.add(antStem, antBall); antGrp.position.set(0, 1.1, 0); antGrp.visible = false; bodyGrp.add(antGrp); hats['hat_antenna'] = antGrp;
+
+// 24. Bow
+const bowGrp = new THREE.Group();
+const bowL = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 12), new THREE.MeshStandardMaterial({ color: 0xff69b4 }));
+bowL.scale.set(1, 0.6, 1); bowL.position.set(-0.15, 0.1, 0);
+const bowR = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 12), new THREE.MeshStandardMaterial({ color: 0xff69b4 }));
+bowR.scale.set(1, 0.6, 1); bowR.position.set(0.15, 0.1, 0);
+const bowC = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 12), new THREE.MeshStandardMaterial({ color: 0xff1493 }));
+bowC.position.set(0, 0.1, 0.05);
+bowGrp.add(bowL, bowR, bowC); bowGrp.position.set(0.3, 1.05, 0.2); bowGrp.visible = false; bodyGrp.add(bowGrp); hats['hat_bow'] = bowGrp;
+
+// 25. Bucket
+const buckGrp = new THREE.Group();
+const buckMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.25, 0.5, 12), new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 }));
+buckGrp.add(buckMesh); buckGrp.position.set(0, 1.15, 0); buckGrp.visible = false; bodyGrp.add(buckGrp); hats['hat_bucket'] = buckGrp;
+
+// 26. Diving Helmet
+const divGrp = new THREE.Group();
+const divDome = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12), new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.9, roughness: 0.3 }));
+const divGlass = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.2, 12), new THREE.MeshStandardMaterial({ color: 0x88ddff, transparent: true, opacity: 0.6 }));
+divGlass.rotation.x = Math.PI/2; divGlass.position.set(0, 0.1, 0.45);
+divGrp.add(divDome, divGlass); divGrp.position.set(0, 1.15, 0); divGrp.visible = false; bodyGrp.add(divGrp); hats['hat_diving'] = divGrp;
+
+// 27. Duck
+const duckGrp = new THREE.Group();
+const duckBody = new THREE.Mesh(new THREE.SphereGeometry(0.4, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xffdd00 }));
+const duckBill = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.05, 0.15), new THREE.MeshStandardMaterial({ color: 0xff8800 }));
+duckBill.position.set(0, 0.1, 0.4);
+duckGrp.add(duckBody, duckBill); duckGrp.position.set(0, 1.05, 0); duckGrp.visible = false; bodyGrp.add(duckGrp); hats['hat_duck'] = duckGrp;
+
+// 28. Fez
+const fezGrp = new THREE.Group();
+const fezMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.25, 0.4, 16), new THREE.MeshStandardMaterial({ color: 0xcc0000 }));
+fezMesh.position.y = 0.2;
+const fezTassel = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.2, 4), new THREE.MeshStandardMaterial({ color: 0xffcc00 }));
+fezTassel.position.set(0.1, 0.35, 0); fezTassel.rotation.z = 0.5;
+fezGrp.add(fezMesh, fezTassel); fezGrp.position.set(0, 1.05, 0); fezGrp.visible = false; bodyGrp.add(fezGrp); hats['hat_fez'] = fezGrp;
+
+// 29. Flower Crown
+const fcGrp = new THREE.Group();
+const fcRing = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.05, 8, 16), new THREE.MeshStandardMaterial({ color: 0x228b22 }));
+fcRing.rotation.x = Math.PI/2;
+for(let i=0; i<6; i++) {
+    const a = (i/6)*Math.PI*2;
+    const flower = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), new THREE.MeshStandardMaterial({ color: i%2 ? 0xff69b4 : 0xffcc00 }));
+    flower.position.set(Math.cos(a)*0.4, 0.05, Math.sin(a)*0.4);
+    fcGrp.add(flower);
+}
+fcGrp.add(fcRing); fcGrp.position.set(0, 1.1, 0); fcGrp.visible = false; bodyGrp.add(fcGrp); hats['hat_flowercrown'] = fcGrp;
+
+// 30. Grad Cap
+const gradGrp = new THREE.Group();
+const gradBase = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.15, 8), new THREE.MeshStandardMaterial({ color: 0x111111 }));
+const gradBoard = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.02, 0.7), new THREE.MeshStandardMaterial({ color: 0x111111 }));
+gradBoard.position.y = 0.1; gradBoard.rotation.y = Math.PI/4;
+const gradTassel = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.3, 4), new THREE.MeshStandardMaterial({ color: 0xffcc00 }));
+gradTassel.position.set(0.3, 0.05, 0.3);
+gradGrp.add(gradBase, gradBoard, gradTassel); gradGrp.position.set(0, 1.15, 0); gradGrp.visible = false; bodyGrp.add(gradGrp); hats['hat_grad'] = gradGrp;
+
+// 31. Headphones
+const hpGrp = new THREE.Group();
+const hpBand = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.05, 8, 16, Math.PI), new THREE.MeshStandardMaterial({ color: 0x222222 }));
+hpBand.rotation.z = Math.PI;
+const hpEarL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.08, 12), new THREE.MeshStandardMaterial({ color: 0x333333 }));
+hpEarL.rotation.z = Math.PI/2; hpEarL.position.set(-0.4, 0, 0);
+const hpEarR = hpEarL.clone(); hpEarR.position.x = 0.4;
+hpGrp.add(hpBand, hpEarL, hpEarR); hpGrp.position.set(0, 1.1, 0); hpGrp.visible = false; bodyGrp.add(hpGrp); hats['hat_headphones'] = hpGrp;
+
+// 32. Ice Cream
+const iceGrp = new THREE.Group();
+const iceCone = new THREE.Mesh(new THREE.ConeGeometry(0.2, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xd4a373 }));
+iceCone.position.y = 0.2; iceCone.rotation.x = Math.PI;
+const iceScoop = new THREE.Mesh(new THREE.SphereGeometry(0.25, 12, 12), new THREE.MeshStandardMaterial({ color: 0xff69b4 }));
+iceScoop.position.y = 0.5;
+iceGrp.add(iceCone, iceScoop); iceGrp.position.set(0, 1.0, 0); iceGrp.visible = false; bodyGrp.add(iceGrp); hats['hat_icecream'] = iceGrp;
+
+// 33. Mining
+const mineGrp = new THREE.Group();
+const mineDome = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xffcc00, metalness: 0.8, roughness: 0.2 }));
+const mineLight = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.1, 12), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1 }));
+mineLight.rotation.x = Math.PI/2; mineLight.position.set(0, 0.2, 0.45);
+mineGrp.add(mineDome, mineLight); mineGrp.position.set(0, 1.05, 0); mineGrp.visible = false; bodyGrp.add(mineGrp); hats['hat_mining'] = mineGrp;
+
+// 34. Mohawk
+const mhGrp = new THREE.Group();
+for(let i=0; i<5; i++) {
+    const spike = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.3, 4), new THREE.MeshStandardMaterial({ color: 0xff00ff }));
+    spike.position.set(0, 0.15, -0.2 + i*0.1);
+    mhGrp.add(spike);
+}
+mhGrp.position.set(0, 1.1, 0); mhGrp.visible = false; bodyGrp.add(mhGrp); hats['hat_mohawk'] = mhGrp;
+
+// 35. Mushroom
+const mushGrp = new THREE.Group();
+const mushStem = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.15, 0.3, 8), new THREE.MeshStandardMaterial({ color: 0xffffff }));
+mushStem.position.y = 0.15;
+const mushCap = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xff0000 }));
+mushCap.position.y = 0.3;
+mushGrp.add(mushStem, mushCap); mushGrp.position.set(0, 1.1, 0); mushGrp.visible = false; bodyGrp.add(mushGrp); hats['hat_mushroom'] = mushGrp;
+
+// 36. Ninja
+const ninjaGrp = new THREE.Group();
+const ninjaBand = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.15, 16), new THREE.MeshStandardMaterial({ color: 0x111111 }));
+ninjaBand.position.y = 0.1;
+const ninjaTie = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.3, 0.02), new THREE.MeshStandardMaterial({ color: 0x111111 }));
+ninjaTie.position.set(0, 0, -0.45); ninjaTie.rotation.x = 0.2;
+ninjaGrp.add(ninjaBand, ninjaTie); ninjaGrp.position.set(0, 1.05, 0); ninjaGrp.visible = false; bodyGrp.add(ninjaGrp); hats['hat_ninja'] = ninjaGrp;
+
+// 37. Roman
+const romanGrp = new THREE.Group();
+const romanDome = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.9, roughness: 0.3 }));
+const romanCrest = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.3, 0.4), new THREE.MeshStandardMaterial({ color: 0xcc0000 }));
+romanCrest.position.y = 0.25;
+romanGrp.add(romanDome, romanCrest); romanGrp.position.set(0, 1.05, 0); romanGrp.visible = false; bodyGrp.add(romanGrp); hats['hat_roman'] = romanGrp;
+
+// 38. Sheriff
+const sherGrp = new THREE.Group();
+const sherDome = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.9 }));
+const sherBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.05, 16), new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.9 }));
+sherBrim.position.y = 0.05;
+const sherStar = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.02, 5), new THREE.MeshStandardMaterial({ color: 0xffcc00, metalness: 0.9 }));
+sherStar.rotation.x = Math.PI/2; sherStar.position.set(0, 0.2, 0.44);
+sherGrp.add(sherDome, sherBrim, sherStar); sherGrp.position.set(0, 1.05, 0); sherGrp.visible = false; bodyGrp.add(sherGrp); hats['hat_sheriff'] = sherGrp;
+
+// 39. Tiara
+const tiaraGrp = new THREE.Group();
+const tiaraBand = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.03, 8, 16, Math.PI), new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 0.9 }));
+tiaraBand.rotation.x = Math.PI/2;
+const tiaraGem = new THREE.Mesh(new THREE.OctahedronGeometry(0.1), new THREE.MeshStandardMaterial({ color: 0xff00ff, emissive: 0x550055 }));
+tiaraGem.position.y = 0.15;
+tiaraGrp.add(tiaraBand, tiaraGem); tiaraGrp.position.set(0, 1.2, 0); tiaraGrp.visible = false; bodyGrp.add(tiaraGrp); hats['hat_tiara'] = tiaraGrp;
+
+// 40. Traffic Cone
+const trafficGrp = new THREE.Group();
+const trafficCone = new THREE.Mesh(new THREE.ConeGeometry(0.3, 0.6, 16), new THREE.MeshStandardMaterial({ color: 0xff6600 }));
+trafficCone.position.y = 0.3;
+const trafficBase = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.05, 0.4), new THREE.MeshStandardMaterial({ color: 0xff6600 }));
+trafficBase.position.y = 0.025;
+trafficGrp.add(trafficCone, trafficBase); trafficGrp.position.set(0, 1.1, 0); trafficGrp.visible = false; bodyGrp.add(trafficGrp); hats['hat_traffic'] = trafficGrp;
+
+// 41. Unicorn
+const uniGrp = new THREE.Group();
+const uniHorn = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0xffcc00, metalness: 0.9 }));
+uniHorn.position.y = 0.25;
+uniGrp.add(uniHorn); uniGrp.position.set(0, 1.1, 0); uniGrp.visible = false; bodyGrp.add(uniGrp); hats['hat_unicorn'] = uniGrp;
+
+// 42. Astronaut (Different from Space)
+const astroGrp = new THREE.Group();
+const astroDome = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), new THREE.MeshStandardMaterial({ color: 0xeeeeee, metalness: 0.7, roughness: 0.4 }));
+astroDome.scale.set(1, 1.1, 1);
+const astroVisor = new THREE.Mesh(new THREE.SphereGeometry(0.4, 16, 12), new THREE.MeshStandardMaterial({ color: 0x88ddff, transparent: true, opacity: 0.4 }));
+astroVisor.position.set(0, 0.05, 0.25);
+astroGrp.add(astroDome, astroVisor); astroGrp.position.set(0, 1.15, 0); astroGrp.visible = false; bodyGrp.add(astroGrp); hats['hat_astronaut'] = astroGrp;
+
+// 43. Jester
+const jesterGrp = new THREE.Group();
+for(let i=0; i<3; i++) {
+    const point = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.4, 8), new THREE.MeshStandardMaterial({ color: i%2 ? 0xff00ff : 0x00ff00 }));
+    point.position.y = 0.2;
+    point.rotation.z = -0.5 + i*0.5;
+    if(i===1) point.position.y = 0.3;
+    const tip = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffcc00 }));
+    tip.position.set(-0.2 + i*0.2, 0.4, 0);
+    jesterGrp.add(point, tip);
+}
+jesterGrp.position.set(0, 1.1, 0); jesterGrp.visible = false; bodyGrp.add(jesterGrp); hats['hat_jester'] = jesterGrp;
+
+
+// Halloween Hats (from previous code)
 const pkGrp = new THREE.Group();
 const pkBody = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), new THREE.MeshStandardMaterial({ color: 0xff6600, roughness: 0.5 }));
 pkBody.scale.set(1, 0.8, 1); pkGrp.add(pkBody);
@@ -1310,7 +1539,6 @@ const pkCrown = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.2, 12), ne
 pkCrown.position.y = 0.5;
 pkGrp.add(pkCrown); pkGrp.position.set(0, 1.15, 0); pkGrp.visible = false; bodyGrp.add(pkGrp); hats['hat_pumpkin_king'] = pkGrp;
 
-// 20. Witch Hat
 const witchGrp = new THREE.Group();
 const wBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.8, 0.05, 24), new THREE.MeshStandardMaterial({ color: 0x1a0033 }));
 const wCone = new THREE.Mesh(new THREE.ConeGeometry(0.4, 1.2, 16), new THREE.MeshStandardMaterial({ color: 0x1a0033 }));
@@ -1319,7 +1547,6 @@ const wBand = new THREE.Mesh(new THREE.CylinderGeometry(0.41, 0.41, 0.1, 16), ne
 wBand.position.y = 0.1;
 witchGrp.add(wBrim, wCone, wBand); witchGrp.position.set(0, 1.4, 0); witchGrp.visible = false; bodyGrp.add(witchGrp); hats['hat_witch'] = witchGrp;
 
-// 21. Ghost
 const ghostGrp = new THREE.Group();
 const gBody = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 }));
 for(let i=0; i<6; i++) {
@@ -1330,7 +1557,6 @@ for(let i=0; i<6; i++) {
 }
 ghostGrp.add(gBody); ghostGrp.position.set(0, 1.1, 0); ghostGrp.visible = false; bodyGrp.add(ghostGrp); hats['hat_ghost_hat'] = ghostGrp;
 
-// 22. Skull
 const skullGrp = new THREE.Group();
 const skBase = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12), new THREE.MeshStandardMaterial({ color: 0xe0e0e0, roughness: 0.6 }));
 const skJaw = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.15, 0.25), new THREE.MeshStandardMaterial({ color: 0xd0d0d0, roughness: 0.6 }));
@@ -1339,7 +1565,6 @@ const skEyeL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.Mes
 skEyeL.position.set(-0.15, 0.1, 0.38); const skEyeR = skEyeL.clone(); skEyeR.position.x = 0.15;
 skullGrp.add(skBase, skJaw, skEyeL, skEyeR); skullGrp.position.set(0, 1.15, 0); skullGrp.visible = false; bodyGrp.add(skullGrp); hats['hat_skull'] = skullGrp;
 
-// 23. Cauldron
 const cauldronGrp = new THREE.Group();
 const cBody = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.3, 0.4, 16), new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.8, roughness: 0.3 }));
 const cRim = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.04, 8, 16), new THREE.MeshStandardMaterial({ color: 0x222222 }));
@@ -1348,7 +1573,6 @@ const cSoup = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.05, 16), n
 cSoup.position.y = 0.18;
 cauldronGrp.add(cBody, cRim, cSoup); cauldronGrp.position.set(0, 1.15, 0); cauldronGrp.visible = false; bodyGrp.add(cauldronGrp); hats['hat_cauldron'] = cauldronGrp;
 
-// 24. Eyeball
 const eyeballGrp = new THREE.Group();
 const ebWhite = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 16), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2 }));
 const ebIris = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.02, 16), new THREE.MeshStandardMaterial({ color: 0x0055ff }));
@@ -1357,7 +1581,6 @@ const ebPupil = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.03, 16),
 ebPupil.rotation.x = Math.PI/2; ebPupil.position.z = 0.35;
 eyeballGrp.add(ebWhite, ebIris, ebPupil); eyeballGrp.position.set(0, 1.15, 0); eyeballGrp.visible = false; bodyGrp.add(eyeballGrp); hats['hat_eyeball'] = eyeballGrp;
 
-// 25. Bolts (Frankenstein)
 const boltsGrp = new THREE.Group();
 const bBase = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.3, 0.4), new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.8 }));
 const bL = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.3, 8), new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.9 }));
@@ -1365,7 +1588,6 @@ bL.position.set(-0.3, 0, 0); bL.rotation.z = Math.PI/2;
 const bR = bL.clone(); bR.position.x = 0.3;
 boltsGrp.add(bBase, bL, bR); boltsGrp.position.set(0, 1.15, 0); boltsGrp.visible = false; bodyGrp.add(boltsGrp); hats['hat_frankenstein'] = boltsGrp;
 
-// 26. Devil Horns
 const hornsGrp = new THREE.Group();
 const hL = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.08, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xaa0000, roughness: 0.4 }));
 hL.position.set(-0.25, 0.2, 0); hL.rotation.z = 0.4;
@@ -1470,6 +1692,25 @@ createWings('wing_mecha', 'mecha', 0x888888);
 createWings('wing_bone', 'angel', 0xdddddd);
 createWings('wing_spiderweb', 'fairy', 0x333333, 0.8);
 createWings('wing_phantom', 'dragon', 0x330033, 0.8);
+
+// 30 NEW WING CREATIONS
+const newWingDefs = [
+  ['wing_phoenix', 'dragon', 0xff6600], ['wing_shadow', 'demon', 0x111111], ['wing_crystal', 'fairy', 0x88ffff, 0.6],
+  ['wing_nature', 'fairy', 0x228b22], ['wing_ocean', 'fairy', 0x0066cc, 0.8], ['wing_storm', 'dragon', 0xffff00],
+  ['wing_earth', 'angel', 0x8b4513], ['wing_light', 'angel', 0xffffcc], ['wing_dark', 'demon', 0x000000],
+  ['wing_soul', 'fairy', 0x00ffcc, 0.5], ['wing_neon', 'mecha', 0xff00ff], ['wing_magma', 'dragon', 0xff3300],
+  ['wing_frost', 'fairy', 0xccffff, 0.9], ['wing_toxic', 'fairy', 0x00ff00, 0.7], ['wing_bubble', 'fairy', 0x88ccff, 0.4],
+  ['wing_ghostly', 'fairy', 0xeeeeee, 0.4], ['wing_cyberpunk', 'mecha', 0x00ffff], ['wing_gold', 'angel', 0xffd700],
+  ['wing_silver', 'angel', 0xc0c0c0], ['wing_bronze', 'angel', 0xcd7f32], ['wing_plasma', 'dragon', 0xaa00ff],
+  ['wing_quantum', 'mecha', 0xffffff], ['wing_void', 'demon', 0x220033], ['wing_angelic', 'angel', 0xffffee],
+  ['wing_fiend', 'demon', 0x990000], ['wing_seraph', 'angel', 0xffd700], ['wing_nebula', 'fairy', 0xaa00aa],
+  ['wing_supernova', 'dragon', 0xffaa00], ['wing_origami', 'fairy', 0xffffff], ['wing_glass', 'fairy', 0xccffff, 0.3]
+];
+
+newWingDefs.forEach(w => {
+  createWings(w[0], w[1], w[2], w[3] || 0.95);
+});
+
 
 scene.add(puffer);
 
@@ -1627,7 +1868,7 @@ giantPumpkin.visible = false;
 scene.add(giantPumpkin);
 
 /* ═══════════════════════════════════════════════════════════════
-   LEVEL GENERATION
+   LEVEL GENERATION & NEW DECORATIONS
    ═══════════════════════════════════════════════════════════════ */
 let currentLevel = null;
 let levelObjects = [];
@@ -1737,15 +1978,17 @@ window.loadStage = (worldIdx, stageIdx) => {
   scene.fog.color.setHex(env.fog);
   water.material.color.setHex(env.water);
   water.visible = true;
-  if (world.theme === 'cave') {
+  
+  if (world.theme === 'cave' || world.theme === 'space' || world.theme === 'cyber') {
     scene.fog.near = 12; scene.fog.far = 40;
     sunLight.intensity = 0.15; caveLight.intensity = 2.5;
-    document.getElementById('caveDark').style.opacity = '0.7';
+    document.getElementById('caveDark').style.opacity = world.theme === 'cave' ? '0.7' : '0';
   } else {
     scene.fog.near = 60; scene.fog.far = 160;
     sunLight.intensity = 1.5; caveLight.intensity = 0;
     document.getElementById('caveDark').style.opacity = '0';
   }
+  
   for (const p of currentLevel.platforms) {
     let matColor = world.color;
     if (p.type === 'bouncy') matColor = 0x39ff14;
@@ -1759,6 +2002,12 @@ window.loadStage = (worldIdx, stageIdx) => {
     if (world.theme === 'cave') topColor = 0x556070;
     if (world.theme === 'volcano') topColor = 0xff8833;
     if (world.theme === 'ice') topColor = 0xaaddff;
+    if (world.theme === 'desert') topColor = 0xeebb77;
+    if (world.theme === 'cyber') topColor = 0x00ffcc;
+    if (world.theme === 'graveyard') topColor = 0x3a3a45;
+    if (world.theme === 'jungle') topColor = 0x1a5a1a;
+    if (world.theme === 'space') topColor = 0x2a2a3a;
+    
     const top = new THREE.Mesh(new THREE.BoxGeometry(p.w + 0.1, 0.15, p.d + 0.1), new THREE.MeshStandardMaterial({ color: topColor, roughness: 0.9 }));
     top.position.set(p.x, p.y + p.h/2 + 0.05, p.z);
     top.receiveShadow = true;
@@ -1778,21 +2027,84 @@ window.loadStage = (worldIdx, stageIdx) => {
 
 function addDecorations(theme, platform, list) {
   const { x, y, z, w, d } = platform;
+  const randPos = () => ({ px: x + (Math.random()-0.5)*(w-1.5), pz: z + (Math.random()-0.5)*(d-1.5) });
+  
   if (theme === 'tropical') {
-    for (let i = 0; i < 2; i++) { const palm = createPalmTree(x + (Math.random()-0.5)*(w-2), y+0.5, z + (Math.random()-0.5)*(d-2)); scene.add(palm); list.push(palm); }
-    for (let i = 0; i < 2; i++) { const bush = new THREE.Mesh(new THREE.SphereGeometry(0.5, 8, 6), new THREE.MeshStandardMaterial({ color: 0x3f7d3a })); bush.position.set(x + (Math.random()-0.5)*(w-1.5), y+0.6, z + (Math.random()-0.5)*(d-1.5)); bush.castShadow = true; scene.add(bush); list.push(bush); }
+    for (let i = 0; i < 2; i++) { const p = randPos(); const palm = createPalmTree(p.px, y+0.5, p.pz); scene.add(palm); list.push(palm); }
+    for (let i = 0; i < 2; i++) { const p = randPos(); const bush = new THREE.Mesh(new THREE.SphereGeometry(0.5, 8, 6), new THREE.MeshStandardMaterial({ color: 0x3f7d3a })); bush.position.set(p.px, y+0.6, p.pz); bush.castShadow = true; scene.add(bush); list.push(bush); }
   } else if (theme === 'cave') {
-    for (let i = 0; i < 3; i++) { const stalag = new THREE.Mesh(new THREE.ConeGeometry(0.3, 1.5 + Math.random(), 6), new THREE.MeshStandardMaterial({ color: 0x556070 })); stalag.position.set(x + (Math.random()-0.5)*(w-1.5), y+1, z + (Math.random()-0.5)*(d-1.5)); stalag.castShadow = true; scene.add(stalag); list.push(stalag); }
-    for (let i = 0; i < 2; i++) { const shroom = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 6, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xdd3344, emissive: 0x552200, emissiveIntensity: 0.5 })); shroom.position.set(x + (Math.random()-0.5)*(w-1.5), y+0.7, z + (Math.random()-0.5)*(d-1.5)); scene.add(shroom); list.push(shroom); }
+    for (let i = 0; i < 3; i++) { const p = randPos(); const stalag = new THREE.Mesh(new THREE.ConeGeometry(0.3, 1.5 + Math.random(), 6), new THREE.MeshStandardMaterial({ color: 0x556070 })); stalag.position.set(p.px, y+1, p.pz); stalag.castShadow = true; scene.add(stalag); list.push(stalag); }
+    for (let i = 0; i < 2; i++) { const p = randPos(); const shroom = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 6, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xdd3344, emissive: 0x552200, emissiveIntensity: 0.5 })); shroom.position.set(p.px, y+0.7, p.pz); scene.add(shroom); list.push(shroom); }
   } else if (theme === 'sky') {
-    for (let i = 0; i < 2; i++) { const pine = createPineTree(x + (Math.random()-0.5)*(w-2), y+0.5, z + (Math.random()-0.5)*(d-2)); scene.add(pine); list.push(pine); }
-    for (let i = 0; i < 2; i++) { const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.4), new THREE.MeshStandardMaterial({ color: 0x88e0ff, emissive: 0x2266aa, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.1 })); crystal.position.set(x + (Math.random()-0.5)*(w-1.5), y+0.6, z + (Math.random()-0.5)*(d-1.5)); crystal.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); crystal.castShadow = true; scene.add(crystal); list.push(crystal); }
+    for (let i = 0; i < 2; i++) { const p = randPos(); const pine = createPineTree(p.px, y+0.5, p.pz); scene.add(pine); list.push(pine); }
+    for (let i = 0; i < 2; i++) { const p = randPos(); const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.4), new THREE.MeshStandardMaterial({ color: 0x88e0ff, emissive: 0x2266aa, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.1 })); crystal.position.set(p.px, y+0.6, p.pz); crystal.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); crystal.castShadow = true; scene.add(crystal); list.push(crystal); }
   } else if (theme === 'volcano') {
-    for (let i = 0; i < 3; i++) { const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(0.4 + Math.random()*0.3), new THREE.MeshStandardMaterial({ color: 0x2a1a0a, emissive: 0xff3300, emissiveIntensity: 0.3, roughness: 0.8 })); rock.position.set(x + (Math.random()-0.5)*(w-1.5), y+0.7, z + (Math.random()-0.5)*(d-1.5)); rock.castShadow = true; scene.add(rock); list.push(rock); }
-    for (let i = 0; i < 2; i++) { const bubble = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 6), new THREE.MeshBasicMaterial({ color: 0xff6600, transparent: true, opacity: 0.8 })); bubble.position.set(x + (Math.random()-0.5)*(w-1.5), y+0.6, z + (Math.random()-0.5)*(d-1.5)); scene.add(bubble); list.push(bubble); }
+    for (let i = 0; i < 3; i++) { const p = randPos(); const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(0.4 + Math.random()*0.3), new THREE.MeshStandardMaterial({ color: 0x2a1a0a, emissive: 0xff3300, emissiveIntensity: 0.3, roughness: 0.8 })); rock.position.set(p.px, y+0.7, p.pz); rock.castShadow = true; scene.add(rock); list.push(rock); }
+    for (let i = 0; i < 2; i++) { const p = randPos(); const bubble = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 6), new THREE.MeshBasicMaterial({ color: 0xff6600, transparent: true, opacity: 0.8 })); bubble.position.set(p.px, y+0.6, p.pz); scene.add(bubble); list.push(bubble); }
   } else if (theme === 'ice') {
-    for (let i = 0; i < 3; i++) { const spike = new THREE.Mesh(new THREE.ConeGeometry(0.25, 1 + Math.random()*0.5, 6), new THREE.MeshStandardMaterial({ color: 0xccf0ff, emissive: 0x88ddff, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.1, transparent: true, opacity: 0.85 })); spike.position.set(x + (Math.random()-0.5)*(w-1.5), y+0.9, z + (Math.random()-0.5)*(d-1.5)); spike.castShadow = true; scene.add(spike); list.push(spike); }
-    for (let i = 0; i < 2; i++) { const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.35), new THREE.MeshStandardMaterial({ color: 0xaaddff, emissive: 0x4488cc, emissiveIntensity: 0.6, metalness: 0.9, roughness: 0.1 })); crystal.position.set(x + (Math.random()-0.5)*(w-1.5), y+0.6, z + (Math.random()-0.5)*(d-1.5)); crystal.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); scene.add(crystal); list.push(crystal); }
+    for (let i = 0; i < 3; i++) { const p = randPos(); const spike = new THREE.Mesh(new THREE.ConeGeometry(0.25, 1 + Math.random()*0.5, 6), new THREE.MeshStandardMaterial({ color: 0xccf0ff, emissive: 0x88ddff, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.1, transparent: true, opacity: 0.85 })); spike.position.set(p.px, y+0.9, p.pz); spike.castShadow = true; scene.add(spike); list.push(spike); }
+    for (let i = 0; i < 2; i++) { const p = randPos(); const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.35), new THREE.MeshStandardMaterial({ color: 0xaaddff, emissive: 0x4488cc, emissiveIntensity: 0.6, metalness: 0.9, roughness: 0.1 })); crystal.position.set(p.px, y+0.6, p.pz); crystal.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); scene.add(crystal); list.push(crystal); }
+  } 
+  // NEW THEMES
+  else if (theme === 'desert') {
+    for (let i = 0; i < 2; i++) { 
+      const p = randPos(); 
+      const cactus = new THREE.Group(); 
+      const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.2, 1.2, 8), new THREE.MeshStandardMaterial({ color: 0x2d5a27 })); 
+      trunk.position.y = 0.6; 
+      const arm1 = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0x2d5a27 })); 
+      arm1.position.set(0.25, 0.8, 0); arm1.rotation.z = -0.5; 
+      cactus.add(trunk, arm1); cactus.position.set(p.px, y, p.pz); scene.add(cactus); list.push(cactus); 
+    }
+    for (let i = 0; i < 2; i++) { 
+      const p = randPos(); 
+      const pyramid = new THREE.Mesh(new THREE.ConeGeometry(0.8, 1.5, 4), new THREE.MeshStandardMaterial({ color: 0xd4a373 })); 
+      pyramid.position.set(p.px, y+0.75, p.pz); pyramid.castShadow = true; scene.add(pyramid); list.push(pyramid); 
+    }
+  } else if (theme === 'cyber') {
+    for (let i = 0; i < 2; i++) { 
+      const p = randPos(); 
+      const neonCube = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, 0.4), new THREE.MeshStandardMaterial({ color: 0x00ffcc, emissive: 0x00aa88, emissiveIntensity: 1.5, wireframe: true })); 
+      neonCube.position.set(p.px, y+0.5, p.pz); scene.add(neonCube); list.push(neonCube); 
+    }
+    for (let i = 0; i < 2; i++) { 
+      const p = randPos(); 
+      const grid = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 1.5), new THREE.MeshBasicMaterial({ color: 0xff00ff, wireframe: true })); 
+      grid.rotation.x = -Math.PI/2; grid.position.set(p.px, y+0.5, p.pz); scene.add(grid); list.push(grid); 
+    }
+  } else if (theme === 'graveyard') {
+    for (let i = 0; i < 3; i++) { 
+      const p = randPos(); 
+      const tomb = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.6, 0.1), new THREE.MeshStandardMaterial({ color: 0x555566, roughness: 0.9 })); 
+      tomb.position.set(p.px, y+0.3, p.pz); tomb.rotation.y = Math.random() * Math.PI; tomb.castShadow = true; scene.add(tomb); list.push(tomb); 
+    }
+    for (let i = 0; i < 2; i++) { 
+      const p = randPos(); 
+      const tree = new THREE.Mesh(new THREE.ConeGeometry(0.1, 1.5, 5), new THREE.MeshStandardMaterial({ color: 0x222222 })); 
+      tree.position.set(p.px, y+0.75, p.pz); tree.rotation.z = (Math.random()-0.5)*0.2; scene.add(tree); list.push(tree); 
+    }
+  } else if (theme === 'jungle') {
+    for (let i = 0; i < 2; i++) { 
+      const p = randPos(); 
+      const vine = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 2, 6), new THREE.MeshStandardMaterial({ color: 0x228b22 })); 
+      vine.position.set(p.px, y+1, p.pz); vine.rotation.x = 0.1; scene.add(vine); list.push(vine); 
+    }
+    for (let i = 0; i < 2; i++) { 
+      const p = randPos(); 
+      const pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8), new THREE.MeshStandardMaterial({ color: 0x777766, roughness: 0.9 })); 
+      pillar.position.set(p.px, y+0.6, p.pz); pillar.rotation.z = (Math.random()-0.5)*0.1; pillar.castShadow = true; scene.add(pillar); list.push(pillar); 
+    }
+  } else if (theme === 'space') {
+    for (let i = 0; i < 3; i++) { 
+      const p = randPos(); 
+      const asteroid = new THREE.Mesh(new THREE.DodecahedronGeometry(0.3 + Math.random()*0.2), new THREE.MeshStandardMaterial({ color: 0x888899, roughness: 0.9 })); 
+      asteroid.position.set(p.px, y+0.5, p.pz); asteroid.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); asteroid.castShadow = true; scene.add(asteroid); list.push(asteroid); 
+    }
+    for (let i = 0; i < 2; i++) { 
+      const p = randPos(); 
+      const star = new THREE.Mesh(new THREE.OctahedronGeometry(0.15), new THREE.MeshBasicMaterial({ color: 0xffffff })); 
+      star.position.set(p.px, y+0.8, p.pz); scene.add(star); list.push(star); 
+    }
   }
 }
 
@@ -1977,7 +2289,9 @@ function updatePlay(dt, now) {
   }
   
   if (gameState.comboTimer > 0) { gameState.comboTimer -= dt; if (gameState.comboTimer <= 0) gameState.combo = 0; }
-  if (WORLDS[gameState.worldIdx].theme === 'cave') { caveLight.position.copy(player.pos); caveLight.position.y += 1; }
+  if (WORLDS[gameState.worldIdx].theme === 'cave' || WORLDS[gameState.worldIdx].theme === 'space' || WORLDS[gameState.worldIdx].theme === 'cyber') { 
+    caveLight.position.copy(player.pos); caveLight.position.y += 1; 
+  }
   
   puffer.position.copy(player.pos);
   puffer.scale.setScalar(1 + player.inflation * 0.75);
@@ -2376,7 +2690,16 @@ window.resetSave = () => {
 };
 
 const UPDATES = [
-  { version:'5.8.0', name:'Mobile Landscape & Hats', best: true, changes: [
+  { version:'6.0.0', name:'Colossal Expansion Update', best: true, changes: [
+    '🌍 Added 5 NEW WORLDS (Desert Oasis, Cyber City, Haunted Graveyard, Jungle Ruins, Cosmic Void)',
+    '🏛️ Added new unique 3D decorations for all 10 worlds',
+    '🐟 Added 10 new Base Skins (Total 50 colors)',
+    '🦋 Added 30 new Wings (Total 45 base wings)',
+    '🎩 Added 25 new Hats with unique 3D models (Total 44 base hats)',
+    '🎟️ Added new redeemable codes (Check Settings to redeem!)',
+    '📱 Kept mobile landscape/portrait optimizations from v5.8.0'
+  ]},
+  { version:'5.8.0', name:'Mobile Landscape & Hats', best: false, changes: [
     '📱 Dynamic Mobile Optimization (Landscape/Portrait)',
     '📷 Camera now automatically adjusts FOV when the phone is tilted',
     '🧭 UI Elements reorganized for mobile landscape orientation',
