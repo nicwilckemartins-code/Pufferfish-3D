@@ -53,20 +53,26 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .overlay h1{font-size:clamp(38px,10vw,64px);color:#fff;text-shadow:0 0 20px var(--acc),0 0 40px var(--acc);margin-bottom:5px;animation:slide-up .5s ease;}
 .overlay h2{font-size:clamp(24px,6vw,36px);color:var(--acc);margin-bottom:20px;text-shadow:0 0 10px rgba(0,243,255,0.5);animation:slide-up .6s ease;}
 .overlay p{font-size:15px;color:var(--sub);margin:5px 0;max-width:480px;line-height:1.5;}
+
+/* FIXED MAIN MENU LAYOUT */
 #mainMenu{justify-content:space-between;padding:25px 20px 30px;backdrop-filter:none;background:linear-gradient(180deg,rgba(3,8,16,0.95) 0%,rgba(3,8,16,0.55) 18%,rgba(3,8,16,0.05) 35%,rgba(3,8,16,0.05) 62%,rgba(3,8,16,0.7) 82%,rgba(3,8,16,0.97) 100%);}
 #mainMenu .menu-top{display:flex;flex-direction:column;align-items:center;width:100%;gap:6px;}
 #mainMenu .menu-middle{flex:1;min-height:180px;pointer-events:none;}
-#mainMenu .menu-bottom{display:flex;flex-direction:column;align-items:center;width:100%;gap:4px;}
+#mainMenu .menu-bottom{display:flex;flex-direction:column;align-items:center;width:100%;max-width:460px;gap:12px;}
+
 .btn{padding:14px 30px;font-family:'Fredoka',sans-serif;font-size:16px;background:var(--panel);color:#fff;border:2px solid var(--acc);border-radius:14px;cursor:pointer;transition:all .2s;min-width:250px;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;font-weight:600;backdrop-filter:blur(10px);box-shadow:0 4px 15px rgba(0,0,0,0.5);}
 .btn:active{transform:scale(0.96);background:rgba(0,243,255,0.2);}
-.btn.pri{background:linear-gradient(135deg,var(--acc),#0088cc);color:#000;border:none;font-weight:800;}
+.btn.pri{background:linear-gradient(135deg,var(--acc),#0088cc);color:#000;border:none;font-weight:800;width:100%;margin-top:0;margin-bottom:6px;}
 .btn.gold{background:linear-gradient(135deg,var(--gold),#ff8800);color:#000;border:none;font-weight:800;}
 .btn.red{background:linear-gradient(135deg,var(--red),#990022);border:none;}
 .btn.halloween{background:linear-gradient(135deg,#ff6600,#6600cc);border:none;color:#fff;animation:glow-pulse 2s infinite;}
 .btn.ghost{background:transparent;border-color:var(--border);color:var(--sub);}
 .btn i{font-size:22px;}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px;width:100%;max-width:460px;}
-.grid-2 .btn{margin:0;min-width:0;padding:15px 10px;font-size:13px;}
+
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;}
+.menu-grid .btn{margin:0;min-width:0;padding:14px 10px;font-size:13px;height:56px;justify-content:flex-start;padding-left:16px;}
+.menu-grid .btn i{font-size:20px;width:24px;text-align:center;margin-right:8px;}
+
 .top-stats{display:flex;gap:12px;z-index:60;justify-content:center;}
 .top-stat{background:var(--panel);padding:8px 18px;border-radius:99px;font-size:14px;font-weight:900;color:var(--gold);border:1px solid var(--border);display:flex;align-items:center;gap:8px;box-shadow:0 4px 10px rgba(0,0,0,0.5);}
 .top-stat.pump{color:var(--pumpkin);border-color:rgba(255,154,60,0.4);}
@@ -236,17 +242,16 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     <p style="letter-spacing:3px;color:var(--acc);font-weight:900;">ULTIMATE AURA</p>
   </div>
   <div class="menu-middle"></div>
+  
   <div class="menu-bottom">
     <button class="btn pri" onclick="window.openWorlds()"><i class="ph ph-play"></i> PLAY NOW</button>
-    <div class="grid-2">
-      <button class="btn" onclick="window.openUpgrades()"><i class="ph ph-arrow-up-circle"></i> UPGRADES</button>
+    <div class="menu-grid">
+      <button class="btn" onclick="window.openUpgrades()"><i class="ph ph-rocket-launch"></i> UPGRADES</button>
       <button class="btn" onclick="window.openCustomize()"><i class="ph ph-paint-brush"></i> INVENTORY</button>
       <button class="btn" onclick="window.openShop()"><i class="ph ph-storefront"></i> SHOP</button>
       <button class="btn" onclick="window.openSettings()"><i class="ph ph-gear"></i> SETTINGS</button>
-    </div>
-    <div class="grid-2" style="margin-top:0;">
       <button class="btn" onclick="window.openUpdates()"><i class="ph ph-scroll"></i> UPDATES</button>
-      <button class="btn halloween" onclick="window.openHalloween()"><i class="ph ph-pumpkin"></i> HALLOWEEN</button>
+      <button class="btn halloween" onclick="window.openHalloween()"><i class="ph ph-ghost"></i> HALLOWEEN</button>
     </div>
   </div>
 </div>
@@ -1263,7 +1268,6 @@ function createWings(id, type, color, opacity = 0.95) {
   const extrudeSettings = { depth: 0.05, bevelEnabled: true, bevelSegments: 2, steps: 2, bevelSize: 0.02, bevelThickness: 0.02 };
 
   if (type === 'angel' || type === 'fairy' || type === 'butterfly') {
-    // Feathers para Anjo / Fada / Borboleta
     for (let i = 0; i < 5; i++) {
       const shape = new THREE.Shape();
       const len = 0.8 + i * 0.2;
@@ -1285,15 +1289,14 @@ function createWings(id, type, color, opacity = 0.95) {
       g.add(r);
     }
   } else if (type === 'dragon' || type === 'demon') {
-    // Asas de Dragão / Demônio (Membrana e Ossos)
     const shape = new THREE.Shape();
     shape.moveTo(0, 0);
-    shape.bezierCurveTo(0.4, 0.5, 0.8, 0.8, 1.2, 0.4); // Topo
-    shape.lineTo(1.0, -0.2); // Ponta 1
-    shape.lineTo(0.7, 0.0);  // Curva
-    shape.lineTo(0.5, -0.3); // Ponta 2
-    shape.lineTo(0.2, -0.1); // Curva
-    shape.lineTo(0, 0);      // Base
+    shape.bezierCurveTo(0.4, 0.5, 0.8, 0.8, 1.2, 0.4);
+    shape.lineTo(1.0, -0.2);
+    shape.lineTo(0.7, 0.0);
+    shape.lineTo(0.5, -0.3);
+    shape.lineTo(0.2, -0.1);
+    shape.lineTo(0, 0);
     const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
     
     for (let side of [-1, 1]) {
@@ -1301,13 +1304,11 @@ function createWings(id, type, color, opacity = 0.95) {
       m.rotation.y = side * Math.PI / 2;
       m.position.set(side*0.2, 0.2, 0);
       g.add(m);
-      // Ossos da asa
       const bone = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 1.2, 6), new THREE.MeshStandardMaterial({ color: darken(color, 0.5) }));
       bone.rotation.z = side * 1.2; bone.position.set(side*0.4, 0.4, 0);
       g.add(bone);
     }
   } else if (type === 'mecha') {
-    // Asas Mech / Cyber
     const plateGeo = new THREE.BoxGeometry(0.8, 0.08, 0.4);
     const neonMat = new THREE.MeshStandardMaterial({ color: 0x00ffcc, emissive: 0x00aa88, emissiveIntensity: 2 });
     for (let side of [-1, 1]) {
@@ -1320,7 +1321,6 @@ function createWings(id, type, color, opacity = 0.95) {
       g.add(p1, p2, glow);
     }
   } else {
-    // Fallback (CircleGeometry)
     const geo = new THREE.CircleGeometry(0.7, 16, 0, Math.PI);
     for (let side of [-1, 1]) {
       const m = new THREE.Mesh(geo, mat);
