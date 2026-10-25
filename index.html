@@ -143,15 +143,15 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     transform: translateX(100%); transition: transform 0.3s ease-out;
 }
 .shop-right-panel.open { transform: translateX(0); }
-.shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; margin-top: 40px; }
+.shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; margin-top: 40px; flex-shrink: 0; }
 .shop-header h2 { margin: 0; color: #fff; font-size: 24px; }
 .shop-balance { background: var(--panel); padding: 8px 16px; border-radius: 99px; font-size: 14px; font-weight: 900; color: var(--gold); border: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
 .shop-balance.pump { color: var(--pumpkin); border-color: rgba(255,154,60,0.4); }
-.tabs { display: flex; gap: 8px; justify-content: center; padding-bottom: 6px; margin-bottom: 10px; }
+.tabs { display: flex; gap: 8px; justify-content: center; padding-bottom: 6px; margin-bottom: 10px; flex-shrink: 0; }
 .tab { flex: 1; max-width: 100px; padding: 12px 6px; border-radius: 12px; font-size: 11px; font-weight: 900; background: rgba(255,255,255,0.05); color: var(--sub); border: 1px solid var(--border); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: .2s; }
 .tab.active { background: rgba(0,243,255,0.15); color: var(--acc); border-color: var(--acc); }
 .tab i { font-size: 20px; }
-.items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 12px; flex: 1; overflow-y: auto; padding: 4px; align-content: start; }
+.items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 12px; flex: 1; overflow-y: auto; padding: 4px 4px 20px 4px; align-content: start; }
 .item-card { background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; position: relative; transition: .2s; }
 .item-card:active { transform: scale(0.95); }
 .item-card.eq { border-color: var(--green); background: rgba(57,255,20,0.1); }
@@ -246,21 +246,25 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .menu-grid .btn { height: 48px; padding: 8px 10px; font-size: 11px; }
     .btn.pri { margin-bottom: 2px; height: 48px; font-size: 14px; }
-    .shop-left-panel { width: 35%; padding: 10px; }
-    .shop-right-panel { width: 65%; padding: 10px; }
-    .shop-header { margin-top: 10px; margin-bottom: 5px; }
-    .shop-header h2 { font-size: 18px; }
-    .shop-balance { padding: 5px 10px; font-size: 12px; }
-    .items-grid { grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 8px; }
-    .item-card { padding: 8px 4px; }
-    .item-card .icon { font-size: 24px; height: 30px; }
-    .item-card .name { font-size: 10px; }
-    .item-card .color-dot { width: 26px; height: 26px; }
-    .tab { padding: 6px 4px; font-size: 10px; }
-    .tab i { font-size: 16px; }
-    .item-info-ui { padding: 10px; gap: 8px; }
-    .item-info-ui h3 { font-size: 16px; }
-    .item-info-ui .info-actions .btn { padding: 8px; font-size: 14px; }
+    
+    .shop-left-panel { width: 40%; padding: 10px; }
+    .shop-right-panel { width: 60%; padding: 10px; }
+    .shop-header { margin-top: 5px; margin-bottom: 5px; }
+    .shop-header h2 { font-size: 16px; }
+    .shop-balance { padding: 4px 8px; font-size: 10px; }
+    .back-btn { width: 36px; height: 36px; font-size: 18px; top: 10px; right: 10px !important; }
+    .items-grid { grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 8px; padding-bottom: 10px; }
+    .item-card { padding: 6px 4px; }
+    .item-card .icon { font-size: 20px; height: 24px; }
+    .item-card .name { font-size: 9px; }
+    .item-card .color-dot { width: 22px; height: 22px; }
+    .tab { padding: 6px 4px; font-size: 9px; }
+    .tab i { font-size: 14px; }
+    
+    .item-info-ui { padding: 8px; gap: 6px; }
+    .item-info-ui h3 { font-size: 14px; }
+    .item-info-ui .info-price { font-size: 12px; }
+    .item-info-ui .info-actions .btn { padding: 6px; font-size: 12px; }
 }
 </style>
 </head>
@@ -351,10 +355,10 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 <div class="overlay hidden" id="customizeScreen">
     <div class="shop-left-panel">
         <div class="item-info-ui" id="itemInfoUI">
-            <h3 id="infoName">Item Name</h3>
-            <div class="info-price" id="infoPrice"><i class="ph ph-coin"></i> <span id="infoPriceVal">0</span></div>
+            <h3 class="info-name">Item Name</h3>
+            <div class="info-price" id="infoPrice"><i class="ph ph-coin"></i> <span class="info-price-val">0</span></div>
             <div class="info-actions">
-                <button class="btn pri" id="infoActionBtn">EQUIP</button>
+                <button class="btn pri info-action-btn">EQUIP</button>
             </div>
         </div>
     </div>
@@ -376,10 +380,10 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 <div class="overlay hidden" id="shopScreen">
     <div class="shop-left-panel">
         <div class="item-info-ui" id="itemInfoUI">
-            <h3 id="infoName">Item Name</h3>
-            <div class="info-price" id="infoPrice"><i class="ph ph-coin"></i> <span id="infoPriceVal">0</span></div>
+            <h3 class="info-name">Item Name</h3>
+            <div class="info-price" id="infoPrice"><i class="ph ph-coin"></i> <span class="info-price-val">0</span></div>
             <div class="info-actions">
-                <button class="btn pri" id="infoActionBtn">BUY</button>
+                <button class="btn pri info-action-btn">BUY</button>
             </div>
         </div>
     </div>
@@ -402,10 +406,10 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 <div class="overlay hidden" id="halloweenScreen">
     <div class="shop-left-panel">
         <div class="item-info-ui" id="itemInfoUI">
-            <h3 id="infoName">Item Name</h3>
-            <div class="info-price pump" id="infoPrice"><i class="ph ph-pumpkin"></i> <span id="infoPriceVal">0</span></div>
+            <h3 class="info-name">Item Name</h3>
+            <div class="info-price pump" id="infoPrice"><i class="ph ph-pumpkin"></i> <span class="info-price-val">0</span></div>
             <div class="info-actions">
-                <button class="btn pri" id="infoActionBtn">BUY</button>
+                <button class="btn pri info-action-btn">BUY</button>
             </div>
         </div>
     </div>
@@ -1089,18 +1093,36 @@ scene.fog = new THREE.Fog(0x0a1e33, 60, 160);
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 300);
 
 function updateCameraLayout() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    if (window.innerHeight > window.innerWidth) {
-        camera.fov = 65; 
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    camera.aspect = w / h;
+
+    if (gameState.mode === 'showcase' || gameState.mode === 'halloween') {
+        if (h > w) {
+            // Portrait
+            camera.fov = 65;
+            camera.setViewOffset(w, h, 0, 0, w * 0.5, h);
+        } else {
+            // Landscape
+            if (w > 800) {
+                // Desktop
+                camera.fov = 60;
+                camera.setViewOffset(w, h, 0, 0, w * 0.45, h);
+            } else {
+                // Mobile Landscape
+                camera.fov = 75;
+                camera.setViewOffset(w, h, 0, 0, w * 0.4, h);
+            }
+        }
     } else {
-        if (window.innerWidth > 800) { camera.fov = 60; } 
-        else { camera.fov = 75; }
+        camera.clearViewOffset();
+        if (h > w) camera.fov = 65;
+        else camera.fov = 60;
     }
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(w, h);
 }
 window.addEventListener('resize', updateCameraLayout);
-updateCameraLayout();
 
 scene.add(new THREE.HemisphereLight(0xb8ddff, 0x0a1e33, 1.3));
 const sunLight = new THREE.DirectionalLight(0xfff0d0, 1.5);
@@ -2050,6 +2072,7 @@ window.loadStage = (worldIdx, stageIdx) => {
   goal.add(new THREE.PointLight(0xffcc00, 3, 15));
   document.getElementById('lvl-title').textContent = `${world.name.toUpperCase()} - STAGE ${stageIdx + 1}`;
   updateHUD();
+  updateCameraLayout();
 };
 
 function addDecorations(theme, platform, list) {
@@ -2388,6 +2411,7 @@ function die() {
   document.getElementById('goCombo').textContent = gameState.combo;
   document.getElementById('goLevel').textContent = save.level;
   window.showScreen('gameOverScreen');
+  updateCameraLayout();
 }
 window.retryStage = () => window.loadStage(gameState.worldIdx, gameState.stageIdx);
 
@@ -2435,6 +2459,7 @@ function winLevel() {
   document.getElementById('winMessage').textContent = t.winMessages[Math.floor(Math.random() * t.winMessages.length)];
   document.getElementById('winEmoji').textContent = emojis[Math.floor(Math.random() * emojis.length)];
   window.showScreen('winScreen');
+  updateCameraLayout();
 }
 window.nextStage = () => { const n = gameState.stageIdx + 1; if (n >= STAGES_PER_WORLD) window.openWorlds(); else window.loadStage(gameState.worldIdx, n); };
 
@@ -2484,11 +2509,16 @@ window.nextTutorialStep = () => {
 window.showScreen = (id) => {
   document.querySelectorAll('.overlay').forEach(o => o.classList.add('hidden'));
   if (id) document.getElementById(id).classList.remove('hidden');
+  updateCameraLayout();
 };
 
 window.clearPreview = () => {
     currentPreview = null;
-    document.getElementById('itemInfoUI').classList.remove('show');
+    const activeScreen = document.querySelector('.overlay:not(.hidden)');
+    if (activeScreen) {
+        const ui = activeScreen.querySelector('.item-info-ui');
+        if (ui) ui.classList.remove('show');
+    }
     updatePufferVisuals(save);
     document.querySelectorAll('.item-card').forEach(c => c.classList.remove('selected'));
 };
@@ -2661,29 +2691,34 @@ window.selectItem = (it, tab, mode, isOwned) => {
   const previewData = { ...save, [tab]: it.id };
   updatePufferVisuals(previewData);
 
+  const activeScreen = document.querySelector('.overlay:not(.hidden)');
+  if (!activeScreen) return;
+  
+  const ui = activeScreen.querySelector('.item-info-ui');
+  const infoName = activeScreen.querySelector('.info-name');
+  const priceEl = activeScreen.querySelector('.info-price');
+  const priceVal = activeScreen.querySelector('.info-price-val');
+  const actionBtn = activeScreen.querySelector('.info-action-btn');
+  
   const t = TRANSLATIONS[save.lang] || TRANSLATIONS.en;
   const currency = mode === 'halloween' ? t.pumpkins : t.coins;
 
-  const ui = document.getElementById('itemInfoUI');
-  document.getElementById('infoName').textContent = it.name;
-  
-  const priceEl = document.getElementById('infoPrice');
-  const priceVal = document.getElementById('infoPriceVal');
+  infoName.textContent = it.name;
   
   if (isOwned) {
     priceEl.style.display = 'none';
-    document.getElementById('infoActionBtn').textContent = save.lang === 'pt' ? 'EQUIPAR' : 'EQUIP';
-    document.getElementById('infoActionBtn').className = 'btn pri';
+    actionBtn.textContent = save.lang === 'pt' ? 'EQUIPAR' : 'EQUIP';
+    actionBtn.className = 'btn pri info-action-btn';
   } else {
     priceEl.style.display = 'flex';
     priceVal.textContent = it.cost;
-    document.getElementById('infoActionBtn').textContent = save.lang === 'pt' ? 'COMPRAR' : 'BUY';
-    document.getElementById('infoActionBtn').className = 'btn gold';
+    actionBtn.textContent = save.lang === 'pt' ? 'COMPRAR' : 'BUY';
+    actionBtn.className = 'btn gold info-action-btn';
   }
   
   ui.classList.add('show');
 
-  document.getElementById('infoActionBtn').onclick = () => {
+  actionBtn.onclick = () => {
     if (isOwned) {
       save[tab] = it.id;
       persistSave();
@@ -2796,7 +2831,13 @@ window.resetSave = () => {
 };
 
 const UPDATES = [
-  { version:'6.1.0', name:'Shop UI & Preview Update', best: true, changes: [
+  { version:'6.1.1', name:'UI Bugfix & Mobile Fix', best: true, changes: [
+    '🛠️ Fixed a bug where the item name and price were showing as default text in the shop.',
+    '📱 Improved mobile landscape layout (Panels no longer overlap).',
+    '📷 3D Camera now centers the Pufferfish perfectly on the left side of the screen on mobile.',
+    '✨ General UI polish and padding adjustments.'
+  ]},
+  { version:'6.1.0', name:'Shop UI & Preview Update', best: false, changes: [
     '🛍️ Completely redesigned Shop and Inventory UI (Items on the right, Puffer on the left)',
     '🔍 Real-time 3D Preview system (check out items before buying/equipping)',
     '📥 New animated sliding UI from the bottom for item details',
@@ -3030,6 +3071,7 @@ window.addEventListener('load', () => {
         window.equipPuffer();
         window.updateHUD();
         window.goMenu();
+        updateCameraLayout();
         if (window._isNewDevice) {
           setTimeout(() => showToast(`🆔 Seu ID: ${DEVICE_ID}`), 1500);
         }
@@ -3040,4 +3082,4 @@ window.addEventListener('load', () => {
 });
 </script>
 </body>
-      </html>
+       </html>
