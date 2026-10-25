@@ -557,6 +557,16 @@ const STAGES_PER_WORLD = 15;
 
 if (IS_MOBILE) document.body.classList.add('is-mobile');
 
+// MOVIDO PARA O TOPO PARA EVITAR ERROS DE REFERÊNCIA NA CÂMERA
+let gameState = { mode: 'menu', worldIdx: 0, stageIdx: 0, coinsCollected: 0, pumpkinsCollected: 0, totalCoins: 0, totalPumpkins: 0, combo: 0, comboTimer: 0, xpEarned: 0, tutorialActive: false, tutorialStep: 0, _tutorialReplay: false };
+const player = { pos: new THREE.Vector3(), vel: new THREE.Vector3(), inflation: 0, airTime: 0, inWater: true, flapCd: 0 };
+const input = { x: 0, z: 0, jump: false, dive: false };
+const keys = new Set();
+let currentLevel = null;
+let levelObjects = [];
+let collectibles = [];
+let currentPreview = null;
+
 function generateDeviceId() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let id = 'PF-';
@@ -1784,8 +1794,6 @@ window.equipPuffer = () => window.updatePufferVisuals(save);
 /* ═══════════════════════════════════════════════════════════════
    SHOWCASE SCENE & PREVIEW SYSTEM
    ═══════════════════════════════════════════════════════════════ */
-let currentPreview = null;
-
 function createShowcaseScene() {
   const group = new THREE.Group();
   const backdropMat = new THREE.ShaderMaterial({
@@ -1909,10 +1917,6 @@ scene.add(giantPumpkin);
 /* ═══════════════════════════════════════════════════════════════
    LEVEL GENERATION & DECORATIONS
    ═══════════════════════════════════════════════════════════════ */
-let currentLevel = null;
-let levelObjects = [];
-let collectibles = [];
-
 function generateLevel(worldIdx, stageIdx) {
   const seed = worldIdx * 100 + stageIdx;
   const rng = (i) => { const x = Math.sin(seed * 999 + i * 777) * 10000; return x - Math.floor(x); };
@@ -1935,11 +1939,6 @@ function generateLevel(worldIdx, stageIdx) {
   for (let i = 0; i < 3; i++) { const p = platforms[Math.floor(rng(i*100) * platforms.length)]; pumpkins.push({ x: p.x + 2, y: p.y + 1.5, z: p.z + 2 }); }
   return { platforms, coins, pumpkins, goal: { x: px, y: py + 2, z: pz } };
 }
-
-let gameState = { mode: 'menu', worldIdx: 0, stageIdx: 0, coinsCollected: 0, pumpkinsCollected: 0, totalCoins: 0, totalPumpkins: 0, combo: 0, comboTimer: 0, xpEarned: 0, tutorialActive: false, tutorialStep: 0, _tutorialReplay: false };
-const player = { pos: new THREE.Vector3(), vel: new THREE.Vector3(), inflation: 0, airTime: 0, inWater: true, flapCd: 0 };
-const input = { x: 0, z: 0, jump: false, dive: false };
-const keys = new Set();
 
 const joyBase = document.getElementById('joy-base');
 const joyKnob = document.getElementById('joy-knob');
@@ -2822,7 +2821,12 @@ window.resetSave = () => {
 };
 
 const UPDATES = [
-  { version:'6.1.2', name:'Mobile 3D Preview Fix', best: true, changes: [
+  { version:'6.1.3', name:'Critical Startup Fix', best: true, changes: [
+    '🚑 Fixed a critical error causing the game to freeze on the loading screen.',
+    '⚙️ Moved game state variables to the top of the script to prevent reference errors.',
+    '📱 Ensured camera layout updates work flawlessly on mobile landscape.'
+  ]},
+  { version:'6.1.2', name:'Mobile 3D Preview Fix', best: false, changes: [
     '📱 Fixed the 3D Pufferfish preview missing on mobile devices',
     '📷 Camera now dynamically shifts to the left panel instead of clipping the screen',
     '🛠️ Ensured `gameState` updates correctly before the camera recalculates'
@@ -3090,4 +3094,4 @@ window.addEventListener('load', () => {
 });
 </script>
 </body>
-           </html>
+         </html>
