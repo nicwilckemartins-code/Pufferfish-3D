@@ -29,7 +29,7 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 #fps{position:fixed;top:5px;right:10px;background:rgba(0,0,0,0.5);color:var(--green);font-size:10px;padding:3px 8px;border-radius:6px;z-index:100;font-family:monospace;}
 #hud{position:fixed;top:0;left:0;right:0;padding:env(safe-area-inset-top,15px) 15px 0;z-index:20;display:none;flex-direction:column;align-items:center;gap:10px;pointer-events:none;}
 .hud-top{display:flex;justify-content:space-between;width:100%;max-width:600px;align-items:flex-start;}
-.hud-stats{display:flex;gap:10px;}
+.hud-stats{display:flex;gap:10px;align-items:center;}
 .pill{background:var(--panel);backdrop-filter:blur(8px);padding:6px 16px;border-radius:99px;font-size:14px;font-weight:900;color:var(--gold);border:1px solid var(--border);display:flex;align-items:center;gap:8px;box-shadow:0 4px 10px rgba(0,0,0,0.5);}
 .pill.cyan{color:var(--acc);} .pill.pump{color:var(--pumpkin);}
 .air-container{width:100%;max-width:300px;height:20px;background:rgba(0,0,0,0.7);border:2px solid rgba(255,255,255,0.2);border-radius:12px;position:relative;overflow:hidden;box-shadow:inset 0 0 10px #000;margin-top:5px;}
@@ -125,9 +125,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .tut-dot.active{background:var(--acc);box-shadow:0 0 10px var(--acc);transform:scale(1.3);}
 .tut-dot.done{background:var(--green);}
 
-/* ═══════════════════════════════════════════════════════════════
-   SHOP / INVENTORY NEW UI
-   ═══════════════════════════════════════════════════════════════ */
 #customizeScreen, #shopScreen, #halloweenScreen {
     padding: 0; background: transparent; backdrop-filter: none;
     display: flex; flex-direction: row; justify-content: flex-start; align-items: stretch;
@@ -164,7 +161,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .item-card .eq-tag { position: absolute; inset: 0; background: rgba(57,255,20,0.85); color: #000; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; border-radius: 12px; opacity: 0; transition: .2s; }
 .item-card.eq .eq-tag { opacity: 1; }
 
-/* Sliding UI */
 .item-info-ui {
     background: var(--panel); border: 2px solid var(--acc); border-radius: 16px; padding: 16px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.8); pointer-events: auto; display: flex; flex-direction: column; gap: 12px;
@@ -177,7 +173,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .item-info-ui .info-actions { display: flex; justify-content: center; margin-top: 4px; }
 .item-info-ui .info-actions .btn { width: 100%; margin: 0; padding: 12px; font-size: 16px; }
 
-/* Modals */
 #modal-confirm { z-index: 9999; background: rgba(0,0,0,0.85); }
 .confirm-box { background: var(--panel); padding: 30px; border-radius: 24px; border: 2px solid var(--acc); max-width: 360px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.8); animation: pop 0.4s ease-out; }
 .confirm-box h3 { color: #fff; margin-bottom: 15px; font-size: 22px; }
@@ -188,7 +183,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 .confirm-box .btn-no { background: linear-gradient(135deg, var(--red), #880022); color: #fff; }
 .confirm-box button:active { transform: scale(0.95); }
 
-/* Other UIs */
 .custom-header { position: absolute; top: 0; left: 0; right: 0; padding: 25px; background: linear-gradient(180deg, rgba(3,8,16,0.95), transparent); display: flex; justify-content: center; align-items: center; z-index: 60; pointer-events: none; }
 .custom-header h2 { margin: 0; color: #fff; font-size: 24px; }
 .custom-footer { display: none; }
@@ -237,7 +231,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 #updList ul { padding-left: 20px; font-size: 13px; color: var(--sub); margin: 0; }
 #updList li { margin: 3px 0; }
 
-/* Mobile Landscape Adjustments */
 @media (max-height: 500px) and (orientation: landscape) {
     #mainMenu { padding: 10px 15px; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; }
     #mainMenu .menu-top { width: auto; flex: 1; min-width: 200px; margin-top: 10px;}
@@ -246,7 +239,6 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .menu-grid .btn { height: 48px; padding: 8px 10px; font-size: 11px; }
     .btn.pri { margin-bottom: 2px; height: 48px; font-size: 14px; }
-    
     .shop-left-panel { width: 40%; padding: 10px; }
     .shop-right-panel { width: 60%; padding: 10px; }
     .shop-header { margin-top: 5px; margin-bottom: 5px; }
@@ -260,12 +252,29 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
     .item-card .color-dot { width: 22px; height: 22px; }
     .tab { padding: 6px 4px; font-size: 9px; }
     .tab i { font-size: 14px; }
-    
     .item-info-ui { padding: 8px; gap: 6px; }
     .item-info-ui h3 { font-size: 14px; }
     .item-info-ui .info-price { font-size: 12px; }
     .item-info-ui .info-actions .btn { padding: 6px; font-size: 12px; }
 }
+
+.pause-btn {
+  width: 40px; height: 40px; border-radius: 12px; background: var(--panel);
+  border: 2px solid var(--acc); color: var(--acc); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; backdrop-filter: blur(8px); box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  font-size: 20px; padding: 0; pointer-events: auto; flex-shrink: 0; transition: .15s;
+  touch-action: manipulation; font-family: inherit;
+}
+.pause-btn:active { transform: scale(0.9); background: rgba(0,243,255,0.15); }
+#pauseScreen { background: radial-gradient(circle at center, rgba(0,243,255,0.15), rgba(3,8,16,0.92)); z-index: 1100; }
+.pause-card {
+  background: var(--panel); border: 2px solid var(--acc); border-radius: 24px; padding: 30px 26px;
+  max-width: 340px; width: 100%; box-shadow: 0 20px 60px rgba(0,243,255,0.3), 0 0 0 1px rgba(0,243,255,0.2);
+  animation: pop 0.4s ease-out; display: flex; flex-direction: column; gap: 12px; text-align: center;
+}
+.pause-title { font-family: 'Fredoka'; font-size: 34px; font-weight: 900; color: var(--acc); text-shadow: 0 0 20px rgba(0,243,255,0.6); margin-bottom: 8px; letter-spacing: 4px; }
+.pause-card .btn { width: 100%; margin: 0; }
+@media (max-width: 420px) { .pause-btn { width: 36px; height: 36px; font-size: 18px; } }
 </style>
 </head>
 <body>
@@ -286,10 +295,11 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 <div id="hud" style="display:none">
   <div class="hud-top">
     <div class="hud-stats">
+      <button class="pause-btn" onclick="window.togglePause()" aria-label="Pause"><i class="ph ph-pause"></i></button>
       <div class="pill"><i class="ph ph-coin"></i> <span id="hCoin">0</span></div>
-      <div class="pill cyan"><i class="ph ph-star"></i> Lv <span id="hLvl">1</span></div>
+      <div class="pill cyan"><i class="ph ph-star"></i> <span data-i18n="lvl">Lv</span> <span id="hLvl">1</span></div>
     </div>
-    <div class="pill pump" id="hudPumpkinPill" style="display:flex;"><i class="ph ph-pumpkin"></i> <span id="hPump">0</span></div>
+    <div class="pill pump" id="hudPumpkinPill" style="display:flex;"><span style="font-size:1.2em;line-height:1;margin-right:2px;">🎃</span> <span id="hPump">0</span></div>
   </div>
   <div id="lvl-title">WORLD 1 - STAGE 1</div>
   <div class="air-container">
@@ -307,30 +317,29 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
   <div class="menu-top">
     <div class="top-stats">
       <div class="top-stat"><i class="ph ph-coin"></i> <span id="mCoin">0</span></div>
-      <div class="top-stat"><i class="ph ph-star"></i> Lv <span id="mLvl">1</span></div>
-      <div class="top-stat pump"><i class="ph ph-pumpkin"></i> <span id="mPump">0</span></div>
+      <div class="top-stat"><i class="ph ph-star"></i> <span data-i18n="lvl">Lv</span> <span id="mLvl">1</span></div>
+      <div class="top-stat pump"><span style="font-size:1.2em;line-height:1;margin-right:2px;">🎃</span> <span id="mPump">0</span></div>
     </div>
     <h1>PUFFERFISH 3D</h1>
     <p style="letter-spacing:3px;color:var(--acc);font-weight:900;">ULTIMATE AURA</p>
   </div>
   <div class="menu-middle"></div>
-  
   <div class="menu-bottom">
-    <button class="btn pri" onclick="window.openWorlds()"><i class="ph ph-play"></i> PLAY NOW</button>
+    <button class="btn pri" onclick="window.openWorlds()"><i class="ph ph-play"></i> <span data-i18n="play">PLAY NOW</span></button>
     <div class="menu-grid">
-      <button class="btn" onclick="window.openUpgrades()"><i class="ph ph-rocket-launch"></i> UPGRADES</button>
-      <button class="btn" onclick="window.openCustomize()"><i class="ph ph-paint-brush"></i> INVENTORY</button>
-      <button class="btn" onclick="window.openShop()"><i class="ph ph-storefront"></i> SHOP</button>
-      <button class="btn" onclick="window.openSettings()"><i class="ph ph-gear"></i> SETTINGS</button>
-      <button class="btn" onclick="window.openUpdates()"><i class="ph ph-scroll"></i> UPDATES</button>
-      <button class="btn halloween" onclick="window.openHalloween()"><i class="ph ph-ghost"></i> HALLOWEEN</button>
+      <button class="btn" onclick="window.openUpgrades()"><i class="ph ph-rocket-launch"></i> <span data-i18n="upgrades">UPGRADES</span></button>
+      <button class="btn" onclick="window.openCustomize()"><i class="ph ph-paint-brush"></i> <span data-i18n="inventory">INVENTORY</span></button>
+      <button class="btn" onclick="window.openShop()"><i class="ph ph-storefront"></i> <span data-i18n="shop">SHOP</span></button>
+      <button class="btn" onclick="window.openSettings()"><i class="ph ph-gear"></i> <span data-i18n="settings">SETTINGS</span></button>
+      <button class="btn" onclick="window.openUpdates()"><i class="ph ph-scroll"></i> <span data-i18n="updates">UPDATES</span></button>
+      <button class="btn halloween" onclick="window.openHalloween()"><i class="ph ph-ghost"></i> <span data-i18n="halloween">HALLOWEEN</span></button>
     </div>
   </div>
 </div>
 
 <div class="overlay hidden" id="worldScreen">
   <button class="back-btn" onclick="window.goMenu()"><i class="ph ph-arrow-left"></i></button>
-  <h2>WORLDS</h2>
+  <h2 data-i18n="worlds">WORLDS</h2>
   <div class="worlds-list" id="worlds-list"></div>
 </div>
 
@@ -343,7 +352,7 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 <div class="overlay hidden" id="upgradeScreen">
   <button class="back-btn" onclick="window.goMenu()"><i class="ph ph-arrow-left"></i></button>
   <div class="custom-header">
-    <h2>UPGRADES</h2>
+    <h2 data-i18n="upgrades">UPGRADES</h2>
     <div class="shop-balance"><i class="ph ph-coin"></i> <span id="upgradeCoinBalance">0</span></div>
   </div>
   <div class="custom-footer" style="max-height:55vh; display:flex;">
@@ -351,65 +360,62 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
   </div>
 </div>
 
-<!-- INVENTORY -->
 <div class="overlay hidden" id="customizeScreen">
     <div class="shop-left-panel">
-        <div class="item-info-ui" id="itemInfoUI">
+        <div class="item-info-ui">
             <h3 class="info-name">Item Name</h3>
-            <div class="info-price" id="infoPrice"><i class="ph ph-coin"></i> <span class="info-price-val">0</span></div>
+            <div class="info-price"><i class="ph ph-coin"></i> <span class="info-price-val">0</span></div>
             <div class="info-actions">
-                <button class="btn pri info-action-btn">EQUIP</button>
+                <button class="btn pri info-action-btn" data-i18n="equip">EQUIP</button>
             </div>
         </div>
     </div>
     <div class="shop-right-panel open">
         <button class="back-btn" style="right:20px; left:auto;" onclick="window.goMenu()"><i class="ph ph-arrow-right"></i></button>
         <div class="shop-header">
-            <h2>INVENTORY</h2>
+            <h2 data-i18n="inventoryTitle">INVENTORY</h2>
         </div>
         <div class="tabs" id="tabs-custom">
-            <button class="tab active" data-t="skin" onclick="window.switchTab('custom','skin')"><i class="ph ph-fish"></i>SKINS</button>
-            <button class="tab" data-t="wing" onclick="window.switchTab('custom','wing')"><i class="ph ph-feather"></i>WINGS</button>
-            <button class="tab" data-t="hat" onclick="window.switchTab('custom','hat')"><i class="ph ph-crown"></i>HATS</button>
+            <button class="tab active" data-t="skin" onclick="window.switchTab('custom','skin')"><i class="ph ph-fish"></i><span data-i18n="skins">SKINS</span></button>
+            <button class="tab" data-t="wing" onclick="window.switchTab('custom','wing')"><i class="ph ph-feather"></i><span data-i18n="wings">WINGS</span></button>
+            <button class="tab" data-t="hat" onclick="window.switchTab('custom','hat')"><i class="ph ph-crown"></i><span data-i18n="hats">HATS</span></button>
         </div>
         <div class="items-grid" id="grid-custom"></div>
     </div>
 </div>
 
-<!-- SHOP -->
 <div class="overlay hidden" id="shopScreen">
     <div class="shop-left-panel">
-        <div class="item-info-ui" id="itemInfoUI">
+        <div class="item-info-ui">
             <h3 class="info-name">Item Name</h3>
-            <div class="info-price" id="infoPrice"><i class="ph ph-coin"></i> <span class="info-price-val">0</span></div>
+            <div class="info-price"><i class="ph ph-coin"></i> <span class="info-price-val">0</span></div>
             <div class="info-actions">
-                <button class="btn pri info-action-btn">BUY</button>
+                <button class="btn pri info-action-btn" data-i18n="buy">BUY</button>
             </div>
         </div>
     </div>
     <div class="shop-right-panel open">
         <button class="back-btn" style="right:20px; left:auto;" onclick="window.goMenu()"><i class="ph ph-arrow-right"></i></button>
         <div class="shop-header">
-            <h2>SHOP</h2>
+            <h2 data-i18n="shopTitle">SHOP</h2>
             <div class="shop-balance"><i class="ph ph-coin"></i> <span id="shopCoinBalance">0</span></div>
         </div>
         <div class="tabs" id="tabs-shop">
-            <button class="tab active" data-t="skin" onclick="window.switchTab('shop','skin')"><i class="ph ph-fish"></i>SKINS</button>
-            <button class="tab" data-t="wing" onclick="window.switchTab('shop','wing')"><i class="ph ph-feather"></i>WINGS</button>
-            <button class="tab" data-t="hat" onclick="window.switchTab('shop','hat')"><i class="ph ph-crown"></i>HATS</button>
+            <button class="tab active" data-t="skin" onclick="window.switchTab('shop','skin')"><i class="ph ph-fish"></i><span data-i18n="skins">SKINS</span></button>
+            <button class="tab" data-t="wing" onclick="window.switchTab('shop','wing')"><i class="ph ph-feather"></i><span data-i18n="wings">WINGS</span></button>
+            <button class="tab" data-t="hat" onclick="window.switchTab('shop','hat')"><i class="ph ph-crown"></i><span data-i18n="hats">HATS</span></button>
         </div>
         <div class="items-grid" id="grid-shop"></div>
     </div>
 </div>
 
-<!-- HALLOWEEN SHOP -->
 <div class="overlay hidden" id="halloweenScreen">
     <div class="shop-left-panel">
-        <div class="item-info-ui" id="itemInfoUI">
+        <div class="item-info-ui">
             <h3 class="info-name">Item Name</h3>
-            <div class="info-price pump" id="infoPrice"><i class="ph ph-pumpkin"></i> <span class="info-price-val">0</span></div>
+            <div class="info-price pump"><span style="font-size:1.2em;line-height:1;margin-right:2px;">🎃</span> <span class="info-price-val">0</span></div>
             <div class="info-actions">
-                <button class="btn pri info-action-btn">BUY</button>
+                <button class="btn pri info-action-btn" data-i18n="buy">BUY</button>
             </div>
         </div>
     </div>
@@ -417,12 +423,12 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
         <button class="back-btn" style="right:20px; left:auto;" onclick="window.goMenu()"><i class="ph ph-arrow-right"></i></button>
         <div class="shop-header">
             <h2>🎃 HALLOWEEN</h2>
-            <div class="shop-balance pump"><i class="ph ph-pumpkin"></i> <span id="shopPumpkinCount">0</span></div>
+            <div class="shop-balance pump"><span style="font-size:1.2em;line-height:1;margin-right:2px;">🎃</span> <span id="shopPumpkinCount">0</span></div>
         </div>
         <div class="tabs" id="tabs-halloween">
-            <button class="tab active" data-t="skin" onclick="window.switchTab('halloween','skin')"><i class="ph ph-fish"></i>SKINS</button>
-            <button class="tab" data-t="wing" onclick="window.switchTab('halloween','wing')"><i class="ph ph-feather"></i>WINGS</button>
-            <button class="tab" data-t="hat" onclick="window.switchTab('halloween','hat')"><i class="ph ph-crown"></i>HATS</button>
+            <button class="tab active" data-t="skin" onclick="window.switchTab('halloween','skin')"><i class="ph ph-fish"></i><span data-i18n="skins">SKINS</span></button>
+            <button class="tab" data-t="wing" onclick="window.switchTab('halloween','wing')"><i class="ph ph-feather"></i><span data-i18n="wings">WINGS</span></button>
+            <button class="tab" data-t="hat" onclick="window.switchTab('halloween','hat')"><i class="ph ph-crown"></i><span data-i18n="hats">HATS</span></button>
         </div>
         <div class="items-grid" id="grid-halloween"></div>
     </div>
@@ -430,23 +436,23 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 
 <div class="overlay hidden" id="settingsScreen">
   <button class="back-btn" onclick="window.goMenu()"><i class="ph ph-arrow-left"></i></button>
-  <h2>SETTINGS</h2>
+  <h2 data-i18n="settingsTitle">SETTINGS</h2>
   <div class="settings-box">
-    <div class="setting-section">DEVICE</div>
+    <div class="setting-section" data-i18n="device">DEVICE</div>
     <div class="setting-row" style="flex-direction:column;align-items:stretch;">
-      <span style="font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Your Device ID (tap to copy)</span>
+      <span style="font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;" data-i18n="deviceIdHint">Your Device ID (tap to copy)</span>
       <div class="device-id" id="deviceIdDisplay" onclick="window.copyDeviceId()">---</div>
     </div>
-    <div class="setting-section">APPEARANCE</div>
+    <div class="setting-section" data-i18n="appearance">APPEARANCE</div>
     <div class="setting-row">
-      <span>Language</span>
+      <span data-i18n="language">Language</span>
       <select id="langSelect" onchange="window.changeLanguage(this.value)">
         <option value="en">English (US)</option>
         <option value="pt">Português (BR)</option>
       </select>
     </div>
     <div class="setting-row">
-      <span>Theme Color</span>
+      <span data-i18n="themeColor">Theme Color</span>
       <div class="theme-picker">
         <div class="theme-dot" data-t="cyan" style="background:#00f3ff" onclick="window.setTheme('cyan')"></div>
         <div class="theme-dot" data-t="purple" style="background:#b000ff" onclick="window.setTheme('purple')"></div>
@@ -456,42 +462,42 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
         <div class="theme-dot" data-t="pink" style="background:#ff69b4" onclick="window.setTheme('pink')"></div>
       </div>
     </div>
-    <div class="setting-section">AUDIO</div>
-    <div class="setting-row"><span>🎵 Music</span><input type="range" id="musicVol" min="0" max="1" step="0.1" oninput="window.setVolume('music',this.value)"></div>
-    <div class="setting-row"><span>🔊 SFX</span><input type="range" id="sfxVol" min="0" max="1" step="0.1" oninput="window.setVolume('sfx',this.value)"></div>
-    <div class="setting-section">CONTROLS</div>
-    <div class="setting-row pc-only" style="display:none;"><span>Jump Key</span><button onclick="window.bindKey('jump')" id="key-jump-btn">Space</button></div>
-    <div class="setting-row pc-only" style="display:none;"><span>Dive Key</span><button onclick="window.bindKey('dive')" id="key-dive-btn">Shift L</button></div>
-    <div class="setting-section">🎟️ REDEEM CODE</div>
+    <div class="setting-section" data-i18n="audio">AUDIO</div>
+    <div class="setting-row"><span data-i18n="music">🎵 Music</span><input type="range" id="musicVol" min="0" max="1" step="0.1" oninput="window.setVolume('music',this.value)"></div>
+    <div class="setting-row"><span data-i18n="sfx">🔊 SFX</span><input type="range" id="sfxVol" min="0" max="1" step="0.1" oninput="window.setVolume('sfx',this.value)"></div>
+    <div class="setting-section" data-i18n="controls">CONTROLS</div>
+    <div class="setting-row pc-only" style="display:none;"><span data-i18n="jumpKey">Jump Key</span><button onclick="window.bindKey('jump')" id="key-jump-btn">Space</button></div>
+    <div class="setting-row pc-only" style="display:none;"><span data-i18n="diveKey">Dive Key</span><button onclick="window.bindKey('dive')" id="key-dive-btn">Shift L</button></div>
+    <div class="setting-section" data-i18n="redeemCode">🎟️ REDEEM CODE</div>
     <div class="setting-row">
       <input type="text" id="codeInput" placeholder="Enter code..." maxlength="20" style="text-transform:uppercase;">
-      <button onclick="window.redeemCode()" style="background:rgba(255,204,0,0.2);border-color:var(--gold);color:var(--gold);">REDEEM</button>
+      <button onclick="window.redeemCode()" style="background:rgba(255,204,0,0.2);border-color:var(--gold);color:var(--gold);" data-i18n="redeem">REDEEM</button>
     </div>
-    <div class="setting-section">STATS</div>
+    <div class="setting-section" data-i18n="stats">STATS</div>
     <div class="stats-grid">
-      <div class="stat-item"><div class="stat-label">Coins Total</div><div class="stat-value" id="statCoins">0</div></div>
-      <div class="stat-item"><div class="stat-label">Best Combo</div><div class="stat-value" id="statCombo">0</div></div>
-      <div class="stat-item"><div class="stat-label">Deaths</div><div class="stat-value" id="statDeaths">0</div></div>
-      <div class="stat-item"><div class="stat-label">Plays</div><div class="stat-value" id="statPlays">0</div></div>
+      <div class="stat-item"><div class="stat-label" data-i18n="coinsTotal">Coins Total</div><div class="stat-value" id="statCoins">0</div></div>
+      <div class="stat-item"><div class="stat-label" data-i18n="bestCombo">Best Combo</div><div class="stat-value" id="statCombo">0</div></div>
+      <div class="stat-item"><div class="stat-label" data-i18n="deaths">Deaths</div><div class="stat-value" id="statDeaths">0</div></div>
+      <div class="stat-item"><div class="stat-label" data-i18n="plays">Plays</div><div class="stat-value" id="statPlays">0</div></div>
     </div>
-    <div class="setting-section">BACKUP</div>
-    <div class="setting-row"><span>Export Save</span><button onclick="window.exportSave()" style="background:rgba(57,255,20,0.2);border-color:var(--green);">EXPORT</button></div>
-    <div class="setting-row"><span>Import Save</span><button onclick="window.importSave()" style="background:rgba(255,204,0,0.2);border-color:var(--gold);">IMPORT</button></div>
-    <div class="setting-section">DANGER ZONE</div>
-    <div class="setting-row"><span>Reset Save</span><button style="background:rgba(255,51,102,0.2);border-color:var(--red);" onclick="window.resetSave()">RESET</button></div>
-    <div class="setting-row"><span>Replay Tutorial</span><button onclick="window.startTutorial(true)">WATCH</button></div>
+    <div class="setting-section" data-i18n="backup">BACKUP</div>
+    <div class="setting-row"><span data-i18n="exportSave">Export Save</span><button onclick="window.exportSave()" style="background:rgba(57,255,20,0.2);border-color:var(--green);">EXPORT</button></div>
+    <div class="setting-row"><span data-i18n="importSave">Import Save</span><button onclick="window.importSave()" style="background:rgba(255,204,0,0.2);border-color:var(--gold);">IMPORT</button></div>
+    <div class="setting-section" data-i18n="dangerZone">DANGER ZONE</div>
+    <div class="setting-row"><span data-i18n="resetSave">Reset Save</span><button style="background:rgba(255,51,102,0.2);border-color:var(--red);" onclick="window.resetSave()">RESET</button></div>
+    <div class="setting-row"><span data-i18n="replayTutorial">Replay Tutorial</span><button onclick="window.startTutorial(true)" data-i18n="watch">WATCH</button></div>
   </div>
 </div>
 
 <div class="overlay hidden" id="updatesScreen">
   <button class="back-btn" onclick="window.goMenu()"><i class="ph ph-arrow-left"></i></button>
-  <h2>UPDATE LOG</h2>
+  <h2 data-i18n="updateLog">UPDATE LOG</h2>
   <div style="width:100%;max-width:440px;max-height:65vh;overflow-y:auto;padding-right:4px;" id="updList"></div>
 </div>
 
 <div class="overlay hidden" id="winScreen">
   <div class="win-card">
-    <div class="win-title">STAGE CLEAR!</div>
+    <div class="win-title" data-i18n="stageClear">STAGE CLEAR!</div>
     <div class="win-subtitle" id="winSubtitle">Tropical Reef - Stage 1</div>
     <div class="win-stars" id="winStars"></div>
     <div class="motivation">
@@ -499,28 +505,28 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
       <div class="motivation-text" id="winMessage">YOU ROCK!!!</div>
     </div>
     <div class="win-rewards">
-      <div class="win-reward"><span class="reward-label">Coins Collected</span><span class="reward-value"><i class="ph ph-coin"></i> <span id="winCoins">0</span></span></div>
-      <div class="win-reward pumpkin" id="winPumpkinRow" style="display:none;"><span class="reward-label">Pumpkins</span><span class="reward-value"><i class="ph ph-pumpkin"></i> <span id="winPumpkins">0</span></span></div>
-      <div class="win-reward xp"><span class="reward-label">XP Gained</span><span class="reward-value"><i class="ph ph-lightning"></i> +<span id="winXP">0</span></span></div>
-      <div class="win-reward"><span class="reward-label">Bonus Coins</span><span class="reward-value"><i class="ph ph-coin"></i> +<span id="winBonus">0</span></span></div>
+      <div class="win-reward"><span class="reward-label" data-i18n="coinsCollected">Coins Collected</span><span class="reward-value"><i class="ph ph-coin"></i> <span id="winCoins">0</span></span></div>
+      <div class="win-reward pumpkin" id="winPumpkinRow" style="display:none;"><span class="reward-label" data-i18n="pumpkins">Pumpkins</span><span class="reward-value"><span style="font-size:1.2em;line-height:1;margin-right:2px;">🎃</span> <span id="winPumpkins">0</span></span></div>
+      <div class="win-reward xp"><span class="reward-label" data-i18n="xpGained">XP Gained</span><span class="reward-value"><i class="ph ph-lightning"></i> +<span id="winXP">0</span></span></div>
+      <div class="win-reward"><span class="reward-label" data-i18n="bonusCoins">Bonus Coins</span><span class="reward-value"><i class="ph ph-coin"></i> +<span id="winBonus">0</span></span></div>
     </div>
-    <button class="btn pri" onclick="window.nextStage()"><i class="ph ph-arrow-right"></i> NEXT STAGE</button>
-    <button class="btn ghost" onclick="window.openWorlds()" style="margin-top:8px;">WORLD MAP</button>
+    <button class="btn pri" onclick="window.nextStage()"><i class="ph ph-arrow-right"></i> <span data-i18n="nextStage">NEXT STAGE</span></button>
+    <button class="btn ghost" onclick="window.openWorlds()" style="margin-top:8px;" data-i18n="worldMap">WORLD MAP</button>
   </div>
 </div>
 
 <div class="overlay hidden" id="gameOverScreen">
   <div class="go-card">
     <div class="go-emoji">💀</div>
-    <div class="go-title">GAME OVER</div>
-    <div class="go-reason" id="goReason">You ran out of air!</div>
+    <div class="go-title" data-i18n="gameOver">GAME OVER</div>
+    <div class="go-reason" id="goReason" data-i18n="ranOutOfAir">You ran out of air!</div>
     <div class="go-stats">
-      <div class="go-stat">Coins <span id="goCoins">0</span></div>
-      <div class="go-stat">Combo <span id="goCombo">0</span></div>
-      <div class="go-stat">Level <span id="goLevel">1</span></div>
+      <div class="go-stat"><span data-i18n="coins">Coins</span> <span id="goCoins">0</span></div>
+      <div class="go-stat"><span data-i18n="combo">Combo</span> <span id="goCombo">0</span></div>
+      <div class="go-stat"><span data-i18n="level">Level</span> <span id="goLevel">1</span></div>
     </div>
-    <button class="btn red" onclick="window.retryStage()" style="margin-top:20px;"><i class="ph ph-arrow-clockwise"></i> TRY AGAIN</button>
-    <button class="btn ghost" onclick="window.openWorlds()" style="margin-top:8px;">WORLD MAP</button>
+    <button class="btn red" onclick="window.retryStage()" style="margin-top:20px;"><i class="ph ph-arrow-clockwise"></i> <span data-i18n="tryAgain">TRY AGAIN</span></button>
+    <button class="btn ghost" onclick="window.openWorlds()" style="margin-top:8px;" data-i18n="worldMap">WORLD MAP</button>
   </div>
 </div>
 
@@ -534,7 +540,15 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
   </div>
 </div>
 
-<!-- CONFIRMATION MODAL -->
+<div class="overlay hidden" id="pauseScreen">
+  <div class="pause-card">
+    <div class="pause-title" data-i18n="paused">PAUSED</div>
+    <button class="btn pri" onclick="window.resumeGame()"><i class="ph ph-play"></i> <span data-i18n="resume">RESUME</span></button>
+    <button class="btn gold" onclick="window.resetStage()"><i class="ph ph-arrow-clockwise"></i> <span data-i18n="reset">RESET</span></button>
+    <button class="btn red" onclick="window.exitGame()"><i class="ph ph-house"></i> <span data-i18n="exit">EXIT</span></button>
+  </div>
+</div>
+
 <div class="overlay hidden" id="modal-confirm">
   <div class="confirm-box">
     <h3 id="confirmTitle">Are you sure?</h3>
@@ -549,15 +563,11 @@ h1,h2,h3,h4 { font-family:'Fredoka',sans-serif; font-weight:600; letter-spacing:
 <div id="toast">Message</div>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   DEVICE ID + MULTI-KEY SAVE SYSTEM
-   ═══════════════════════════════════════════════════════════════ */
 const IS_MOBILE = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 const STAGES_PER_WORLD = 15;
 
 if (IS_MOBILE) document.body.classList.add('is-mobile');
 
-// MOVIDO PARA O TOPO PARA EVITAR ERROS DE REFERÊNCIA NA CÂMERA
 let gameState = { mode: 'menu', worldIdx: 0, stageIdx: 0, coinsCollected: 0, pumpkinsCollected: 0, totalCoins: 0, totalPumpkins: 0, combo: 0, comboTimer: 0, xpEarned: 0, tutorialActive: false, tutorialStep: 0, _tutorialReplay: false };
 const player = { pos: new THREE.Vector3(), vel: new THREE.Vector3(), inflation: 0, airTime: 0, inWater: true, flapCd: 0 };
 const input = { x: 0, z: 0, jump: false, dive: false };
@@ -566,6 +576,15 @@ let currentLevel = null;
 let levelObjects = [];
 let collectibles = [];
 let currentPreview = null;
+
+const I18N = {
+  en: {
+    play: "PLAY NOW", upgrades: "UPGRADES", inventory: "INVENTORY", shop: "SHOP", settings: "SETTINGS", updates: "UPDATES", halloween: "HALLOWEEN", worlds: "WORLDS", shopTitle: "SHOP", inventoryTitle: "INVENTORY", skins: "SKINS", wings: "WINGS", hats: "HATS", equip: "EQUIP", buy: "BUY", equipped: "EQUIPPED", lvl: "Lv", air: "AIR", stage: "STAGE", world: "WORLD", paused: "PAUSED", resume: "RESUME", reset: "RESET", exit: "EXIT", stageClear: "STAGE CLEAR!", gameOver: "GAME OVER", nextStage: "NEXT STAGE", worldMap: "WORLD MAP", tryAgain: "TRY AGAIN", coins: "Coins", pumpkins: "Pumpkins", xp: "XP", bonus: "Bonus", settingsTitle: "SETTINGS", device: "DEVICE", deviceIdHint: "Your Device ID (tap to copy)", appearance: "APPEARANCE", language: "Language", themeColor: "Theme Color", audio: "AUDIO", music: "🎵 Music", sfx: "🔊 SFX", controls: "CONTROLS", jumpKey: "Jump Key", diveKey: "Dive Key", redeemCode: "🎟️ REDEEM CODE", redeem: "REDEEM", stats: "STATS", coinsTotal: "Coins Total", bestCombo: "Best Combo", deaths: "Deaths", plays: "Plays", backup: "BACKUP", exportSave: "Export Save", importSave: "Import Save", dangerZone: "DANGER ZONE", resetSave: "Reset Save", replayTutorial: "Replay Tutorial", watch: "WATCH", locked: "Locked", updateLog: "UPDATE LOG", noMoney: "Not enough {currency}!", bought: "You bought {item}!", confirmBuy: "Are you sure you want to buy this???", yes: "YES", no: "NO", coinsCollected: "Coins Collected", xpGained: "XP Gained", bonusCoins: "Bonus Coins", ranOutOfAir: "You ran out of air!", combo: "Combo", level: "Level"
+  },
+  pt: {
+    play: "JOGAR AGORA", upgrades: "MELHORIAS", inventory: "INVENTÁRIO", shop: "LOJA", settings: "CONFIGURAÇÕES", updates: "ATUALIZAÇÕES", halloween: "HALLOWEEN", worlds: "MUNDOS", shopTitle: "LOJA", inventoryTitle: "INVENTÁRIO", skins: "PELE", wings: "ASAS", hats: "CHAPÉUS", equip: "EQUIPAR", buy: "COMPRAR", equipped: "EQUIPADO", lvl: "Nv", air: "AR", stage: "FASE", world: "MUNDO", paused: "PAUSADO", resume: "CONTINUAR", reset: "REINICIAR", exit: "SAIR", stageClear: "FASE CONCLUÍDA!", gameOver: "FIM DE JOGO", nextStage: "PRÓXIMA FASE", worldMap: "MAPA DOS MUNDOS", tryAgain: "TENTAR NOVAMENTE", coins: "Moedas", pumpkins: "Abóboras", xp: "XP", bonus: "Bônus", settingsTitle: "CONFIGURAÇÕES", device: "DISPOSITIVO", deviceIdHint: "Seu ID (toque para copiar)", appearance: "APARÊNCIA", language: "Idioma", themeColor: "Cor do Tema", audio: "ÁUDIO", music: "🎵 Música", sfx: "🔊 Efeitos", controls: "CONTROLES", jumpKey: "Tecla de Pulo", diveKey: "Tecla de Mergulho", redeemCode: "🎟️ RESGATAR CÓDIGO", redeem: "RESGATAR", stats: "ESTATÍSTICAS", coinsTotal: "Total de Moedas", bestCombo: "Melhor Combo", deaths: "Mortes", plays: "Jogadas", backup: "BACKUP", exportSave: "Exportar Save", importSave: "Importar Save", dangerZone: "ZONA DE PERIGO", resetSave: "Apagar Save", replayTutorial: "Rever Tutorial", watch: "ASSISTIR", locked: "Bloqueado", updateLog: "REGISTRO DE ATUALIZAÇÕES", noMoney: "Sem {currency} suficiente!", bought: "Você comprou o(a) {item}!", confirmBuy: "Você tem certeza que quer comprar isso???", yes: "SIM", no: "NÃO", coinsCollected: "Moedas Coletadas", xpGained: "XP Ganho", bonusCoins: "Moedas Bônus", ranOutOfAir: "Você ficou sem ar!", combo: "Combo", level: "Nível"
+  }
+};
 
 function generateDeviceId() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -643,9 +662,7 @@ function loadSave() {
       const parsed = JSON.parse(raw);
       if (!parsed || typeof parsed !== 'object') continue;
       const ts = (typeof parsed._savedAt === 'number' ? parsed._savedAt : 0) || 0;
-      if (ts > bestTime || bestParsed === null) {
-        bestTime = ts; bestParsed = parsed; bestKey = key;
-      }
+      if (ts > bestTime || bestParsed === null) { bestTime = ts; bestParsed = parsed; bestKey = key; }
     } catch(e) {}
   }
   if (bestParsed) return mergeWithDefaults(bestParsed);
@@ -699,21 +716,13 @@ window.importSave = () => {
 };
 
 const CODES = {
-  'WELCOME': { coins: 100, pumpkins: 5, xp: 50 },
-  'PUFFER': { coins: 250, pumpkins: 10, xp: 100 },
-  'AURA': { coins: 500, pumpkins: 25, xp: 200 },
-  'HALLOWEEN': { pumpkins: 100, xp: 50 },
-  'THANKS': { coins: 1000, pumpkins: 50, xp: 500 },
-  'OCEAN': { coins: 500, xp: 100 },
-  'CYBER': { coins: 500, xp: 100 },
-  'SPOOKY': { pumpkins: 50, xp: 100 },
-  'DESERT': { coins: 500, xp: 100 },
-  'JUNGLE': { coins: 500, xp: 100 },
-  'COSMOS': { coins: 1000, xp: 500 },
-  'MASTER': { coins: 2000, pumpkins: 100, xp: 1000 },
-  'MEGA': { coins: 5000 },
-  'GOLDEN': { pumpkins: 200 },
-  'LEGEND': { coins: 10000, pumpkins: 500, xp: 5000 }
+  'WELCOME': { coins: 100, pumpkins: 5, xp: 50 }, 'PUFFER': { coins: 250, pumpkins: 10, xp: 100 },
+  'AURA': { coins: 500, pumpkins: 25, xp: 200 }, 'HALLOWEEN': { pumpkins: 100, xp: 50 },
+  'THANKS': { coins: 1000, pumpkins: 50, xp: 500 }, 'OCEAN': { coins: 500, xp: 100 },
+  'CYBER': { coins: 500, xp: 100 }, 'SPOOKY': { pumpkins: 50, xp: 100 },
+  'DESERT': { coins: 500, xp: 100 }, 'JUNGLE': { coins: 500, xp: 100 },
+  'COSMOS': { coins: 1000, xp: 500 }, 'MASTER': { coins: 2000, pumpkins: 100, xp: 1000 },
+  'MEGA': { coins: 5000 }, 'GOLDEN': { pumpkins: 200 }, 'LEGEND': { coins: 10000, pumpkins: 500, xp: 5000 }
 };
 
 window.redeemCode = () => {
@@ -736,9 +745,6 @@ window.redeemCode = () => {
   showToast('✅ Resgatado! ' + msgs.join(' '));
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   AUDIO
-   ═══════════════════════════════════════════════════════════════ */
 let audioCtx = null, musicGain = null, musicTimeout = null, melodyIdx = 0;
 function initAudio() {
   if (audioCtx) return;
@@ -773,11 +779,7 @@ const SFX = {
   splash: () => playTone(200, 0.2, 'sine', 0.1, 80),
   levelUp: () => { [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(() => playTone(f, 0.2, 'square', 0.1), i * 80)); },
   combo: () => playTone(1200, 0.08, 'square', 0.08),
-  cash: () => { 
-      playTone(1500, 0.1, 'square', 0.15); 
-      setTimeout(() => playTone(2000, 0.15, 'square', 0.15), 50); 
-      setTimeout(() => playTone(2500, 0.3, 'square', 0.15), 100); 
-  }
+  cash: () => { playTone(1500, 0.1, 'square', 0.15); setTimeout(() => playTone(2000, 0.15, 'square', 0.15), 50); setTimeout(() => playTone(2500, 0.3, 'square', 0.15), 100); }
 };
 const MELODY = [262, 330, 392, 330, 262, 294, 349, 294, 262, 330, 392, 523, 392, 330, 262, 196];
 function startMusic() {
@@ -855,23 +857,30 @@ function addXP(amount) {
   persistSave(); updateHUD();
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   UPGRADES SYSTEM
-   ═══════════════════════════════════════════════════════════════ */
+function translateUI() {
+  const t = I18N[save.lang] || I18N.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.textContent = t[key];
+  });
+  if (!document.getElementById('worldScreen').classList.contains('hidden')) renderWorlds();
+  if (!document.getElementById('stageScreen').classList.contains('hidden')) window.openStageSelect(gameState.worldIdx);
+  updateHUD();
+}
+window.changeLanguage = (lang) => { save.lang = lang; persistSave(); translateUI(); };
+
 const UPGRADES = {
   speed:  { name: 'Swim Speed', icon: 'ph-sneaker-move', baseCost: 100, costMult: 1.5, maxLevel: 10 },
   air:    { name: 'Air Capacity', icon: 'ph-wind', baseCost: 150, costMult: 1.6, maxLevel: 10 },
   jump:   { name: 'Jump Power', icon: 'ph-arrow-fat-up', baseCost: 120, costMult: 1.5, maxLevel: 10 },
   magnet: { name: 'Coin Magnet', icon: 'ph-magnet', baseCost: 80, costMult: 1.4, maxLevel: 10 }
 };
-
 function getUpgradeCost(key) {
   const upg = UPGRADES[key];
   const currentLvl = save.upgrades[key];
   if (currentLvl >= upg.maxLevel) return null;
   return Math.floor(upg.baseCost * Math.pow(upg.costMult, currentLvl - 1));
 }
-
 function getUpgradeStat(key) {
   const lvl = save.upgrades[key];
   if (key === 'speed') return Math.round((lvl - 1) * 10) + '%';
@@ -879,7 +888,6 @@ function getUpgradeStat(key) {
   if (key === 'jump') return Math.round(14 + (lvl - 1) * 1.2) + ' pow';
   if (key === 'magnet') return Math.round(3.5 + (lvl - 1) * 0.5) + 'm';
 }
-
 window.openUpgrades = () => {
   SFX.click();
   gameState.mode = 'upgrades';
@@ -897,7 +905,6 @@ window.openUpgrades = () => {
   document.getElementById('upgradeCoinBalance').textContent = save.coins;
   renderUpgrades();
 };
-
 window.renderUpgrades = () => {
   const list = document.getElementById('upgrade-list');
   list.innerHTML = '';
@@ -907,7 +914,6 @@ window.renderUpgrades = () => {
     const cost = getUpgradeCost(key);
     const isMax = lvl >= upg.maxLevel;
     const stat = getUpgradeStat(key);
-    
     const card = document.createElement('div');
     card.className = 'upgrade-card' + (isMax ? ' maxed' : '');
     card.innerHTML = `
@@ -919,33 +925,20 @@ window.renderUpgrades = () => {
       </div>
       ${!isMax ? `<button class="upgrade-btn ${save.coins < cost ? 'disabled' : ''}"><i class="ph ph-coin"></i> ${cost}</button>` : `<span style="color:var(--gold);font-weight:900;font-size:12px;">MAX</span>`}
     `;
-    if (!isMax) {
-      card.querySelector('.upgrade-btn').onclick = () => window.buyUpgrade(key);
-    }
+    if (!isMax) card.querySelector('.upgrade-btn').onclick = () => window.buyUpgrade(key);
     list.appendChild(card);
   }
 };
-
 window.buyUpgrade = (key) => {
   const cost = getUpgradeCost(key);
   if (!cost) return;
   if (save.coins >= cost) {
-    save.coins -= cost;
-    save.upgrades[key]++;
-    persistSave();
-    updateHUD();
-    SFX.levelUp();
-    renderUpgrades();
+    save.coins -= cost; save.upgrades[key]++;
+    persistSave(); updateHUD(); SFX.levelUp(); renderUpgrades();
     showToast(`⬆️ ${UPGRADES[key].name} upgraded to Lv.${save.upgrades[key]}!`);
-  } else {
-    SFX.lose();
-    showToast('Not enough coins!');
-  }
+  } else { SFX.lose(); showToast('Not enough coins!'); }
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   COSMETICS DATA
-   ═══════════════════════════════════════════════════════════════ */
 const SKIN_COLORS = [
   0xf5b71d, 0x3b82f6, 0x22c55e, 0xef4444, 0xa855f7, 0xec4899, 0x14b8a6, 0xf97316, 0x84cc16, 0x06b6d4,
   0xff6b6b, 0xffd700, 0x8b5cf6, 0x10b981, 0xf43f5e, 0xf59e0b, 0x0ea5e9, 0x6366f1, 0x94a3b8, 0x1e293b,
@@ -953,7 +946,10 @@ const SKIN_COLORS = [
   0x5eead4, 0xfcd34d, 0xa3e635, 0x38bdf8, 0x818cf8, 0xd8b4fe, 0xfda4af, 0xfde047, 0x86efac, 0x7dd3fc,
   0xff0000, 0x00ff00, 0x0000ff, 0xffffff, 0x000000, 0x888888, 0xff00ff, 0xffff00, 0x00ffff, 0x8b4513
 ];
-const SKINS = SKIN_COLORS.map((c, i) => ({ id: 'skin_' + i, name: 'Skin ' + (i+1), color: c, cost: i === 0 ? 0 : Math.floor(50 * Math.pow(1.5, i/4)) }));
+const SKINS = SKIN_COLORS.map((c, i) => {
+  const cost = i === 0 ? 0 : Math.floor(50 + (i / (SKIN_COLORS.length - 1)) * 1450);
+  return { id: 'skin_' + i, name: 'Skin ' + (i+1), color: c, cost };
+});
 
 const WINGS = [
   { id:'wing_0', name:'None', cost:0, icon:'ph-x' }, { id:'wing_angel', name:'Angel', cost:200, icon:'ph-feather' },
@@ -1042,16 +1038,16 @@ const ALL_WINGS = [...WINGS, ...HALLOWEEN_ITEMS.wing];
 const ALL_HATS = [...HATS, ...HALLOWEEN_ITEMS.hat];
 
 const WORLDS = [
-  { id:0, name:'Tropical Reef', theme:'tropical', color:0x4f7a45, primary:'#39ff14', icon:'ph-tree-palm', desc:'Sunny coral reefs and clear waters' },
-  { id:1, name:'Dark Cave', theme:'cave', color:0x3a4a58, primary:'#8b5cf6', icon:'ph-mountains', desc:'Mysterious underground caverns' },
-  { id:2, name:'Sky Islands', theme:'sky', color:0x6a8a55, primary:'#38bdf8', icon:'ph-cloud', desc:'Floating islands in the clouds' },
-  { id:3, name:'Volcanic Core', theme:'volcano', color:0x5a2a1a, primary:'#ff4400', icon:'ph-fire', desc:'Molten rivers and fiery embers' },
-  { id:4, name:'Frozen Abyss', theme:'ice', color:0x6a9cc9, primary:'#88ddff', icon:'ph-snowflake', desc:'Frozen crystals and icy winds' },
-  { id:5, name:'Desert Oasis', theme:'desert', color:0xd4a373, primary:'#ffcc00', icon:'ph-sun', desc:'Golden sands and ancient ruins' },
-  { id:6, name:'Cyber City', theme:'cyber', color:0x112244, primary:'#00ffcc', icon:'ph-cpu', desc:'Neon lights and high tech' },
-  { id:7, name:'Haunted Graveyard', theme:'graveyard', color:0x2a2a35, primary:'#8b5cf6', icon:'ph-ghost', desc:'Spooky tombstones and fog' },
-  { id:8, name:'Jungle Ruins', theme:'jungle', color:0x2d4a22, primary:'#39ff14', icon:'ph-tree', desc:'Overgrown temples and vines' },
-  { id:9, name:'Cosmic Void', theme:'space', color:0x050510, primary:'#ff00ff', icon:'ph-planet', desc:'Floating asteroids in deep space' }
+  { id:0, name:'Tropical Reef', name_pt:'Recife Tropical', desc_pt:'Recifes de coral e águas claras', theme:'tropical', color:0x4f7a45, primary:'#39ff14', icon:'ph-tree-palm', desc:'Sunny coral reefs and clear waters' },
+  { id:1, name:'Dark Cave', name_pt:'Caverna Escura', desc_pt:'Cavernas subterrâneas misteriosas', theme:'cave', color:0x3a4a58, primary:'#8b5cf6', icon:'ph-mountains', desc:'Mysterious underground caverns' },
+  { id:2, name:'Sky Islands', name_pt:'Ilhas Celestes', desc_pt:'Ilhas flutuantes nas nuvens', theme:'sky', color:0x6a8a55, primary:'#38bdf8', icon:'ph-cloud', desc:'Floating islands in the clouds' },
+  { id:3, name:'Volcanic Core', name_pt:'Núcleo Vulcânico', desc_pt:'Rios de lava e brasas ardentes', theme:'volcano', color:0x5a2a1a, primary:'#ff4400', icon:'ph-fire', desc:'Molten rivers and fiery embers' },
+  { id:4, name:'Frozen Abyss', name_pt:'Abismo Congelado', desc_pt:'Cristais de gelo e ventos gélidos', theme:'ice', color:0x6a9cc9, primary:'#88ddff', icon:'ph-snowflake', desc:'Frozen crystals and icy winds' },
+  { id:5, name:'Desert Oasis', name_pt:'Oásis no Deserto', desc_pt:'Areias douradas e ruínas antigas', theme:'desert', color:0xd4a373, primary:'#ffcc00', icon:'ph-sun', desc:'Golden sands and ancient ruins' },
+  { id:6, name:'Cyber City', name_pt:'Cidade Cyber', desc_pt:'Luzes neon e alta tecnologia', theme:'cyber', color:0x112244, primary:'#00ffcc', icon:'ph-cpu', desc:'Neon lights and high tech' },
+  { id:7, name:'Haunted Graveyard', name_pt:'Cemitério Assombrado', desc_pt:'Lápides assustadoras e neblina', theme:'graveyard', color:0x2a2a35, primary:'#8b5cf6', icon:'ph-ghost', desc:'Spooky tombstones and fog' },
+  { id:8, name:'Jungle Ruins', name_pt:'Ruínas da Selva', desc_pt:'Templos cobertos de vegetação', theme:'jungle', color:0x2d4a22, primary:'#39ff14', icon:'ph-tree', desc:'Overgrown temples and vines' },
+  { id:9, name:'Cosmic Void', name_pt:'Vazio Cósmico', desc_pt:'Asteroides flutuando no espaço', theme:'space', color:0x050510, primary:'#ff00ff', icon:'ph-planet', desc:'Floating asteroids in deep space' }
 ];
 
 const WORLD_ENV = [
@@ -1067,30 +1063,6 @@ const WORLD_ENV = [
   { skyTop:0x000000, skyBottom:0x1a002a, water:0x0a001a, fog:0x000000 }
 ];
 
-const TRANSLATIONS = {
-  en: { 
-      winMessages:['YOU ROCK!!!','AWESOME!!!','AMAZING!!!','FANTASTIC!!!','INCREDIBLE!!!','SUPERSTAR!!!','BRILLIANT!!!','LEGENDARY!!!','UNSTOPPABLE!!!'],
-      confirmBuy: 'Are you sure you want to buy this???', yes: 'YES', no: 'NO', 
-      noMoney: 'Not enough {currency}!', bought: 'You bought {item}!', coins: 'Coins', pumpkins: 'Pumpkins'
-  },
-  pt: { 
-      winMessages:['ISSO FOI ÓTIMO!!!','INCRÍVEL!!!','FANTÁSTICO!!!','SENSACIONAL!!!','GENIAL!!!','LENDÁRIO!!!','BRILHANTE!!!','PERFEITO!!!','IMPARÁVEL!!!'],
-      confirmBuy: 'Você tem certeza que quer comprar isso???', yes: 'SIM', no: 'NÃO',
-      noMoney: 'Sem {currency} suficiente!', bought: 'Você comprou o(a) {item}!', coins: 'Moedas', pumpkins: 'Abóboras'
-  }
-};
-window.changeLanguage = (lang) => { save.lang = lang; persistSave(); };
-window.showToast = (msg) => {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._timeout);
-  t._timeout = setTimeout(() => t.classList.remove('show'), 2200);
-};
-
-/* ═══════════════════════════════════════════════════════════════
-   THREE.JS SETUP & MOBILE ORIENTATION
-   ═══════════════════════════════════════════════════════════════ */
 const canvas = document.getElementById('c');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, IS_MOBILE ? 1.5 : 2));
@@ -1102,22 +1074,18 @@ const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x0a1e33, 60, 160);
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 300);
 
-// Função que ajusta a câmera dependendo da orientação do celular
 function updateCameraLayout() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = window.innerWidth, h = window.innerHeight;
     camera.aspect = w / h;
     camera.clearViewOffset();
-
-    if (gameState.mode === 'showcase' || gameState.mode === 'halloween') {
+    if (gameState.mode === 'showcase' || gameState.mode === 'halloween' || gameState.mode === 'upgrades') {
         if (h > w) camera.fov = 65;
         else if (w > 800) camera.fov = 60;
-        else camera.fov = 75; // Celular deitado
+        else camera.fov = 75;
     } else {
         if (h > w) camera.fov = 65;
         else camera.fov = 60;
     }
-    
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
 }
@@ -1128,15 +1096,13 @@ scene.add(new THREE.HemisphereLight(0xb8ddff, 0x0a1e33, 1.3));
 const sunLight = new THREE.DirectionalLight(0xfff0d0, 1.5);
 sunLight.position.set(20, 40, 15);
 sunLight.castShadow = true;
-sunLight.shadow.mapSize.width = 2048;
-sunLight.shadow.mapSize.height = 2048;
+sunLight.shadow.mapSize.width = 2048; sunLight.shadow.mapSize.height = 2048;
 sunLight.shadow.camera.left = -50; sunLight.shadow.camera.right = 50;
 sunLight.shadow.camera.top = 50; sunLight.shadow.camera.bottom = -50;
 scene.add(sunLight);
 
 const caveLight = new THREE.PointLight(0xffaa44, 0, 18);
 scene.add(caveLight);
-
 const showcaseLight = new THREE.PointLight(0x88ddff, 0, 15);
 showcaseLight.position.set(0, 4, 4);
 scene.add(showcaseLight);
@@ -1159,9 +1125,6 @@ water.rotation.x = -Math.PI / 2;
 water.position.y = 0;
 scene.add(water);
 
-/* ═══════════════════════════════════════════════════════════════
-   PUFFERFISH MODEL
-   ═══════════════════════════════════════════════════════════════ */
 function createSkinTexture(c1, c2) {
   const cv = document.createElement('canvas');
   cv.width = 256; cv.height = 128;
@@ -1256,9 +1219,6 @@ function animateFins(now, speed = 1) {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   HATS
-   ═══════════════════════════════════════════════════════════════ */
 const hats = {};
 // 1. Cap
 const capGrp = new THREE.Group();
@@ -1332,7 +1292,7 @@ jaw.position.set(0, 0.02, 0.5);
 pirGrp.add(pirBase, skullBase, eyeL, eyeR, jaw);
 pirGrp.position.set(0, 1.15, 0); pirGrp.visible = false; bodyGrp.add(pirGrp); hats['hat_pirate'] = pirGrp;
 
-// 8. Hood / Hacker
+// 8. Hood
 const hoodGrp = new THREE.Group();
 const hoodGeo = new THREE.SphereGeometry(0.6, 16, 16, 0, Math.PI*2, 0, Math.PI*0.8);
 const hoodMesh = new THREE.Mesh(hoodGeo, new THREE.MeshStandardMaterial({ color: 0x222222, side: THREE.DoubleSide, roughness: 0.9 }));
@@ -1354,8 +1314,7 @@ flwGrp.add(flwCenter); flwGrp.position.set(0.35, 1.05, 0.25); flwGrp.visible = f
 const cowGrp = new THREE.Group();
 const cowCrown = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.4, 0.5, 16), new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.9 }));
 const cowBrim = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.05, 20), new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.9 }));
-cowBrim.position.y = -0.25;
-cowBrim.scale.set(1, 1, 1.2);
+cowBrim.position.y = -0.25; cowBrim.scale.set(1, 1, 1.2);
 const cowBand = new THREE.Mesh(new THREE.CylinderGeometry(0.41, 0.41, 0.08, 16), new THREE.MeshStandardMaterial({ color: 0x111111 }));
 cowBand.position.y = -0.15;
 cowGrp.add(cowCrown, cowBrim, cowBand); cowGrp.position.set(0, 1.15, 0); cowGrp.visible = false; bodyGrp.add(cowGrp); hats['hat_cowboy'] = cowGrp;
@@ -1628,8 +1587,7 @@ astroGrp.add(astroDome, astroVisor); astroGrp.position.set(0, 1.15, 0); astroGrp
 const jesterGrp = new THREE.Group();
 for(let i=0; i<3; i++) {
     const point = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.4, 8), new THREE.MeshStandardMaterial({ color: i%2 ? 0xff00ff : 0x00ff00 }));
-    point.position.y = 0.2;
-    point.rotation.z = -0.5 + i*0.5;
+    point.position.y = 0.2; point.rotation.z = -0.5 + i*0.5;
     if(i===1) point.position.y = 0.3;
     const tip = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffcc00 }));
     tip.position.set(-0.2 + i*0.2, 0.4, 0);
@@ -1701,9 +1659,6 @@ const hR = hL.clone(); hR.position.x = 0.25; hR.rotation.z = -0.4;
 hornsGrp.add(hL, hR); hornsGrp.position.set(0, 1.15, 0); hornsGrp.visible = false; bodyGrp.add(hornsGrp); hats['hat_devil_horns'] = hornsGrp;
 
 
-/* ═══════════════════════════════════════════════════════════════
-   WINGS
-   ═══════════════════════════════════════════════════════════════ */
 const wings = {};
 function createWings(id, type, color, opacity = 0.95) {
   const g = new THREE.Group();
@@ -1791,9 +1746,6 @@ window.updatePufferVisuals = (data) => {
 };
 window.equipPuffer = () => window.updatePufferVisuals(save);
 
-/* ═══════════════════════════════════════════════════════════════
-   SHOWCASE SCENE & PREVIEW SYSTEM
-   ═══════════════════════════════════════════════════════════════ */
 function createShowcaseScene() {
   const group = new THREE.Group();
   const backdropMat = new THREE.ShaderMaterial({
@@ -1806,18 +1758,13 @@ function createShowcaseScene() {
   const backdrop = new THREE.Mesh(new THREE.PlaneGeometry(24, 14), backdropMat);
   backdrop.position.set(0, 1, -6);
   group.add(backdrop);
-  
   const pedestal = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 3.5, 0.4, 40), new THREE.MeshStandardMaterial({ color: 0x1a3a5e, roughness: 0.15, metalness: 0.9, transparent: true, opacity: 0.85 }));
   pedestal.position.y = -1.2; pedestal.receiveShadow = true; group.add(pedestal);
-  
   const ring = new THREE.Mesh(new THREE.TorusGeometry(3.0, 0.15, 14, 60), new THREE.MeshBasicMaterial({ color: 0x00f3ff }));
   ring.rotation.x = Math.PI / 2; ring.position.y = -1.0; group.add(ring);
-  
   const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.2, 0.06, 10, 40), new THREE.MeshBasicMaterial({ color: 0x88ddff, transparent: true, opacity: 0.9 }));
   ring2.rotation.x = Math.PI / 2; ring2.position.y = -1.05; group.add(ring2);
-  
   const ringLight = new THREE.PointLight(0x00f3ff, 2.5, 10); ringLight.position.set(0, -0.9, 0); group.add(ringLight);
-  
   const bubbles = [];
   for (let i = 0; i < 25; i++) {
     const r = 0.08 + Math.random() * 0.22;
@@ -1826,7 +1773,6 @@ function createShowcaseScene() {
     bubble.userData = { baseY: bubble.position.y, speed: 0.4 + Math.random() * 0.8, phase: Math.random() * Math.PI * 2, amp: 0.4 + Math.random() * 0.6 };
     group.add(bubble); bubbles.push(bubble);
   }
-  
   const seaweeds = [];
   for (let i = 0; i < 10; i++) {
     const side = i % 2 === 0 ? -1 : 1;
@@ -1842,7 +1788,6 @@ function createShowcaseScene() {
     }
     group.add(weedGroup); seaweeds.push(weedGroup);
   }
-  
   const sparkles = [];
   for (let i = 0; i < 35; i++) {
     const sparkle = new THREE.Mesh(new THREE.OctahedronGeometry(0.08), new THREE.MeshBasicMaterial({ color: 0xffffcc, transparent: true }));
@@ -1850,13 +1795,11 @@ function createShowcaseScene() {
     sparkle.userData = { phase: Math.random() * Math.PI * 2 };
     group.add(sparkle); sparkles.push(sparkle);
   }
-  
   for (let i = 0; i < 8; i++) {
     const coral = new THREE.Mesh(new THREE.SphereGeometry(0.2 + Math.random() * 0.2, 8, 6), new THREE.MeshStandardMaterial({ color: i % 2 ? 0xff6688 : 0xff9944, emissive: i % 2 ? 0x441122 : 0x442200, emissiveIntensity: 0.8, roughness: 0.6 }));
     coral.position.set((Math.random() - 0.5) * 12, -0.8 + Math.random() * 5, -3 - Math.random() * 2);
     group.add(coral);
   }
-  
   group.userData = { bubbles, sparkles, seaweeds, ring, ring2 };
   group.visible = false;
   return group;
@@ -1883,9 +1826,6 @@ function animateShowcase(now, dt) {
   if (ring2) ring2.rotation.z -= dt * 0.5;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   GIANT PUMPKIN
-   ═══════════════════════════════════════════════════════════════ */
 function createGiantPumpkin() {
   const group = new THREE.Group();
   const bodyMat = new THREE.MeshStandardMaterial({ color: 0xff6600, emissive: 0x441100, emissiveIntensity: 0.35, roughness: 0.6 });
@@ -1914,9 +1854,6 @@ const giantPumpkin = createGiantPumpkin();
 giantPumpkin.visible = false;
 scene.add(giantPumpkin);
 
-/* ═══════════════════════════════════════════════════════════════
-   LEVEL GENERATION & DECORATIONS
-   ═══════════════════════════════════════════════════════════════ */
 function generateLevel(worldIdx, stageIdx) {
   const seed = worldIdx * 100 + stageIdx;
   const rng = (i) => { const x = Math.sin(seed * 999 + i * 777) * 10000; return x - Math.floor(x); };
@@ -2016,7 +1953,6 @@ window.loadStage = (worldIdx, stageIdx) => {
   scene.fog.color.setHex(env.fog);
   water.material.color.setHex(env.water);
   water.visible = true;
-  
   if (world.theme === 'cave' || world.theme === 'space' || world.theme === 'cyber') {
     scene.fog.near = 12; scene.fog.far = 40;
     sunLight.intensity = 0.15; caveLight.intensity = 2.5;
@@ -2026,7 +1962,6 @@ window.loadStage = (worldIdx, stageIdx) => {
     sunLight.intensity = 1.5; caveLight.intensity = 0;
     document.getElementById('caveDark').style.opacity = '0';
   }
-  
   for (const p of currentLevel.platforms) {
     let matColor = world.color;
     if (p.type === 'bouncy') matColor = 0x39ff14;
@@ -2045,7 +1980,6 @@ window.loadStage = (worldIdx, stageIdx) => {
     if (world.theme === 'graveyard') topColor = 0x3a3a45;
     if (world.theme === 'jungle') topColor = 0x1a5a1a;
     if (world.theme === 'space') topColor = 0x2a2a3a;
-    
     const top = new THREE.Mesh(new THREE.BoxGeometry(p.w + 0.1, 0.15, p.d + 0.1), new THREE.MeshStandardMaterial({ color: topColor, roughness: 0.9 }));
     top.position.set(p.x, p.y + p.h/2 + 0.05, p.z);
     top.receiveShadow = true;
@@ -2059,7 +1993,10 @@ window.loadStage = (worldIdx, stageIdx) => {
   goal.userData = { type: 'goal' }; goal.castShadow = true;
   scene.add(goal); levelObjects.push(goal); collectibles.push(goal);
   goal.add(new THREE.PointLight(0xffcc00, 3, 15));
-  document.getElementById('lvl-title').textContent = `${world.name.toUpperCase()} - STAGE ${stageIdx + 1}`;
+  
+  const t = I18N[save.lang];
+  const wName = save.lang === 'pt' ? world.name_pt : world.name;
+  document.getElementById('lvl-title').textContent = `${wName.toUpperCase()} - ${t.stage} ${stageIdx + 1}`;
   updateHUD();
   updateCameraLayout();
 };
@@ -2067,83 +2004,133 @@ window.loadStage = (worldIdx, stageIdx) => {
 function addDecorations(theme, platform, list) {
   const { x, y, z, w, d } = platform;
   const randPos = () => ({ px: x + (Math.random()-0.5)*(w-1.5), pz: z + (Math.random()-0.5)*(d-1.5) });
-  
   if (theme === 'tropical') {
-    for (let i = 0; i < 2; i++) { const p = randPos(); const palm = createPalmTree(p.px, y+0.5, p.pz); scene.add(palm); list.push(palm); }
-    for (let i = 0; i < 2; i++) { const p = randPos(); const bush = new THREE.Mesh(new THREE.SphereGeometry(0.5, 8, 6), new THREE.MeshStandardMaterial({ color: 0x3f7d3a })); bush.position.set(p.px, y+0.6, p.pz); bush.castShadow = true; scene.add(bush); list.push(bush); }
+    for (let i = 0; i < 3; i++) { const p = randPos(); const palm = createPalmTree(p.px, y+0.5, p.pz); scene.add(palm); list.push(palm); }
+    for (let i = 0; i < 4; i++) { const p = randPos(); const bush = new THREE.Mesh(new THREE.SphereGeometry(0.5, 8, 6), new THREE.MeshStandardMaterial({ color: 0x3f7d3a })); bush.position.set(p.px, y+0.6, p.pz); bush.castShadow = true; scene.add(bush); list.push(bush); }
+    for (let i = 0; i < 3; i++) { const p = randPos(); const starfish = createStarfish(p.px, y+0.6, p.pz); scene.add(starfish); list.push(starfish); }
   } else if (theme === 'cave') {
-    for (let i = 0; i < 3; i++) { const p = randPos(); const stalag = new THREE.Mesh(new THREE.ConeGeometry(0.3, 1.5 + Math.random(), 6), new THREE.MeshStandardMaterial({ color: 0x556070 })); stalag.position.set(p.px, y+1, p.pz); stalag.castShadow = true; scene.add(stalag); list.push(stalag); }
-    for (let i = 0; i < 2; i++) { const p = randPos(); const shroom = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 6, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xdd3344, emissive: 0x552200, emissiveIntensity: 0.5 })); shroom.position.set(p.px, y+0.7, p.pz); scene.add(shroom); list.push(shroom); }
+    for (let i = 0; i < 5; i++) { const p = randPos(); const stalag = new THREE.Mesh(new THREE.ConeGeometry(0.3, 1.5 + Math.random(), 6), new THREE.MeshStandardMaterial({ color: 0x556070 })); stalag.position.set(p.px, y+1, p.pz); stalag.castShadow = true; scene.add(stalag); list.push(stalag); }
+    for (let i = 0; i < 4; i++) { const p = randPos(); const shroom = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 6, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({ color: 0xdd3344, emissive: 0x552200, emissiveIntensity: 0.5 })); shroom.position.set(p.px, y+0.7, p.pz); scene.add(shroom); list.push(shroom); }
   } else if (theme === 'sky') {
-    for (let i = 0; i < 2; i++) { const p = randPos(); const pine = createPineTree(p.px, y+0.5, p.pz); scene.add(pine); list.push(pine); }
-    for (let i = 0; i < 2; i++) { const p = randPos(); const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.4), new THREE.MeshStandardMaterial({ color: 0x88e0ff, emissive: 0x2266aa, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.1 })); crystal.position.set(p.px, y+0.6, p.pz); crystal.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); crystal.castShadow = true; scene.add(crystal); list.push(crystal); }
+    for (let i = 0; i < 4; i++) { const p = randPos(); const pine = createPineTree(p.px, y+0.5, p.pz); scene.add(pine); list.push(pine); }
+    for (let i = 0; i < 3; i++) { const p = randPos(); const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.4), new THREE.MeshStandardMaterial({ color: 0x88e0ff, emissive: 0x2266aa, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.1 })); crystal.position.set(p.px, y+0.6, p.pz); crystal.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); crystal.castShadow = true; scene.add(crystal); list.push(crystal); }
   } else if (theme === 'volcano') {
-    for (let i = 0; i < 3; i++) { const p = randPos(); const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(0.4 + Math.random()*0.3), new THREE.MeshStandardMaterial({ color: 0x2a1a0a, emissive: 0xff3300, emissiveIntensity: 0.3, roughness: 0.8 })); rock.position.set(p.px, y+0.7, p.pz); rock.castShadow = true; scene.add(rock); list.push(rock); }
-    for (let i = 0; i < 2; i++) { const p = randPos(); const bubble = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 6), new THREE.MeshBasicMaterial({ color: 0xff6600, transparent: true, opacity: 0.8 })); bubble.position.set(p.px, y+0.6, p.pz); scene.add(bubble); list.push(bubble); }
+    for (let i = 0; i < 5; i++) { const p = randPos(); const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(0.4 + Math.random()*0.3), new THREE.MeshStandardMaterial({ color: 0x2a1a0a, emissive: 0xff3300, emissiveIntensity: 0.3, roughness: 0.8 })); rock.position.set(p.px, y+0.7, p.pz); rock.castShadow = true; scene.add(rock); list.push(rock); }
+    for (let i = 0; i < 4; i++) { const p = randPos(); const bubble = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 6), new THREE.MeshBasicMaterial({ color: 0xff6600, transparent: true, opacity: 0.8 })); bubble.position.set(p.px, y+0.6, p.pz); scene.add(bubble); list.push(bubble); }
   } else if (theme === 'ice') {
-    for (let i = 0; i < 3; i++) { const p = randPos(); const spike = new THREE.Mesh(new THREE.ConeGeometry(0.25, 1 + Math.random()*0.5, 6), new THREE.MeshStandardMaterial({ color: 0xccf0ff, emissive: 0x88ddff, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.1, transparent: true, opacity: 0.85 })); spike.position.set(p.px, y+0.9, p.pz); spike.castShadow = true; scene.add(spike); list.push(spike); }
-    for (let i = 0; i < 2; i++) { const p = randPos(); const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.35), new THREE.MeshStandardMaterial({ color: 0xaaddff, emissive: 0x4488cc, emissiveIntensity: 0.6, metalness: 0.9, roughness: 0.1 })); crystal.position.set(p.px, y+0.6, p.pz); crystal.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); scene.add(crystal); list.push(crystal); }
-  } 
-  else if (theme === 'desert') {
-    for (let i = 0; i < 2; i++) { 
-      const p = randPos(); 
-      const cactus = new THREE.Group(); 
-      const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.2, 1.2, 8), new THREE.MeshStandardMaterial({ color: 0x2d5a27 })); 
-      trunk.position.y = 0.6; 
-      const arm1 = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0x2d5a27 })); 
-      arm1.position.set(0.25, 0.8, 0); arm1.rotation.z = -0.5; 
-      cactus.add(trunk, arm1); cactus.position.set(p.px, y, p.pz); scene.add(cactus); list.push(cactus); 
+    for (let i = 0; i < 5; i++) { const p = randPos(); const spike = new THREE.Mesh(new THREE.ConeGeometry(0.25, 1 + Math.random()*0.5, 6), new THREE.MeshStandardMaterial({ color: 0xccf0ff, emissive: 0x88ddff, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.1, transparent: true, opacity: 0.85 })); spike.position.set(p.px, y+0.9, p.pz); spike.castShadow = true; scene.add(spike); list.push(spike); }
+    for (let i = 0; i < 3; i++) { const p = randPos(); const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.35), new THREE.MeshStandardMaterial({ color: 0xaaddff, emissive: 0x4488cc, emissiveIntensity: 0.6, metalness: 0.9, roughness: 0.1 })); crystal.position.set(p.px, y+0.6, p.pz); crystal.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); scene.add(crystal); list.push(crystal); }
+  } else if (theme === 'desert') {
+    for (let i = 0; i < 4; i++) {
+      const p = randPos();
+      const cactus = new THREE.Group();
+      const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.2, 1.2, 8), new THREE.MeshStandardMaterial({ color: 0x2d5a27 }));
+      trunk.position.y = 0.6;
+      const arm1 = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.5, 8), new THREE.MeshStandardMaterial({ color: 0x2d5a27 }));
+      arm1.position.set(0.25, 0.8, 0); arm1.rotation.z = -0.5;
+      cactus.add(trunk, arm1); cactus.position.set(p.px, y, p.pz); scene.add(cactus); list.push(cactus);
     }
-    for (let i = 0; i < 2; i++) { 
-      const p = randPos(); 
-      const pyramid = new THREE.Mesh(new THREE.ConeGeometry(0.8, 1.5, 4), new THREE.MeshStandardMaterial({ color: 0xd4a373 })); 
-      pyramid.position.set(p.px, y+0.75, p.pz); pyramid.castShadow = true; scene.add(pyramid); list.push(pyramid); 
+    for (let i = 0; i < 3; i++) {
+      const p = randPos();
+      const pyramid = new THREE.Mesh(new THREE.ConeGeometry(0.8, 1.5, 4), new THREE.MeshStandardMaterial({ color: 0xd4a373 }));
+      pyramid.position.set(p.px, y+0.75, p.pz); pyramid.castShadow = true; scene.add(pyramid); list.push(pyramid);
+    }
+    for (let i = 0; i < 3; i++) {
+      const p = randPos();
+      const skull = new THREE.Mesh(new THREE.SphereGeometry(0.3, 8, 8), new THREE.MeshStandardMaterial({ color: 0xeeeedd }));
+      skull.position.set(p.px, y+0.4, p.pz); skull.castShadow = true; scene.add(skull); list.push(skull);
     }
   } else if (theme === 'cyber') {
-    for (let i = 0; i < 2; i++) { 
-      const p = randPos(); 
-      const neonCube = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, 0.4), new THREE.MeshStandardMaterial({ color: 0x00ffcc, emissive: 0x00aa88, emissiveIntensity: 1.5, wireframe: true })); 
-      neonCube.position.set(p.px, y+0.5, p.pz); scene.add(neonCube); list.push(neonCube); 
+    for (let i = 0; i < 5; i++) {
+      const p = randPos();
+      const neonCube = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, 0.4), new THREE.MeshStandardMaterial({ color: 0x00ffcc, emissive: 0x00aa88, emissiveIntensity: 1.5, wireframe: true }));
+      neonCube.position.set(p.px, y+0.5, p.pz); scene.add(neonCube); list.push(neonCube);
     }
-    for (let i = 0; i < 2; i++) { 
-      const p = randPos(); 
-      const grid = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 1.5), new THREE.MeshBasicMaterial({ color: 0xff00ff, wireframe: true })); 
-      grid.rotation.x = -Math.PI/2; grid.position.set(p.px, y+0.5, p.pz); scene.add(grid); list.push(grid); 
+    for (let i = 0; i < 4; i++) {
+      const p = randPos();
+      const grid = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 1.5), new THREE.MeshBasicMaterial({ color: 0xff00ff, wireframe: true }));
+      grid.rotation.x = -Math.PI/2; grid.position.set(p.px, y+0.5, p.pz); scene.add(grid); list.push(grid);
+    }
+    for (let i = 0; i < 3; i++) {
+      const p = randPos();
+      const antenna = new THREE.Group();
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.05, 2, 6), new THREE.MeshStandardMaterial({ color: 0x334455 }));
+      pole.position.y = 1;
+      const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshBasicMaterial({ color: 0xff00ff }));
+      bulb.position.y = 2;
+      antenna.add(pole, bulb); antenna.position.set(p.px, y, p.pz); scene.add(antenna); list.push(antenna);
+    }
+    for (let i = 0; i < 2; i++) {
+      const p = randPos();
+      const holoRing = new THREE.Group();
+      const ring1 = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.05, 8, 16), new THREE.MeshBasicMaterial({ color: 0x00ffcc, transparent: true, opacity: 0.7 }));
+      ring1.rotation.x = Math.PI/2;
+      const ring2 = new THREE.Mesh(new THREE.TorusGeometry(0.7, 0.03, 8, 16), new THREE.MeshBasicMaterial({ color: 0xff00ff, transparent: true, opacity: 0.5 }));
+      ring2.rotation.x = Math.PI/2;
+      holoRing.add(ring1, ring2); holoRing.position.set(p.px, y+1, p.pz); scene.add(holoRing); list.push(holoRing);
     }
   } else if (theme === 'graveyard') {
-    for (let i = 0; i < 3; i++) { 
-      const p = randPos(); 
-      const tomb = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.6, 0.1), new THREE.MeshStandardMaterial({ color: 0x555566, roughness: 0.9 })); 
-      tomb.position.set(p.px, y+0.3, p.pz); tomb.rotation.y = Math.random() * Math.PI; tomb.castShadow = true; scene.add(tomb); list.push(tomb); 
+    for (let i = 0; i < 6; i++) {
+      const p = randPos();
+      const tomb = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.6, 0.1), new THREE.MeshStandardMaterial({ color: 0x555566, roughness: 0.9 }));
+      tomb.position.set(p.px, y+0.3, p.pz); tomb.rotation.y = Math.random() * Math.PI; tomb.castShadow = true; scene.add(tomb); list.push(tomb);
     }
-    for (let i = 0; i < 2; i++) { 
-      const p = randPos(); 
-      const tree = new THREE.Mesh(new THREE.ConeGeometry(0.1, 1.5, 5), new THREE.MeshStandardMaterial({ color: 0x222222 })); 
-      tree.position.set(p.px, y+0.75, p.pz); tree.rotation.z = (Math.random()-0.5)*0.2; scene.add(tree); list.push(tree); 
+    for (let i = 0; i < 4; i++) {
+      const p = randPos();
+      const tree = new THREE.Mesh(new THREE.ConeGeometry(0.1, 1.5, 5), new THREE.MeshStandardMaterial({ color: 0x222222 }));
+      tree.position.set(p.px, y+0.75, p.pz); tree.rotation.z = (Math.random()-0.5)*0.2; scene.add(tree); list.push(tree);
+    }
+    for (let i = 0; i < 2; i++) {
+      const p = randPos();
+      const ghost = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.4, emissive: 0xffffff, emissiveIntensity: 0.5 }));
+      ghost.position.set(p.px, y+1, p.pz); scene.add(ghost); list.push(ghost);
     }
   } else if (theme === 'jungle') {
-    for (let i = 0; i < 2; i++) { 
-      const p = randPos(); 
-      const vine = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 2, 6), new THREE.MeshStandardMaterial({ color: 0x228b22 })); 
-      vine.position.set(p.px, y+1, p.pz); vine.rotation.x = 0.1; scene.add(vine); list.push(vine); 
+    for (let i = 0; i < 4; i++) {
+      const p = randPos();
+      const vine = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 2, 6), new THREE.MeshStandardMaterial({ color: 0x228b22 }));
+      vine.position.set(p.px, y+1, p.pz); vine.rotation.x = 0.1; scene.add(vine); list.push(vine);
     }
-    for (let i = 0; i < 2; i++) { 
-      const p = randPos(); 
-      const pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8), new THREE.MeshStandardMaterial({ color: 0x777766, roughness: 0.9 })); 
-      pillar.position.set(p.px, y+0.6, p.pz); pillar.rotation.z = (Math.random()-0.5)*0.1; pillar.castShadow = true; scene.add(pillar); list.push(pillar); 
+    for (let i = 0; i < 4; i++) {
+      const p = randPos();
+      const pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 1.2, 8), new THREE.MeshStandardMaterial({ color: 0x777766, roughness: 0.9 }));
+      pillar.position.set(p.px, y+0.6, p.pz); pillar.rotation.z = (Math.random()-0.5)*0.1; pillar.castShadow = true; scene.add(pillar); list.push(pillar);
     }
   } else if (theme === 'space') {
-    for (let i = 0; i < 3; i++) { 
-      const p = randPos(); 
-      const asteroid = new THREE.Mesh(new THREE.DodecahedronGeometry(0.3 + Math.random()*0.2), new THREE.MeshStandardMaterial({ color: 0x888899, roughness: 0.9 })); 
-      asteroid.position.set(p.px, y+0.5, p.pz); asteroid.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); asteroid.castShadow = true; scene.add(asteroid); list.push(asteroid); 
+    for (let i = 0; i < 5; i++) {
+      const p = randPos();
+      const asteroid = new THREE.Mesh(new THREE.DodecahedronGeometry(0.3 + Math.random()*0.2), new THREE.MeshStandardMaterial({ color: 0x888899, roughness: 0.9 }));
+      asteroid.position.set(p.px, y+0.5, p.pz); asteroid.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3); asteroid.castShadow = true; scene.add(asteroid); list.push(asteroid);
     }
-    for (let i = 0; i < 2; i++) { 
-      const p = randPos(); 
-      const star = new THREE.Mesh(new THREE.OctahedronGeometry(0.15), new THREE.MeshBasicMaterial({ color: 0xffffff })); 
-      star.position.set(p.px, y+0.8, p.pz); scene.add(star); list.push(star); 
+    for (let i = 0; i < 4; i++) {
+      const p = randPos();
+      const star = new THREE.Mesh(new THREE.OctahedronGeometry(0.15), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      star.position.set(p.px, y+0.8, p.pz); scene.add(star); list.push(star);
+    }
+    for (let i = 0; i < 2; i++) {
+      const p = randPos();
+      const planet = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshStandardMaterial({ color: 0xff66aa, emissive: 0x551133 }));
+      planet.position.set(p.px, y+1, p.pz); scene.add(planet); list.push(planet);
     }
   }
+}
+
+function createStarfish(x, y, z) {
+  const g = new THREE.Group();
+  const mat = new THREE.MeshStandardMaterial({ color: 0xff6688, roughness: 0.6 });
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.3, 8, 8), mat);
+  body.scale.set(1, 0.2, 1);
+  g.add(body);
+  for(let i=0; i<5; i++) {
+    const arm = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.4, 4), mat);
+    const a = (i/5)*Math.PI*2;
+    arm.position.set(Math.cos(a)*0.25, 0, Math.sin(a)*0.25);
+    arm.rotation.z = Math.PI/2;
+    arm.rotation.y = -a;
+    g.add(arm);
+  }
+  g.position.set(x, y, z);
+  return g;
 }
 
 function createPalmTree(x, y, z) {
@@ -2217,7 +2204,6 @@ function updatePlay(dt, now) {
   if (keys.has('ArrowRight') || keys.has('KeyD')) ix += 1;
   if (keys.has('ArrowUp') || keys.has('KeyW')) iz -= 1;
   if (keys.has('ArrowDown') || keys.has('KeyS')) iz += 1;
-  
   const speedMult = 1 + ((save.upgrades.speed - 1) * 0.1);
   const jumpPower = 14 + ((save.upgrades.jump - 1) * 1.2);
   const maxAir = 22 + ((save.upgrades.air - 1) * 3);
@@ -2227,7 +2213,6 @@ function updatePlay(dt, now) {
   const diveHeld = input.dive || save.keybinds.dive.some(k => keys.has(k));
   const inWaterNow = player.pos.y < 0;
   if (inWaterNow !== player.inWater) { if (inWaterNow) SFX.splash(); player.inWater = inWaterNow; }
-  
   if (player.inWater) {
     player.vel.x += ix * 24 * speedMult * dt; player.vel.z += iz * 24 * speedMult * dt;
     player.vel.y += (0 - player.pos.y) * 0.6 * dt;
@@ -2238,22 +2223,15 @@ function updatePlay(dt, now) {
     player.vel.x += ix * 34 * speedMult * dt; player.vel.z += iz * 34 * speedMult * dt;
     player.vel.y -= 26 * dt;
     player.flapCd -= dt;
-    if (jumpHeld && player.flapCd <= 0) { 
-      player.vel.y = jumpPower; 
-      player.flapCd = 0.28; 
-      SFX.jump(); 
-      spawnParticles(player.pos.x, player.pos.y - 0.5, player.pos.z, 0xffffff, 6);
-    }
+    if (jumpHeld && player.flapCd <= 0) { player.vel.y = jumpPower; player.flapCd = 0.28; SFX.jump(); spawnParticles(player.pos.x, player.pos.y - 0.5, player.pos.z, 0xffffff, 6); }
     if (diveHeld) player.vel.y -= 20 * dt;
     player.vel.multiplyScalar(Math.pow(0.98, dt * 60));
     if (player.vel.y < -22) player.vel.y = -22;
   }
-  
   const targetInfl = player.inWater ? 0 : 1;
   player.inflation += (targetInfl - player.inflation) * 5 * dt;
   if (!player.inWater) player.airTime += dt;
   else player.airTime = Math.max(0, player.airTime - dt * 3.5);
-  
   if (player.airTime > maxAir) { die(); return; }
   player.pos.addScaledVector(player.vel, dt);
   const radius = 1.05 + player.inflation * 0.55;
@@ -2295,16 +2273,13 @@ function updatePlay(dt, now) {
       if (p.crumbleTimer <= 0 && p.mesh) { p.mesh.visible = false; if (p.topMesh) p.topMesh.visible = false; }
     }
   }
-  
   for (let i = collectibles.length - 1; i >= 0; i--) {
     const c = collectibles[i];
     const dist = player.pos.distanceTo(c.position);
-    
     if (dist < magnetRange && c.userData.type !== 'goal') {
         const dir = new THREE.Vector3().subVectors(player.pos, c.position).normalize();
         c.position.addScaledVector(dir, 15 * dt);
     }
-
     if (dist < 1.8) {
       if (c.userData.type === 'coin') {
         gameState.coinsCollected++; save.coins += 1; save.stats.coinsTotal++;
@@ -2325,19 +2300,13 @@ function updatePlay(dt, now) {
       } else if (c.userData.type === 'goal') { winLevel(); return; }
     }
   }
-  
   if (gameState.comboTimer > 0) { gameState.comboTimer -= dt; if (gameState.comboTimer <= 0) gameState.combo = 0; }
-  if (WORLDS[gameState.worldIdx].theme === 'cave' || WORLDS[gameState.worldIdx].theme === 'space' || WORLDS[gameState.worldIdx].theme === 'cyber') { 
-    caveLight.position.copy(player.pos); caveLight.position.y += 1; 
+  if (WORLDS[gameState.worldIdx].theme === 'cave' || WORLDS[gameState.worldIdx].theme === 'space' || WORLDS[gameState.worldIdx].theme === 'cyber') {
+    caveLight.position.copy(player.pos); caveLight.position.y += 1;
   }
-  
   puffer.position.copy(player.pos);
   puffer.scale.setScalar(1 + player.inflation * 0.75);
-  
-  for (const s of spikes) {
-    s.mesh.visible = !player.inWater && player.inflation > 0.1; 
-  }
-  
+  for (const s of spikes) { s.mesh.visible = !player.inWater && player.inflation > 0.1; }
   const hSpeed = Math.hypot(player.vel.x, player.vel.z);
   if (hSpeed > 0.5) {
     const targetAngle = Math.atan2(player.vel.x, player.vel.z);
@@ -2395,13 +2364,53 @@ function die() {
   document.getElementById('caveDark').style.opacity = '0';
   document.getElementById('darkness').style.opacity = '0';
   document.getElementById('danger').style.opacity = '0';
-  document.getElementById('goReason').textContent = 'You ran out of air!';
+  document.getElementById('goReason').textContent = I18N[save.lang].ranOutOfAir;
   document.getElementById('goCoins').textContent = gameState.coinsCollected;
   document.getElementById('goCombo').textContent = gameState.combo;
   document.getElementById('goLevel').textContent = save.level;
   window.showScreen('gameOverScreen');
 }
 window.retryStage = () => window.loadStage(gameState.worldIdx, gameState.stageIdx);
+
+window.togglePause = () => {
+  if (gameState.mode !== 'play') return;
+  gameState.mode = 'paused';
+  document.getElementById('pauseScreen').classList.remove('hidden');
+  document.getElementById('joy-base').style.display = 'none';
+  document.getElementById('btn-jump').style.display = 'none';
+  document.getElementById('btn-dive').style.display = 'none';
+  input.x = 0; input.z = 0; input.jump = false; input.dive = false;
+  joyId = null;
+  const knob = document.getElementById('joy-knob');
+  if (knob) knob.style.transform = 'translate(-50%, -50%)';
+  SFX.click();
+};
+window.resumeGame = () => {
+  if (gameState.mode !== 'paused') return;
+  gameState.mode = 'play';
+  document.getElementById('pauseScreen').classList.add('hidden');
+  document.getElementById('joy-base').style.display = 'block';
+  document.getElementById('btn-jump').style.display = 'flex';
+  document.getElementById('btn-dive').style.display = 'flex';
+  lastTime = performance.now();
+  SFX.click();
+};
+window.resetStage = () => {
+  document.getElementById('pauseScreen').classList.add('hidden');
+  SFX.click();
+  window.loadStage(gameState.worldIdx, gameState.stageIdx);
+};
+window.exitGame = () => {
+  document.getElementById('pauseScreen').classList.add('hidden');
+  SFX.click();
+  window.goMenu();
+};
+window.addEventListener('keydown', (e) => {
+  if (e.code === 'Escape') {
+    if (gameState.mode === 'play') window.togglePause();
+    else if (gameState.mode === 'paused') window.resumeGame();
+  }
+});
 
 function winLevel() {
   gameState.mode = 'menu';
@@ -2428,7 +2437,8 @@ function winLevel() {
   document.getElementById('caveDark').style.opacity = '0';
   document.getElementById('darkness').style.opacity = '0';
   document.getElementById('danger').style.opacity = '0';
-  document.getElementById('winSubtitle').textContent = `${WORLDS[worldIdx].name} - Stage ${stageIdx + 1}`;
+  const wName = save.lang === 'pt' ? WORLDS[worldIdx].name_pt : WORLDS[worldIdx].name;
+  document.getElementById('winSubtitle').textContent = `${wName} - ${I18N[save.lang].stage} ${stageIdx + 1}`;
   const winStars = document.getElementById('winStars');
   winStars.innerHTML = '';
   for (let i = 0; i < 3; i++) {
@@ -2442,9 +2452,8 @@ function winLevel() {
   document.getElementById('winPumpkinRow').style.display = gameState.totalPumpkins > 0 ? 'flex' : 'none';
   document.getElementById('winXP').textContent = gameState.xpEarned;
   document.getElementById('winBonus').textContent = bonus;
-  const t = TRANSLATIONS[save.lang] || TRANSLATIONS.en;
   const emojis = ['🎉', '🌟', '🏆', '⭐', '💫', '🎊', '👑', '🚀', '✨', '🔥'];
-  document.getElementById('winMessage').textContent = t.winMessages[Math.floor(Math.random() * t.winMessages.length)];
+  document.getElementById('winMessage').textContent = I18N[save.lang].stageClear; 
   document.getElementById('winEmoji').textContent = emojis[Math.floor(Math.random() * emojis.length)];
   window.showScreen('winScreen');
 }
@@ -2548,9 +2557,11 @@ function renderWorlds() {
     for (let s = 0; s < STAGES_PER_WORLD; s++) if (save.stars[`${i}_${s}`]) completed++;
     const card = document.createElement('div');
     card.className = 'world-card' + (locked ? ' locked' : '');
+    const wName = save.lang === 'pt' ? w.name_pt : w.name;
+    const wDesc = save.lang === 'pt' ? w.desc_pt : w.desc;
     card.innerHTML = `
       <div class="world-icon" style="background: linear-gradient(135deg, ${w.primary}44, ${w.primary}22); color: ${w.primary};"><i class="ph ${w.icon}"></i></div>
-      <div class="world-info"><h3>${w.name}</h3><p>${w.desc}</p><div class="world-progress">${locked ? '🔒 Locked' : `${completed}/${STAGES_PER_WORLD} Stages`}</div></div>
+      <div class="world-info"><h3>${wName}</h3><p>${wDesc}</p><div class="world-progress">${locked ? '🔒 ' + I18N[save.lang].locked : `${completed}/${STAGES_PER_WORLD} ${I18N[save.lang].stage}s`}</div></div>
       <i class="ph ph-caret-right" style="font-size:28px;color:${locked ? 'var(--sub)' : w.primary};"></i>`;
     if (!locked) card.onclick = () => { SFX.click(); window.openStageSelect(i); };
     list.appendChild(card);
@@ -2560,7 +2571,8 @@ window.openStageSelect = (worldIdx) => {
   gameState.worldIdx = worldIdx;
   gameState.mode = 'menu';
   showScreen('stageScreen');
-  document.getElementById('stage-screen-title').textContent = WORLDS[worldIdx].name.toUpperCase();
+  const wName = save.lang === 'pt' ? WORLDS[worldIdx].name_pt : WORLDS[worldIdx].name;
+  document.getElementById('stage-screen-title').textContent = wName.toUpperCase();
   const grid = document.getElementById('stages-grid');
   grid.innerHTML = '';
   for (let s = 0; s < STAGES_PER_WORLD; s++) {
@@ -2677,35 +2689,31 @@ window.selectItem = (it, tab, mode, isOwned) => {
   if (card) card.classList.add('selected');
 
   currentPreview = { type: tab, id: it.id };
-  
   const previewData = { ...save, [tab]: it.id };
   updatePufferVisuals(previewData);
 
   const activeScreen = document.querySelector('.overlay:not(.hidden)');
   if (!activeScreen) return;
-  
   const ui = activeScreen.querySelector('.item-info-ui');
   const infoName = activeScreen.querySelector('.info-name');
   const priceEl = activeScreen.querySelector('.info-price');
   const priceVal = activeScreen.querySelector('.info-price-val');
   const actionBtn = activeScreen.querySelector('.info-action-btn');
-  
-  const t = TRANSLATIONS[save.lang] || TRANSLATIONS.en;
+
+  const t = I18N[save.lang] || I18N.en;
   const currency = mode === 'halloween' ? t.pumpkins : t.coins;
 
   infoName.textContent = it.name;
-  
   if (isOwned) {
     priceEl.style.display = 'none';
-    actionBtn.textContent = save.lang === 'pt' ? 'EQUIPAR' : 'EQUIP';
+    actionBtn.textContent = t.equip;
     actionBtn.className = 'btn pri info-action-btn';
   } else {
     priceEl.style.display = 'flex';
     priceVal.textContent = it.cost;
-    actionBtn.textContent = save.lang === 'pt' ? 'COMPRAR' : 'BUY';
+    actionBtn.textContent = t.buy;
     actionBtn.className = 'btn gold info-action-btn';
   }
-  
   ui.classList.add('show');
 
   actionBtn.onclick = () => {
@@ -2715,39 +2723,32 @@ window.selectItem = (it, tab, mode, isOwned) => {
       updatePufferVisuals(save);
       ui.classList.remove('show');
       SFX.purchase();
+      renderGrid(mode, tab); 
     } else {
       if (save[mode === 'halloween' ? 'pumpkins' : 'coins'] < it.cost) {
         SFX.lose();
         showToast(t.noMoney.replace('{currency}', currency));
         return;
       }
-      
       document.getElementById('confirmTitle').textContent = t.confirmBuy;
       const confirmModal = document.getElementById('modal-confirm');
       confirmModal.classList.remove('hidden');
       document.getElementById('confirmYesBtn').textContent = t.yes;
       document.getElementById('confirmNoBtn').textContent = t.no;
-      
+
       document.getElementById('confirmYesBtn').onclick = () => {
         confirmModal.classList.add('hidden');
         save[mode === 'halloween' ? 'pumpkins' : 'coins'] -= it.cost;
-        
         const ownedKey = mode === 'halloween' ? 'ownedHalloween' : 'owned' + tab.charAt(0).toUpperCase() + tab.slice(1) + 's';
         save[ownedKey].push(it.id);
-        
         persistSave();
         updateHUD();
-        
         SFX.cash();
         showToast(t.bought.replace('{item}', it.name));
-        
-        save[tab] = it.id;
-        persistSave();
-        updatePufferVisuals(save);
         ui.classList.remove('show');
         renderGrid(mode, tab);
       };
-      
+
       document.getElementById('confirmNoBtn').onclick = () => {
         confirmModal.classList.add('hidden');
       };
@@ -2762,12 +2763,17 @@ window.renderGrid = (mode, tab) => {
   if (mode === 'halloween') items = HALLOWEEN_ITEMS[tab] || [];
   else if (mode === 'shop') items = tab === 'skin' ? SKINS : (tab === 'wing' ? WINGS : HATS);
   else items = tab === 'skin' ? ALL_SKINS : (tab === 'wing' ? ALL_WINGS : ALL_HATS);
-  
+
   const baseOwnedKey = 'owned' + tab.charAt(0).toUpperCase() + tab.slice(1) + 's';
   const halloweenIds = new Set((HALLOWEEN_ITEMS[tab] || []).map(h => h.id));
-  
+
   items.forEach(it => {
     const isHalloweenItem = halloweenIds.has(it.id);
+    if (mode === 'shop' && isHalloweenItem) return;
+    if (mode === 'shop' && /^skin_(spooky|witch|zombie|vampire|ghost|mummy|skeleton|werewolf)$/.test(it.id)) return;
+    if (mode === 'shop' && /^wing_(bat|bone|spiderweb|phantom)$/.test(it.id)) return;
+    if (mode === 'shop' && /^hat_(pumpkin_king|witch|ghost_hat|skull|cauldron|eyeball|frankenstein|devil_horns)$/.test(it.id)) return;
+
     const ownedArr = isHalloweenItem ? save.ownedHalloween : save[baseOwnedKey];
     const isOwned = ownedArr.includes(it.id) || it.cost === 0;
     if (mode === 'custom' && !isOwned) return;
@@ -2776,17 +2782,17 @@ window.renderGrid = (mode, tab) => {
     const card = document.createElement('div');
     card.className = 'item-card ' + (save[tab] === it.id ? 'eq' : '');
     card.dataset.id = it.id;
-    
+
     const icon = it.color ? `<div class="color-dot" style="background: #${it.color.toString(16).padStart(6,'0')}"></div>` : `<div class="icon"><i class="ph ${it.icon}"></i></div>`;
-    
+
     if (mode === 'shop' || mode === 'halloween') {
       const priceClass = mode === 'halloween' ? 'pump' : '';
-      const coinIcon = mode === 'halloween' ? 'ph-pumpkin' : 'ph-coin';
-      card.innerHTML = `${icon}<div class="name">${it.name}</div><div class="price ${priceClass}"><i class="ph ${coinIcon}"></i> ${it.cost}</div>`;
+      const coinIcon = mode === 'halloween' ? '🎃' : '<i class="ph ph-coin"></i>';
+      card.innerHTML = `${icon}<div class="name">${it.name}</div><div class="price ${priceClass}">${coinIcon} ${it.cost}</div>`;
     } else {
-      card.innerHTML = `${icon}<div class="name">${it.name}</div><div class="eq-tag">EQUIPPED</div>`;
+      card.innerHTML = `${icon}<div class="name">${it.name}</div><div class="eq-tag">${I18N[save.lang].equipped}</div>`;
     }
-    
+
     card.onclick = () => window.selectItem(it, tab, mode, isOwned);
     grid.appendChild(card);
   });
@@ -2821,125 +2827,33 @@ window.resetSave = () => {
 };
 
 const UPDATES = [
-  { version:'6.1.3', name:'Critical Startup Fix', best: true, changes: [
-    '🚑 Fixed a critical error causing the game to freeze on the loading screen.',
-    '⚙️ Moved game state variables to the top of the script to prevent reference errors.',
-    '📱 Ensured camera layout updates work flawlessly on mobile landscape.'
+  { version:'6.2.0', name:'Mundos Cheios & Tradução', best: true, changes: [
+    '🌍 Muito mais elementos 3D adicionados em TODOS os mundos.',
+    '🇧🇷 O jogo agora traduz COMPLETAMENTE para Português (e volta pro Inglês).',
+    '📍 O Baiacu no Preview (Loja/Inventário) agora fica na posição correta.',
+    '🛒 Preços de cores na loja reduzidos para variar entre 50 e 1500 moedas.',
+    '🎃 Ícone de abóbora adicionado nas moedas de Halloween.'
   ]},
-  { version:'6.1.2', name:'Mobile 3D Preview Fix', best: false, changes: [
-    '📱 Fixed the 3D Pufferfish preview missing on mobile devices',
-    '📷 Camera now dynamically shifts to the left panel instead of clipping the screen',
-    '🛠️ Ensured `gameState` updates correctly before the camera recalculates'
+  { version:'6.1.5', name:'Shop & Equip Fix', best: false, changes: [
+    '🛒 Itens comprados NÃO são mais equipados automaticamente',
+    '✅ Card verde + EQUIPPED agora atualiza na hora ao equipar',
+    '🎃 Filtro extra para impedir itens de Halloween na loja principal'
   ]},
-  { version:'6.1.1', name:'UI Bugfix & Mobile Fix', best: false, changes: [
-    '🛠️ Fixed a bug where the item name and price were showing as default text in the shop.',
-    '📱 Improved mobile landscape layout (Panels no longer overlap).',
-    '📷 3D Camera now centers the Pufferfish perfectly on the left side of the screen on mobile.',
-    '✨ General UI polish and padding adjustments.'
+  { version:'6.1.4', name:'Pause System', best: false, changes: [
+    '⏸️ Added pause button with RESUME / RESET / EXIT',
+    '⌨️ Press ESC to pause/resume on desktop'
+  ]},
+  { version:'6.1.3', name:'Critical Startup Fix', best: false, changes: [
+    '🚑 Fixed a critical error causing the game to freeze on the loading screen.'
   ]},
   { version:'6.1.0', name:'Shop UI & Preview Update', best: false, changes: [
-    '🛍️ Completely redesigned Shop and Inventory UI (Items on the right, Puffer on the left)',
-    '🔍 Real-time 3D Preview system (check out items before buying/equipping)',
-    '📥 New animated sliding UI from the bottom for item details',
-    '💬 Added localization for Buy/Equip confirmations and success messages',
-    '💸 Classic "TIQUIM!!!" cash register sound on purchase',
-    '🔄 Preview resets automatically if you leave the shop without applying changes',
-    '🛠️ Fixed missing icons on several Hats and Wings'
+    '🛍️ Completely redesigned Shop and Inventory UI',
+    '🔍 Real-time 3D Preview system'
   ]},
   { version:'6.0.0', name:'Colossal Expansion Update', best: false, changes: [
-    '🌍 Added 5 NEW WORLDS (Desert Oasis, Cyber City, Haunted Graveyard, Jungle Ruins, Cosmic Void)',
-    '🏛️ Added new unique 3D decorations for all 10 worlds',
-    '🐟 Added 10 new Base Skins (Total 50 colors)',
-    '🦋 Added 30 new Wings (Total 45 base wings)',
-    '🎩 Added 25 new Hats with unique 3D models (Total 44 base hats)',
-    '🎟️ Added new redeemable codes (Check Settings to redeem!)',
-    '📱 Kept mobile landscape/portrait optimizations from v5.8.0'
+    '🌍 Added 5 NEW WORLDS', '🐟 50 base skins', '🦋 45 base wings', '🎩 44 base hats'
   ]},
-  { version:'5.8.0', name:'Mobile Landscape & Hats', best: false, changes: [
-    '📱 Dynamic Mobile Optimization (Landscape/Portrait)',
-    '📷 Camera now automatically adjusts FOV when the phone is tilted',
-    '🧭 UI Elements reorganized for mobile landscape orientation',
-    '👒 Added 4 New Hats: Police, Firefighter, Space, Sombrero'
-  ]},
-  { version:'5.7.0', name:'Realism Update', best: false, changes: [
-    '🎩 Completely revamped all 3D Hats with ExtrudeGeometry and complex models',
-    '🦋 Completely revamped all Wings with realistic thickness, bevels, and layers',
-    '✨ Added glowing materials (emissive) to Halo, Cyber, and Jewel items',
-    '🧵 Improved textures and roughness mapping for leather, metal, and cloth'
-  ]},
-  { version:'5.6.0', name:'Upgrades System', best: false, changes: [
-    '⬆️ Added a brand new Upgrades system!',
-    '🏊 Speed, Air Capacity, Jump Power, and Coin Magnet can now be upgraded.',
-    '🏪 New UI for upgrades matching the shop aesthetic.',
-    '🎨 Cleaned up the main menu button layout.'
-  ]},
-  { version:'5.5.0', name:'Cosmetic Fixes', best: false, changes: [
-    '🛠️ Fixed glitched parts on some hats (Party, Cowboy, Propeller, Cauldron)',
-    '👒 Added missing 3D models for Pirate, Hood, and Flower hats',
-    '🎨 Fixed hat color mismatches',
-    '🎁 Added hidden redeemable codes for players to find (Check Settings)'
-  ]},
-  { version:'5.4.0', name:'Aura & Spikes Fix', best: false, changes: [
-    'Pufferfish is back and prominent in the menus',
-    'Inflated with spikes in all menus (no more invisible fish)',
-    'Showcase scenario is now much brighter and more eye-catching',
-    'Coin Magnet added (coins fly to you when close)',
-    'Jump particles added for better game feel',
-    'Dynamic camera smoothing'
-  ]},
-  { version:'5.3.0', name:'Massive Cosmetic Update', best: false, changes: [
-    'Spike scaling fixed (they grow with the body)',
-    'In-game spikes correctly show only when inflated out of water',
-    'Added 20 new base skins (40 total)',
-    'Added 5 new base wings (Star, Mecha, Rainbow, Flame, Cloud)',
-    'Added 5 new base hats (Cowboy, Propeller, Party, Viking, Chef)',
-    'Added 4 new Halloween skins, 3 wings, 5 hats',
-    'Total cosmetics is now OVER 90!'
-  ]},
-  { version:'5.2.0', name:'Shop & Save Update', best: false, changes: [
-    'Shop and Halloween Shop now show your balance',
-    'Lateral fins redesigned - bigger, cuter, match skin color',
-    'Giant Jack-o-Lantern replaces witch NPC in Halloween shop',
-    'Redeem section added to settings',
-    'Device-based save system with unique ID',
-    'Auto-migration from old save keys'
-  ]},
-  { version:'5.1.0', name:'Polish Update', best: false, changes: [
-    'Witch NPC redesigned with full detail',
-    'Pumpkin pet companion added',
-    'Tail and fins match skin color',
-    'Save backup + Export/Import',
-    'Fixed Halloween items not showing in inventory'
-  ]},
-  { version:'5.0.0', name:'Mega Update', best: false, changes: [
-    'Audio system (SFX + music)', 'Game Over screen', 'XP & Level system',
-    'Interactive tutorial', 'Combo system', '6 color themes',
-    'Halloween shop', '2 new worlds', 'Motivational messages',
-    'Pufferfish in menu/inventory', 'Cave darkness effect', 'Stats tracking'
-  ]},
-  { version:'4.0.0', name:'Ultimate Edition', best: false, changes: [
-    '50+ cosmetics across skins, wings and hats',
-    'Complete settings menu',
-    'Animated win screen with stars',
-    'World selection screen',
-    'Pumpkin collectibles'
-  ]},
-  { version:'2.3.0', name:'World System Update', best: false, changes: [
-    'World selection system',
-    '3 worlds × 15 stages',
-    'Level design with themed decorations',
-    'Rewritten physics engine'
-  ]},
-  { version:'2.0.0', name:'Halloween Special', best: false, changes: [
-    'Pumpkin collectibles',
-    'Spooky shop items',
-    'Halloween-themed UI'
-  ]},
-  { version:'1.0.0', name:'Initial Launch', best: false, changes: [
-    'Initial release',
-    '5 base stages',
-    'Basic customization'
-  ]}
+  { version:'1.0.0', name:'Initial Launch', best: false, changes: ['Initial release'] }
 ];
 
 function renderUpdates() {
@@ -2969,10 +2883,10 @@ function loop(now) {
     updatePlay(dt, now);
     showcaseScene.visible = false; giantPumpkin.visible = false;
     showcaseLight.intensity = 0; showcaseAccent.intensity = 0;
+  } else if (gameState.mode === 'paused') {
+    // frozen
   } else if (gameState.mode === 'halloween') {
     showcaseScene.visible = true;
-    
-    // Posicionamento dinâmico para mobile e desktop
     let camX = -1.5;
     if (window.innerWidth < window.innerHeight) camX = -1.2;
     else if (window.innerWidth < 900) camX = -2.5;
@@ -2987,28 +2901,25 @@ function loop(now) {
         s.mesh.scale.setScalar(1.0);
         s.mesh.position.copy(s.dir).multiplyScalar(1.15);
     });
-
     giantPumpkin.visible = true;
     giantPumpkin.position.set(camX + 3, 0.1, -1);
     giantPumpkin.rotation.y = Math.sin(now * 0.0008) * 0.35;
     giantPumpkin.scale.setScalar(0.75);
-
     animateShowcase(now, dt);
-
-    camera.position.set(camX, 1.8, 6.5);
-    camera.lookAt(camX, 0.5, 0);
+    
+    // FIX: Offset camera to move pufferfish left
+    camera.position.set(camX + 2.2, 1.8, 6.5);
+    camera.lookAt(camX + 2.2, 0.5, 0);
     water.visible = false;
   } else if (gameState.mode === 'showcase' || gameState.mode === 'upgrades') {
     showcaseScene.visible = true;
-    
-    // Posicionamento dinâmico para mobile e desktop
     let camX = -1.5;
     if (window.innerWidth < window.innerHeight) camX = -1.2;
     else if (window.innerWidth < 900) camX = -2.5;
     
     puffer.position.set(camX, 0.5, 0);
     puffer.rotation.y += dt * 0.5;
-    puffer.scale.setScalar(1.5 + Math.sin(now * 0.003) * 0.05); 
+    puffer.scale.setScalar(1.5 + Math.sin(now * 0.003) * 0.05);
     tailPivot.rotation.y = Math.sin(now * 0.005) * 0.4;
     animateFins(now, 0.6);
     spikes.forEach(s => {
@@ -3016,13 +2927,12 @@ function loop(now) {
         s.mesh.scale.setScalar(1.0);
         s.mesh.position.copy(s.dir).multiplyScalar(1.15);
     });
-
     giantPumpkin.visible = false;
-
     animateShowcase(now, dt);
-
-    camera.position.set(camX, 1.8, 6.5);
-    camera.lookAt(camX, 0.5, 0);
+    
+    // FIX: Offset camera to move pufferfish left
+    camera.position.set(camX + 2.2, 1.8, 6.5);
+    camera.lookAt(camX + 2.2, 0.5, 0);
     water.visible = false;
   } else {
     showcaseScene.visible = false; giantPumpkin.visible = false;
@@ -3037,7 +2947,6 @@ function loop(now) {
         s.mesh.scale.setScalar(1.0);
         s.mesh.position.copy(s.dir).multiplyScalar(1.15);
     });
-    
     camera.position.set(
       Math.cos(now * 0.0002) * 1.5,
       1.5 + Math.sin(now * 0.0003) * 0.5,
@@ -3047,7 +2956,7 @@ function loop(now) {
     water.visible = false;
   }
 
-  updateParticles(dt);
+  if (gameState.mode !== 'paused') updateParticles(dt);
   renderer.render(scene, camera);
 
   const fpsEl = document.getElementById('fps');
@@ -3063,7 +2972,6 @@ function loop(now) {
 }
 
 window.addEventListener('resize', updateCameraLayout);
-
 if (!IS_MOBILE) document.querySelectorAll('.pc-only').forEach(el => el.style.display = 'flex');
 
 window.addEventListener('load', () => {
@@ -3094,4 +3002,4 @@ window.addEventListener('load', () => {
 });
 </script>
 </body>
-         </html>
+</html>
